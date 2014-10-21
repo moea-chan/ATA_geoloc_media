@@ -9,8 +9,19 @@
     tools:context="com.mediageoloc.ata.MainActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+
+    <Button
+        android:id="@+id/buttonTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="32dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="Button" />
 
 </RelativeLayout>
