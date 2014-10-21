@@ -1,4 +1,5 @@
 package com.mediageoloc.ata;
+//Thierry - une modif pour visu branch
 
 import android.app.Activity;
 import android.os.Bundle;
