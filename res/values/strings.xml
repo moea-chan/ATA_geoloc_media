@@ -11,4 +11,16 @@
     <string name="btnIntendV">Take Video</string>
     <string name="cannot">Cannot</string>
     <string name="album_name">CameraSample</string>
+
+    <string name="audio">Audio</string>
+    <string name="video">Vidéo</string>
+    <string name="photo">Photo</string>
+    <string name="from_snapshot_photo">Prendre une photo</string>
+    <string name="from_gallery_photo">Galerie</string>
+    <string name="from_snapshot_video">Prendre une vidéo</string>
+    <string name="from_gallery_video">Galerie</string>
+    <string name="from_snapshot_audio">Prendre un son</string>
+    <string name="from_gallery_audio">Galerie</string>
+
 </resources>
+
