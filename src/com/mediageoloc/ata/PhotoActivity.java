@@ -227,28 +227,28 @@ public class PhotoActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_photo);
+		setContentView(R.layout.activity_main);
 
 		mImageView = (ImageView) findViewById(R.id.imageView1);
 		mVideoView = (VideoView) findViewById(R.id.videoView1);
 		mImageBitmap = null;
 		mVideoUri = null;
 
-		Button picBtn = (Button) findViewById(R.id.btnIntend);
+		Button picBtn = (Button) findViewById(R.id.buttonPhoto);
 		setBtnListenerOrDisable( 
 				picBtn, 
 				mTakePicOnClickListener,
 				MediaStore.ACTION_IMAGE_CAPTURE
 		);
 
-		Button picSBtn = (Button) findViewById(R.id.btnIntendS);
+		Button picSBtn = (Button) findViewById(R.id.buttonVideo);
 		setBtnListenerOrDisable( 
 				picSBtn, 
 				mTakePicSOnClickListener,
 				MediaStore.ACTION_IMAGE_CAPTURE
 		);
 
-		Button vidBtn = (Button) findViewById(R.id.btnIntendV);
+		Button vidBtn = (Button) findViewById(R.id.buttonAudio);
 		setBtnListenerOrDisable( 
 				vidBtn, 
 				mTakeVidOnClickListener,

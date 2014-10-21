@@ -32,4 +32,15 @@ android:layout_alignRight="@+id/buttonVideo"
 android:layout_below="@+id/buttonVideo"
 android:layout_marginTop="48dp"
 android:text="@string/audio" />
+
+<ImageView 
+      android:layout_height="wrap_content" 
+      android:layout_width="wrap_content" 
+      android:visibility="visible"
+      android:id="@+id/imageView1" />
+  <VideoView 
+      android:layout_height="wrap_content" 
+      android:layout_width="wrap_content" 
+      android:visibility="invisible"
+      android:id="@+id/videoView1" />
 </RelativeLayout>
