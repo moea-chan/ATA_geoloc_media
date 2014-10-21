@@ -1,7 +1,9 @@
 package com.mediageoloc.ata;
 
+
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,39 +18,39 @@ public class MainActivity extends Activity {
 
 	private Button _buttonPhoto;
 	private Button _buttonVideo;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		addButtonPhotoListener();
 		addButtonVideoListener();
-		
+
 	}
-	
-	
+
 	/*
-	 * Ajout 
+	 * Ajout
 	 */
-	private void addButtonPhotoListener(){
+	private void addButtonPhotoListener() {
 		_buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
 		_buttonPhoto.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            }
-        });
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						PhotoActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
-	
-	private void addButtonVideoListener(){
+
+	private void addButtonVideoListener() {
 		_buttonVideo = (Button) findViewById(R.id.buttonVideo);
 		_buttonVideo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            }
-        });
+			public void onClick(View v) {
+
+			}
+		});
 	}
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
