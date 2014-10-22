@@ -2,6 +2,7 @@ package com.mediageoloc.ata;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,7 +18,8 @@ public class MainActivity extends Activity {
 
 	private Button _buttonPhoto;
 	private Button _buttonVideo;
-
+	private Button _buttonAudio;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,37 +57,34 @@ public class MainActivity extends Activity {
 	}
 	
 	private void addButtonPhotoListener(){
-		final Button buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
-		buttonPhoto.setOnClickListener(new View.OnClickListener() {
+		_buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
+		_buttonPhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	showPopup(v);
+            	Intent intent = new Intent(MainActivity.this,
+						PhotoActivity.class);
+				startActivity(intent);
             }
         });
 	}
 	
 	private void addButtonVideoListener(){
-		final Button buttonVideo = (Button) findViewById(R.id.buttonVideo);
-		buttonVideo.setOnClickListener(new View.OnClickListener() {
+		_buttonVideo = (Button) findViewById(R.id.buttonVideo);
+		_buttonVideo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	showPopup(v);
+            	
             }
         });
 	}
 	
 	private void addButtonAudioListener(){
-		final Button buttonAudio = (Button) findViewById(R.id.buttonAudio);
-		buttonAudio.setOnClickListener(new View.OnClickListener() {
+		_buttonAudio = (Button) findViewById(R.id.buttonAudio);
+		_buttonAudio.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	showPopup(v);
+            	
             }
         });
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
