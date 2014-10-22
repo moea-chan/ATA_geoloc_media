@@ -14,6 +14,10 @@ import android.widget.PopupMenu;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
 	
+
+	private Button _buttonPhoto;
+	private Button _buttonVideo;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,6 +27,8 @@ public class MainActivity extends Activity {
 		addButtonPhotoListener();
 		addButtonAudioListener();
 		addButtonVideoListener();
+
+
 	}
 	/*
 	 * Display contextual menu on button
