@@ -60,7 +60,6 @@ public class MainActivity extends Activity {
         });
 	}
 	
-
 	
 }
->>>>>>> 7bf7e00ad6c174ac565c92c9545a1a447e57ebf8
+
