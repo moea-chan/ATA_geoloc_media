@@ -21,6 +21,11 @@
     <string name="from_gallery_video">Galerie</string>
     <string name="from_snapshot_audio">Prendre un son</string>
     <string name="from_gallery_audio">Galerie</string>
-
+    
+    <string name="photo_file">com.mediageoloc.ata.photoFile</string>
+    
+	<string name="ok">OK</string>
+	<string name="apply_NB_filter">Noir et Blanc</string>
+	
 </resources>
 
