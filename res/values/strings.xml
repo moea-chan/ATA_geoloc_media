@@ -21,6 +21,15 @@
     <string name="from_gallery_video">Galerie</string>
     <string name="from_snapshot_audio">Prendre un son</string>
     <string name="from_gallery_audio">Galerie</string>
-
+    
+    <string name="tap">Résultat</string>
+    <string name="txtButtonBW">BW effect</string>
+    <string name="txtComment">Commentaire</string>
+    <string name="txtHintComment">Entrer votre commentaire ici</string>
+    <string name="txtButtonValider">Valider</string>
+    <string name="txtEffet">Appliquer effet Noir et Blanc</string>
+    <string name="txtButtonNext">Suivant</string>
+    <string name="title_activity_photo_filter_preview">PhotoFilterPreviewActivity</string>
+    
 </resources>
 
