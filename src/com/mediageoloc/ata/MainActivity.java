@@ -60,9 +60,13 @@ public class MainActivity extends Activity {
 		_buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
 		_buttonPhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
             	Intent intent = new Intent(MainActivity.this,
 						PhotoActivity.class);
 				startActivity(intent);
+
+            	
+
             }
         });
 	}
