@@ -20,8 +20,10 @@ public class PhotoFilterPreviewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo_filter_preview);
+		
 		addButtonGoToCommentpreviewListener();
 		
+		//display taken picture
 		Intent intent = getIntent();
 		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
 		_photoUri = Uri.parse(intent.getStringExtra("photoUri"));

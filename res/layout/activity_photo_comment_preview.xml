@@ -17,16 +17,16 @@
         android:contentDescription="TODO"
         android:src="@drawable/ic_launcher" />
 	<Button
-        android:id="@+id/button1"
+        android:id="@+id/button_save_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignRight="@+id/edit_text_comment"
+        android:layout_below="@+id/edit_text_comment"
         android:layout_marginTop="36dp"
         android:text="@string/ok" />
 
 	<EditText
-	    android:id="@+id/editText1"
+	    android:id="@+id/edit_text_comment"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/photo_preview"
