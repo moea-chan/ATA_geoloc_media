@@ -49,7 +49,7 @@ public class PhotoActivity extends Activity {
 
 	private AlbumStorageDirFactory mAlbumStorageDirFactory = null;
 
-	
+
 	/* Photo album for this application */
 	private String getAlbumName() {
 		return getString(R.string.album_name);
@@ -172,6 +172,7 @@ public class PhotoActivity extends Activity {
 		startActivityForResult(takeVideoIntent, ACTION_TAKE_VIDEO);
 	}
 
+	
 	private void handleSmallCameraPhoto(Intent intent) {
 		Bundle extras = intent.getExtras();
 		mImageBitmap = (Bitmap) extras.get("data");
@@ -223,6 +224,14 @@ public class PhotoActivity extends Activity {
 		}
 	};
 
+	Button.OnClickListener mTakeSoundOnClickListener = 
+			new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dispatchTakeVideoIntent();
+			}
+	};
+		
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -350,5 +359,4 @@ public class PhotoActivity extends Activity {
 			btn.setClickable(false);
 		}
 	}
-
 }

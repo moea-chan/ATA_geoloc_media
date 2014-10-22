@@ -29,7 +29,7 @@ import java.io.IOException;
 
 public class SoundActivity extends Activity
 {
-    private static final String LOG_TAG = "AudioRecordTest";
+    private static final String LOG_TAG = "SoundActivity";
     private static String mFileName = null;
 
     private RecordButton mRecordButton = null;
