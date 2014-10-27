@@ -8,25 +8,5 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/>
     
-    <item
-        android:id="@+id/action_audio"
-        android:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@drawable/ic_launcher"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/audio"/>
-
-    <item
-        android:id="@+id/action_video"
-        android:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@drawable/ic_launcher"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/video"/>
-        
-    <item
-        android:id="@+id/action_photo"
-        android:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@drawable/ic_launcher"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:title="@string/photo"/> 
-    
     </menu>
+
