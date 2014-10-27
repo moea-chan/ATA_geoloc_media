@@ -61,20 +61,7 @@ public class PhotoCommentPreviewActivity extends Activity {
 	private void savePictureCommented(){
 		
 		gestionHistoriquePreferences();
-		
-//		_editTextComment = (EditText)findViewById(R.id.edit_text_comment);
-//		String data = _editTextComment.getText().toString();
-		// TODO
-		//recuperation du fichier local de stockage
-//		try {
-//	         FileOutputStream fOut = openFileOutput("photos_backup",MODE_WORLD_READABLE);
-//	         fOut.write(data.getBytes());
-//	         fOut.close();
-//	         Toast.makeText(getBaseContext(),"file saved",
-//	         Toast.LENGTH_SHORT).show();
-//	      } catch (Exception e) {
-//	         e.printStackTrace();
-//	      }
+		returnTakeMediaActivity();
 		
 	}
 	
@@ -118,8 +105,7 @@ public class PhotoCommentPreviewActivity extends Activity {
 		editor.putString(stKey,stValue);	
 		
 		editor.commit();
-	  //TODO: revenir au principal	
-		returnTakeMediaActivity();
+
 	}
 	
 	private void returnTakeMediaActivity(){
