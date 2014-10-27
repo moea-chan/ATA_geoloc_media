@@ -67,11 +67,8 @@ public class PhotoFilterPreviewActivity extends Activity {
         startActivity(intent);
 	}
 	
-	//Sauvegarde sur click button
 	   public void doFilter()
 	   {
-		   //TODO : tout faire !!
-		   
 		   
 		   if (_filterAction.isChecked())
 		   {
