@@ -29,9 +29,4 @@
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/photo"/> 
     
-    <item android:id="@+id/action_websearch"
-          android:icon="@drawable/action_search"
-          android:title="@string/action_websearch"
-          android:showAsAction="ifRoom|withText" />
-    
     </menu>

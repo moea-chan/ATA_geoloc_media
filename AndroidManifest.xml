@@ -32,12 +32,12 @@
         android:name=".PhotoFilterPreviewActivity"
         android:label="@string/app_name" >
     </activity>
-    
-    <activity 
-	android:name=".TakeMediaActivity"         
-	android:label="@string/app_name" >
-    </activity> 
-    
+
+    <activity
+        android:name=".SoundActivity"
+        android:label="@string/app_name" >
+    </activity>
+        
   </application>
   
 </manifest>

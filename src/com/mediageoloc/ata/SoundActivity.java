@@ -18,7 +18,6 @@ import android.os.Environment;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.content.Context;
 import android.util.Log;
 import android.media.MediaRecorder;
@@ -27,7 +26,7 @@ import android.media.MediaPlayer;
 import java.io.IOException;
 
 
-public class SoundActivity extends Activity
+public class SoundActivity extends DrawerActivity
 {
     private static final String LOG_TAG = "SoundActivity";
     private static String mFileName = null;
@@ -145,6 +144,9 @@ public class SoundActivity extends Activity
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        //get the main layout from xml
+        LinearLayout mainLayout = (LinearLayout)findViewById(R.id.content_frame);
+        
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
         ll.addView(mRecordButton,
@@ -158,7 +160,8 @@ public class SoundActivity extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 0));
-        setContentView(ll);
+        //setContentView(ll);
+        mainLayout.addView(ll);
     }
 
     @Override
