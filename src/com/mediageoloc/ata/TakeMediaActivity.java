@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,9 +14,10 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class TakeMediaActivity extends Activity {
+public class TakeMediaActivity extends DrawerActivity {
 	
 
 	private Button _buttonPhoto;
@@ -33,14 +33,22 @@ public class TakeMediaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_take_media);
 		
-		// add listeners on buttons
+        //get the main layout from xml
+        LinearLayout mainLayout = (LinearLayout)findViewById(R.id.content_frame);
+ 
+        //create a view to inflate the new layout
+        View view = getLayoutInflater().inflate(R.layout.activity_take_media, mainLayout, true);
+ 
+
+		//add the view to the main layout
+        //mainLayout.addView(view);
+
+        //add listeners on buttons
 		addButtonPhotoListener();
 		addButtonAudioListener();
 	}
-	
-	
+    
 	/** Create a file Uri for saving an image or video */
 	private static Uri getOutputMediaFileUri(int type){
 	      return Uri.fromFile(getOutputMediaFile(type));
