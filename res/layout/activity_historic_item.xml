@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="TODO"
+        android:maxHeight="140dp"
+        android:maxWidth="140dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/picture"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/picture"
+        android:gravity="left"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+</RelativeLayout>
