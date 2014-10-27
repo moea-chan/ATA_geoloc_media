@@ -2,11 +2,12 @@ package com.mediageoloc.ata;
 
 
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,12 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class PhotoCommentPreviewActivity extends Activity {
 	
 	private Button _buttonSaveComment;
 	private EditText _editTextComment;
+	private Uri _photoUri;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +33,11 @@ public class PhotoCommentPreviewActivity extends Activity {
 		//display taken picture
 		Intent intent = getIntent();
 		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
-		Uri photoUri = Uri.parse(intent.getStringExtra("photoUri"));
+		_editTextComment = (EditText) findViewById(R.id.edit_text_comment);
+		_photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		
 		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),_photoUri);
 			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
 			imageView.setImageBitmap(bitmap);
 		} catch (IOException e) {
@@ -53,9 +55,15 @@ public class PhotoCommentPreviewActivity extends Activity {
         });
 	}
 	
+	/**
+	 * Via les sharedReference
+	 */
 	private void savePictureCommented(){
-		_editTextComment = (EditText)findViewById(R.id.edit_text_comment);
-		String data = _editTextComment.getText().toString();
+		
+		gestionHistoriquePreferences();
+		
+//		_editTextComment = (EditText)findViewById(R.id.edit_text_comment);
+//		String data = _editTextComment.getText().toString();
 		// TODO
 		//recuperation du fichier local de stockage
 //		try {
@@ -67,5 +75,62 @@ public class PhotoCommentPreviewActivity extends Activity {
 //	      } catch (Exception e) {
 //	         e.printStackTrace();
 //	      }
+		
 	}
+	
+	
+	private void gestionHistoriquePreferences(){
+		
+		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
+		
+		String stKey;
+		String stValue = "";
+		
+	
+		//Decalage Historique 
+		
+		Editor editor = sharedpreferences.edit();
+		for (int i = 9;i >0;i--)
+		{
+			stKey= "filePath" + String.valueOf(i);
+			stValue = sharedpreferences.getString(stKey, "%&%p%&defValue");
+			
+			if (!stValue.equals("%&%p%&defValue"))
+			{
+				stKey= "filePath" + String.valueOf(i+1);
+				editor.putString(stKey,stValue);	
+			
+				stKey= "commentaire" + String.valueOf(i);
+				stValue = sharedpreferences.getString(stKey, "%&%p%&defValue");
+				
+				stKey= "commentaire" + String.valueOf(i+1);
+				editor.putString(stKey,stValue);	
+				
+			}
+		}
+		//insertion nouvelles donnees
+		stKey= "filePath1";
+		stValue = _photoUri.toString();
+		editor.putString(stKey,stValue);	
+		
+		stKey= "commentaire1";
+		stValue = _editTextComment.getText().toString();
+		editor.putString(stKey,stValue);	
+		
+		editor.commit();
+	  //TODO: revenir au principal	
+		returnTakeMediaActivity();
+	}
+	
+	private void returnTakeMediaActivity(){
+		
+		Intent intent = new Intent(this, TakeMediaActivity.class);
+		intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(intent);
+        //on masque l'activité courante
+        finish();
+        
+	}
+	
 }
