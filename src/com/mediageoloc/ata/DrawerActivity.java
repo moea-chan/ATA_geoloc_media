@@ -169,7 +169,7 @@ public class DrawerActivity extends Activity {
 				LayoutInflater inflater = getLayoutInflater();
 				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
 				inflater.inflate(R.layout.activity_take_media, container);
-				Intent intent = new Intent(this, SoundActivity.class);
+				Intent intent = new Intent(this, TakeMediaActivity.class);
 				startActivity(intent);
 			}
 		default:
