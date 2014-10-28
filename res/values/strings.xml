@@ -38,7 +38,7 @@
 
     <string-array name="menu_options_array">
         <item>Capture media</item>
-        <item>Lasr captures</item>
+        <item>Last captures</item>
         <item>Account</item>
     </string-array>
 
