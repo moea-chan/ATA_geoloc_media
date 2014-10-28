@@ -13,17 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="48dp"
         android:text="@string/photo" />
 
     <Button
         android:id="@+id/buttonAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/buttonPhoto"
-        android:layout_below="@+id/buttonPhoto"
-        android:layout_marginTop="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/buttonPhoto"
         android:text="@string/audio" />
 
     <ImageView
@@ -36,6 +35,8 @@
         android:id="@+id/videoView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:visibility="invisible" />
 
 </RelativeLayout>

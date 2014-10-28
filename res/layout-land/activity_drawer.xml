@@ -9,7 +9,7 @@
          space available using match_parent in both dimensions. -->
     <LinearLayout
         android:id="@+id/content_frame"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -29,4 +29,3 @@
         android:dividerHeight="0dp"
         android:background="#111"/>
 </android.support.v4.widget.DrawerLayout>
-

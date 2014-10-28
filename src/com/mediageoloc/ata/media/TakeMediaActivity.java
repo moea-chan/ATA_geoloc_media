@@ -1,21 +1,20 @@
 package com.mediageoloc.ata.media;
-import android.app.Activity;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
+import com.mediageoloc.ata.DrawerActivity;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
 import com.mediageoloc.ata.media.photo.PhotoUtils;
 
-public class TakeMediaActivity extends Activity {
-	
+public class TakeMediaActivity extends DrawerActivity {
 
 	private Button buttonPhoto;
 	private Button buttonAudio;
@@ -27,15 +26,17 @@ public class TakeMediaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_take_media);
-		
-//		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
+
+		setDrawerContentView(R.layout.activity_take_media);
+
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
+
 		
 		// add listeners on buttons
 		addButtonPhotoListener();
 		addButtonAudioListener();
 	}
+
 	
 	public void startPhotoActivity(){
 		// create Intent to take a picture and return control to the calling application
