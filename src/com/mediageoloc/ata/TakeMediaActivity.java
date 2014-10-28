@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class TakeMediaActivity extends DrawerActivity {
 	
 
