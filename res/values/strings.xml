@@ -3,11 +3,6 @@
 
     <string name="app_name">Media Geolocalization</string>
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
-
-=======
-    <string name="hello">Hello World, PhotoActivity!</string>
->>>>>>> 06ee7c3c9a8a1b4e834ed9b3817631ea24f9f9aa
     <string name="btnIntend">Take (big) Picture</string>
     <string name="btnIntendS">Take (small) Picture</string>
     <string name="btnIntendV">Take Video</string>
@@ -22,7 +17,6 @@
     <string name="from_gallery_video">Galerie</string>
     <string name="from_snapshot_audio">Prendre un son</string>
     <string name="from_gallery_audio">Galerie</string>
-<<<<<<< HEAD
 
     <string name="start_sound_recording">Enregistrement son</string>
     <string name="stop_sound_recording">Fin enregistrement</string>
@@ -40,20 +34,8 @@
     <string name="ok">OK</string>
     <string name="apply_NB_filter">Noir et Blanc</string>
     
-=======
-    <string name="photo_file">com.mediageoloc.ata.photoFile</string>
-    <string name="ok">OK</string>
-    <string name="apply_NB_filter">Noir et Blanc</string>
     <string name="title_activity_historic_media">HistoricMediaActivity</string>
     <string name="title_activity_historic_item">HistoricItemActivity</string>
     <string name="title_activity_drawer">DrawerActivity</string>
-<string-array name="menu_options_array">
-        <item>Capture media</item>
-        <item>Look in the area</item>
-        <item>The posts</item>
-        <item>Account</item>
-    </string-array>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
->>>>>>> 06ee7c3c9a8a1b4e834ed9b3817631ea24f9f9aa
+
 </resources>

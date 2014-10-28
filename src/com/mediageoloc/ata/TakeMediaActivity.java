@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class TakeMediaActivity extends DrawerActivity {
@@ -35,24 +34,13 @@ public class TakeMediaActivity extends DrawerActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-<<<<<<< HEAD
-        //get the main layout from xml
-        LinearLayout mainLayout = (LinearLayout)findViewById(R.id.content_frame);
- 
+		 
         //create a view to inflate the new layout
-        View view = getLayoutInflater().inflate(R.layout.activity_take_media, mainLayout, true);
+        setContentView(R.layout.activity_take_media);
  
-
-		//add the view to the main layout
-        //mainLayout.addView(view);
-
-        //add listeners on buttons
-=======
 		initHistoriquePreferences();
 		
 		// add listeners on buttons
->>>>>>> 06ee7c3c9a8a1b4e834ed9b3817631ea24f9f9aa
 		addButtonPhotoListener();
 		addButtonAudioListener();
 	}
