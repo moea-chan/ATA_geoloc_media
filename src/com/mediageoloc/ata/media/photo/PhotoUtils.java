@@ -6,6 +6,8 @@ import java.util.Date;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -51,9 +53,6 @@ public class PhotoUtils {
 	}
 	
 	
-	
-	
-	
 	/**
 	 * 
 	 * -Verifie l'existence de l'historiquePreferences et le complete eventuellement
@@ -77,4 +76,50 @@ public class PhotoUtils {
 		}		
 	}
 	
+	
+	/**
+	 * filtreLumiere
+	 * @param value : for Brightness
+	 * @param src : Bitmap to modify
+	 * @return : modified 
+	 */
+	public static Bitmap filtreLumiere(int value, final Bitmap src) {
+		// image size
+		int width = src.getWidth();
+		int height = src.getHeight();
+		// create output bitmap
+		Bitmap bmOut = Bitmap.createBitmap(width, height, src.getConfig());
+		// color information
+		int A, R, G, B;
+		int pixel;
+
+		// scan through all pixels
+		for(int x = 0; x < width; ++x) {
+			for(int y = 0; y < height; ++y) {
+				// get pixel color
+				pixel = src.getPixel(x, y);
+				A = Color.alpha(pixel);
+				R = Color.red(pixel);
+				G = Color.green(pixel);
+				B = Color.blue(pixel);
+
+				// increase/decrease each channel
+				R += value;
+				if(R > 255) { R = 255; }
+				else if(R < 0) { R = 0; }
+
+				G += value;
+				if(G > 255) { G = 255; }
+				else if(G < 0) { G = 0; }
+
+				B += value;
+				if(B > 255) { B = 255; }
+				else if(B < 0) { B = 0; }
+
+				// apply new pixel color to output bitmap
+				bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+			}
+		}
+		return bmOut;
+	}
 }
