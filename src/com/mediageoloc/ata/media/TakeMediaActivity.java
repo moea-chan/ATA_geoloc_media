@@ -1,24 +1,18 @@
 package com.mediageoloc.ata.media;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
+import com.mediageoloc.ata.media.photo.PhotoUtils;
 
 public class TakeMediaActivity extends Activity {
 	
@@ -27,10 +21,6 @@ public class TakeMediaActivity extends Activity {
 	private Button buttonAudio;
 	
 	private Uri photoUri;
-	private Intent intentPhoto;
-	
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	public static final int MEDIA_TYPE_IMAGE = 1;
 	
 	
 	@Override
@@ -38,52 +28,29 @@ public class TakeMediaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_take_media);
 		
-		initHistoriquePreferences();
+		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
+		PhotoUtils.initHistoriquePreferences(sharedpreferences);
 		
 		// add listeners on buttons
 		addButtonPhotoListener();
 		addButtonAudioListener();
 	}
 	
-	
-	/** Create a file Uri for saving an image or video */
-	private static Uri getOutputMediaFileUri(int type){
-	      return Uri.fromFile(getOutputMediaFile(type));
+	public void startPhotoActivity(){
+		// create Intent to take a picture and return control to the calling application
+		Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+		Uri photoUri = PhotoUtils.getOutputMediaFileUri(PhotoUtils.MEDIA_TYPE_IMAGE); // create a file to save the image
+	    intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); // set the image file name
+	    
+	    // start the image capture Intent
+	    startActivityForResult(intentPhoto, PhotoUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
-	/** Create a File for saving an image or video */
-	private static File getOutputMediaFile(int type){
-	    // To be safe, you should check that the SDCard is mounted
-	    // using Environment.getExternalStorageState() before doing this.
-
-	    File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-	              Environment.DIRECTORY_PICTURES), "MyCameraApp");
-	    // This location works best if you want the created images to be shared
-	    // between applications and persist after your app has been uninstalled.
-
-	    // Create the storage directory if it does not exist
-	    if (! mediaStorageDir.exists()){
-	        if (! mediaStorageDir.mkdirs()){
-	            Log.d("MyCameraApp", "failed to create directory");
-	            return null;
-	        }
-	    }
-
-	    // Create a media file name
-	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	    File mediaFile;
-	    if (type == MEDIA_TYPE_IMAGE){
-	        mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-	        "IMG_"+ timeStamp + ".jpg");
-	    } else {
-	        return null;
-	    }
-	    return mediaFile;
-	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+	    if (requestCode == PhotoUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	            // Image captured and saved to fileUri specified in the Intent
 	            Intent intent = new Intent(this, PhotoFilterPreviewActivity.class);
@@ -98,16 +65,6 @@ public class TakeMediaActivity extends Activity {
 	    } 
 	}
 	
-	private void startPhotoActivity(){
-		// create Intent to take a picture and return control to the calling application
-		intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-		photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-	    intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); // set the image file name
-	    
-	    // start the image capture Intent
-	    startActivityForResult(intentPhoto, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-	}
 	
 	
 	private void addButtonPhotoListener(){
@@ -135,35 +92,6 @@ public class TakeMediaActivity extends Activity {
         startActivity(intent);
 	}
 	
-	/**
-	 * initHistoriquePreferences()
-	 * 
-	 * -Verifie l'existence de l'historiquePreferences et le complete eventuellement
-	 * 		avec filePathX pour les URI et commentaireX pour les commentaires (0 < X < 11)
-	 */
-	private void initHistoriquePreferences(){
-		
-		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
-		
-		String existHisto = sharedpreferences.getString("filePath10", "%&%p%&defValue");
-		String stKey;
-		String stValue = "";
-		
-		if (existHisto.equals("%&%p%&defValue"))
-		{
-			//Historique inexistant => Création
-			
-			Editor editor = sharedpreferences.edit();
-			for (int i =1;i<11;i++)
-			{
-				stKey= "filePath" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-				stKey= "commentaire" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-			}
-			editor.commit();
-		}		
-		
-	}
+	
 
 }
