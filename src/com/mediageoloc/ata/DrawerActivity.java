@@ -88,8 +88,8 @@ public class DrawerActivity extends Activity {
 
 		// set a custom shadow that overlays the main content when the drawer
 		// opens
-		//mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
-		//		GravityCompat.START);
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+				GravityCompat.START);
 		// set up the drawer's list view with items and click listener
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, mMenuOptionstTitles));
