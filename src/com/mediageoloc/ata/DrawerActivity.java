@@ -165,14 +165,14 @@ public class DrawerActivity extends Activity {
 	private void selectItem(int position) {
 		// update the main content by replacing fragments
 		switch (position) {
-		case 0:
-			if (this.getClass() != TakeMediaActivity.class) {
-				LayoutInflater inflater = getLayoutInflater();
-				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
-				inflater.inflate(R.layout.activity_take_media, container);
+//		case 0:
+			//if (this.getClass() != TakeMediaActivity.class) {
+//				LayoutInflater inflater = getLayoutInflater();
+//				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+//				inflater.inflate(R.layout.activity_take_media, container);
 //				Intent intent = new Intent(this, SoundActivity.class);
 //				startActivity(intent);
-			}
+//			}
 		default:
 		}
 	}
