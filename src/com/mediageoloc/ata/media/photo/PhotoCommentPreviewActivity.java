@@ -4,10 +4,6 @@ package com.mediageoloc.ata.media.photo;
 
 import java.io.IOException;
 
-import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.R.id;
-import com.mediageoloc.ata.R.layout;
-import com.mediageoloc.ata.media.TakeMediaActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +17,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.TakeMediaActivity;
 
 public class PhotoCommentPreviewActivity extends Activity {
 	
