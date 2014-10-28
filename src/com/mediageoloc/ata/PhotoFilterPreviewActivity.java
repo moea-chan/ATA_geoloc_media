@@ -22,6 +22,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 	private ImageView _imageView;
 	private CheckBox _filterAction;
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo_filter_preview);
