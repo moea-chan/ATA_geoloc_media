@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.drawer;
 
 /*
  * Copyright 2013 The Android Open Source Project
@@ -16,6 +16,7 @@ package com.mediageoloc.ata;
  * limitations under the License.
  */
 
+import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
 

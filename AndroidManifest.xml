@@ -31,7 +31,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".SoundActivity"
+            android:name=".drawer.SoundActivity"
             android:label="@string/app_name" >
         </activity>
         <activity

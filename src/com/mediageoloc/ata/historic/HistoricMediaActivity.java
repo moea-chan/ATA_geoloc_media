@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.mediageoloc.ata.DrawerActivity;
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.media.StoredMedia;
 
 

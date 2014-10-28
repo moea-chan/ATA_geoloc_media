@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.drawer;
 
 /*
  * The application needs to have the permission to write to external storage
@@ -24,6 +24,8 @@ import android.media.MediaRecorder;
 import android.media.MediaPlayer;
 
 import java.io.IOException;
+
+import com.mediageoloc.ata.R;
 
 
 public class SoundActivity extends DrawerActivity
