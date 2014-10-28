@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".TakeMediaActivity"
+            android:name="com.mediageoloc.ata.media.TakeMediaActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +37,11 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".HistoricMediaActivity"
+            android:name="com.mediageoloc.ata.historic.HistoricMediaActivity"
             android:label="@string/title_activity_historic_media" >
         </activity>
         <activity
-            android:name=".HistoricItemActivity"
+            android:name="com.mediageoloc.ata.historic.HistoricItemActivity"
             android:label="@string/title_activity_historic_item" >
         </activity>
         <activity

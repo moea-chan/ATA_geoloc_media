@@ -1,4 +1,7 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.historic;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;
