@@ -43,7 +43,7 @@ public class TakeMediaActivity extends DrawerActivity {
 		// create Intent to take a picture and return control to the calling application
 		Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		Uri photoUri = PhotoUtils.getOutputMediaFileUri(PhotoUtils.MEDIA_TYPE_IMAGE); // create a file to save the image
+		photoUri = PhotoUtils.getOutputMediaFileUri(PhotoUtils.MEDIA_TYPE_IMAGE); // create a file to save the image
 	    intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); // set the image file name
 	    
 	    // start the image capture Intent
@@ -59,7 +59,6 @@ public class TakeMediaActivity extends DrawerActivity {
 	            Intent intent = new Intent(this, PhotoFilterPreviewActivity.class);
 	            intent.putExtra("photoUri", photoUri.toString());
 	            startActivity(intent);
-	            
 	        } else if (resultCode == RESULT_CANCELED) {
 	            // User cancelled the image capture
 	        } else {
@@ -67,8 +66,6 @@ public class TakeMediaActivity extends DrawerActivity {
 	        }
 	    } 
 	}
-	
-	
 	
 	private void addButtonPhotoListener(){
 		buttonPhoto = (Button) findViewById(R.id.buttonPhoto);

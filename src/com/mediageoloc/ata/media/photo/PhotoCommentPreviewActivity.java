@@ -58,11 +58,9 @@ public class PhotoCommentPreviewActivity extends Activity {
         });
 	}
 	
-private void savePictureCommented(){
-		
+	private void savePictureCommented(){
 		gestionHistoriquePreferences();
 		returnTakeMediaActivity();
-		
 	}
 	
 	
