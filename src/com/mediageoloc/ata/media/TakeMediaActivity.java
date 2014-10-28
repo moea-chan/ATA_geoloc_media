@@ -1,8 +1,14 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.media;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.R.id;
+import com.mediageoloc.ata.R.layout;
+import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
 
 import android.app.Activity;
 import android.content.Intent;

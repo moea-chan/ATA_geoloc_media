@@ -1,7 +1,12 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.historic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.R.id;
+import com.mediageoloc.ata.R.layout;
+import com.mediageoloc.ata.media.StoredMedia;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

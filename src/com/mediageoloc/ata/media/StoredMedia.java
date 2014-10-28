@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.media;
 
 public class StoredMedia {
 	private String comment;
