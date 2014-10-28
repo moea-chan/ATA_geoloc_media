@@ -182,6 +182,7 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 				Intent intent = new Intent(this, TakeMediaActivity.class);
 				startActivity(intent);
 			}
+			break;
 		case 1:
 			if (this.getClass() != HistoricMediaActivity.class) {
 				LayoutInflater inflater = getLayoutInflater();
