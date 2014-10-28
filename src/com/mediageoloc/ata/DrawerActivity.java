@@ -66,7 +66,7 @@ import android.widget.ListView;
  * overlay on top of the current content.
  * </p>
  */
-public class DrawerActivity extends Activity {
+public class DrawerActivity extends Activity implements DrawerContentInterface{
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -127,7 +127,7 @@ public class DrawerActivity extends Activity {
 	}
 
 	@Override
-	public void setContentView(int contentId) {
+	public void setDrawerContentView(int contentId) {
         LinearLayout congtentLayout = (LinearLayout)findViewById(R.id.content_frame);
         //create a view to inflate the new layout
         getLayoutInflater().inflate(contentId, congtentLayout, true);
@@ -177,6 +177,14 @@ public class DrawerActivity extends Activity {
 				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
 				inflater.inflate(R.layout.activity_take_media, container);
 				Intent intent = new Intent(this, TakeMediaActivity.class);
+				startActivity(intent);
+			}
+		case 1:
+			if (this.getClass() != HistoricMediaActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_take_media, container);
+				Intent intent = new Intent(this, HistoricMediaActivity.class);
 				startActivity(intent);
 			}
 		default:

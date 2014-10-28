@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 
-public class HistoricMediaActivity extends Activity {
+public class HistoricMediaActivity extends DrawerActivity {
 	private ListView _historicListView;
 	private List<StoredMedia> _historicList = new ArrayList<StoredMedia>();
 	private HistoricAdapter _historicAdpt;
@@ -17,7 +17,7 @@ public class HistoricMediaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_historic_media);
+		setDrawerContentView(R.layout.activity_historic_media);
 		
 		_historicListView = (ListView) findViewById(R.id.historic_list);
 		

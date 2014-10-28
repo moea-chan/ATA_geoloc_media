@@ -35,7 +35,7 @@ public class TakeMediaActivity extends DrawerActivity {
 		super.onCreate(savedInstanceState);
 		 
         //create a view to inflate the new layout
-        setContentView(R.layout.activity_take_media);
+		setDrawerContentView(R.layout.activity_take_media);
  
 		initHistoriquePreferences();
 		
