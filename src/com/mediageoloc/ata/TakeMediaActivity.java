@@ -4,13 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -18,15 +16,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class TakeMediaActivity extends Activity {
 	
 
-	private Button _buttonPhoto;
-	private Button _buttonAudio;
+	private Button buttonPhoto;
+	private Button buttonAudio;
 	
-	private Uri _photoUri;
-	private Intent _intentPhoto;
+	private Uri photoUri;
+	private Intent intentPhoto;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -86,7 +83,7 @@ public class TakeMediaActivity extends Activity {
 	        if (resultCode == RESULT_OK) {
 	            // Image captured and saved to fileUri specified in the Intent
 	            Intent intent = new Intent(this, PhotoFilterPreviewActivity.class);
-	            intent.putExtra("photoUri", _photoUri.toString());
+	            intent.putExtra("photoUri", photoUri.toString());
 	            startActivity(intent);
 	            
 	        } else if (resultCode == RESULT_CANCELED) {
@@ -99,19 +96,19 @@ public class TakeMediaActivity extends Activity {
 	
 	private void startPhotoActivity(){
 		// create Intent to take a picture and return control to the calling application
-		_intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		_photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-	    _intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, _photoUri); // set the image file name
+		photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+	    intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); // set the image file name
 	    
 	    // start the image capture Intent
-	    startActivityForResult(_intentPhoto, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	    startActivityForResult(intentPhoto, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
 	
 	private void addButtonPhotoListener(){
-		_buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
-		_buttonPhoto.setOnClickListener(new View.OnClickListener() {
+		buttonPhoto = (Button) findViewById(R.id.buttonPhoto);
+		buttonPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
 			public void onClick(View v) {
             	startPhotoActivity();
@@ -120,8 +117,8 @@ public class TakeMediaActivity extends Activity {
 	}
 	
 	private void addButtonAudioListener(){
-		_buttonAudio = (Button) findViewById(R.id.buttonAudio);
-		_buttonAudio.setOnClickListener(new View.OnClickListener() {
+		buttonAudio = (Button) findViewById(R.id.buttonAudio);
+		buttonAudio.setOnClickListener(new View.OnClickListener() {
             @Override
 			public void onClick(View v) {
             	startHistoricMediaActivity();

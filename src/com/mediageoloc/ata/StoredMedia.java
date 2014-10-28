@@ -1,27 +1,32 @@
 package com.mediageoloc.ata;
 
 public class StoredMedia {
-	private String _comment;
-	private String _filePath;
+	private String comment;
+	private String filePath;
 	
-	public StoredMedia(String fp, String c){
+	public StoredMedia(String filepath, String comment){
 		super();
-		_comment = c;
-		_filePath = fp;
+		this.comment = comment;
+		this.filePath = filepath;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 	
-	public String get_comment() {
-		return _comment;
-	}
-	public void set_comment(String _comment) {
-		this._comment = _comment;
-	}
-	public String get_filePath() {
-		return _filePath;
-	}
-	public void set_filePath(String _filePath) {
-		this._filePath = _filePath;
-	}
+	
 	
 	
 }

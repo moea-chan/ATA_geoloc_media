@@ -17,10 +17,10 @@ import android.widget.ImageView;
 
 public class PhotoFilterPreviewActivity extends Activity {
 	
-	private Button _buttonGoToCommentPreview;
-	private Uri _photoUri;
-	private ImageView _imageView;
-	private CheckBox _filterAction;
+	private Button buttonGoToCommentPreview;
+	private Uri photoUri;
+	private ImageView imageView;
+	private CheckBox filterAction;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +31,21 @@ public class PhotoFilterPreviewActivity extends Activity {
 		addButtonFilterListener();
 		//display taken picture
 		Intent intent = getIntent();
-		_imageView = (ImageView) findViewById(R.id.photo_preview);
-		_photoUri = Uri.parse(intent.getStringExtra("photoUri"));
+		imageView = (ImageView) findViewById(R.id.photo_preview);
+		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		
 		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),_photoUri);
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
 			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
-			_imageView.setImageBitmap(bitmap);
+			imageView.setImageBitmap(bitmap);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private void addButtonGoToCommentpreviewListener(){
-		_buttonGoToCommentPreview = (Button) findViewById(R.id.button_go_to_comment_preview);
-		_buttonGoToCommentPreview.setOnClickListener(new View.OnClickListener() {
+		buttonGoToCommentPreview = (Button) findViewById(R.id.button_go_to_comment_preview);
+		buttonGoToCommentPreview.setOnClickListener(new View.OnClickListener() {
             @Override
 			public void onClick(View v) {
             	startCommentPreviewActivity();
@@ -53,8 +53,8 @@ public class PhotoFilterPreviewActivity extends Activity {
         });
 	}
 	private void addButtonFilterListener(){
-		_filterAction = (CheckBox) findViewById(R.id.check_box_filter);
-		_filterAction.setOnClickListener(new View.OnClickListener() {
+		filterAction = (CheckBox) findViewById(R.id.check_box_filter);
+		filterAction.setOnClickListener(new View.OnClickListener() {
             @Override
 			public void onClick(View v) {
             	doFilter();
@@ -64,19 +64,19 @@ public class PhotoFilterPreviewActivity extends Activity {
 	
 	private void startCommentPreviewActivity(){
 		Intent intent = new Intent(this, PhotoCommentPreviewActivity.class);
-        intent.putExtra("photoUri", _photoUri.toString());
+        intent.putExtra("photoUri", photoUri.toString());
         startActivity(intent);
 	}
 	
 	   public void doFilter()
 	   {
 		   
-		   if (_filterAction.isChecked())
+		   if (filterAction.isChecked())
 		   {
 			   
 			      int value=100;
 				   
-			      BitmapDrawable drawable = (BitmapDrawable) _imageView.getDrawable();
+			      BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 			        final Bitmap src = drawable.getBitmap();
 //				   Bitmap src = _imageView.getDrawingCache();
 				   
@@ -118,7 +118,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 			       }
 			    
 			       // return final image
-			       _imageView.setImageBitmap(bmOut);
+			       imageView.setImageBitmap(bmOut);
 		   }
 		   
 	   }
