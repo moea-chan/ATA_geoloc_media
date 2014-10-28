@@ -3,6 +3,7 @@ package com.mediageoloc.ata.historic;
 import java.io.IOException;
 import java.util.List;
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;

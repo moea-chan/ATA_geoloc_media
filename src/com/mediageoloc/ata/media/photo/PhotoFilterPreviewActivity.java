@@ -2,6 +2,7 @@ package com.mediageoloc.ata.media.photo;
 
 import java.io.IOException;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.mediageoloc.ata.R;
+
 
 public class PhotoFilterPreviewActivity extends Activity {
 
