@@ -3,11 +3,6 @@ package com.mediageoloc.ata.historic;
 import java.io.IOException;
 import java.util.List;
 
-import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.R.id;
-import com.mediageoloc.ata.R.layout;
-import com.mediageoloc.ata.media.StoredMedia;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.StoredMedia;
 
 public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 
