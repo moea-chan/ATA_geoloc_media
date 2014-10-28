@@ -1,14 +1,19 @@
 package com.mediageoloc.ata.media.photo;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.ContentResolver;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ImageView;
 
 public class PhotoUtils {
 	
@@ -50,8 +55,17 @@ public class PhotoUtils {
 	    return mediaFile;
 	}
 	
-	
-	
+	public static Bitmap loadPhotoInImageViewByUri(ContentResolver contentResolver, String uri, int height, int width){
+		Uri photoUri = Uri.parse(uri);
+		try {
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photoUri);
+			bitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
+			return bitmap;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 	/**

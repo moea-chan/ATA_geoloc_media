@@ -38,15 +38,10 @@ public class PhotoCommentPreviewActivity extends Activity {
 		Intent intent = getIntent();
 		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
 		editTextComment = (EditText) findViewById(R.id.edit_text_comment);
-		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		
-		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
-			imageView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Bitmap bitmap = PhotoUtils.loadPhotoInImageViewByUri(this.getContentResolver(), intent.getStringExtra("photoUri"), 190, 140);
+		imageView.setImageBitmap(bitmap);
+		
 	}
 	
 	private void addButtonSaveCommentListener(){
