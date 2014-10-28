@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
 import com.mediageoloc.ata.media.photo.PhotoUtils;
 
@@ -22,13 +23,14 @@ public class TakeMediaActivity extends Activity {
 	private Uri photoUri;
 	
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_take_media);
 		
-		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
-		PhotoUtils.initHistoriquePreferences(sharedpreferences);
+//		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
+		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
 		
 		// add listeners on buttons
 		addButtonPhotoListener();
