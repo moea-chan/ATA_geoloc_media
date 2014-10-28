@@ -6,4 +6,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:textColor="#fff"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textSize="26sp" 
 />

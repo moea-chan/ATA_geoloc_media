@@ -3,7 +3,6 @@ package com.mediageoloc.ata.historic;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;

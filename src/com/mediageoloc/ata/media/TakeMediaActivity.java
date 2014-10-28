@@ -1,5 +1,6 @@
 package com.mediageoloc.ata.media;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ public class TakeMediaActivity extends DrawerActivity {
 
 		setDrawerContentView(R.layout.activity_take_media);
 
+
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
+
 
 		
 		// add listeners on buttons
