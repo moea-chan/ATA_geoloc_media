@@ -1,25 +1,27 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.historic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.mediageoloc.ata.DrawerActivity;
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.StoredMedia;
+
 
 public class HistoricMediaActivity extends DrawerActivity {
-	private ListView _historicListView;
-	private List<StoredMedia> _historicList = new ArrayList<StoredMedia>();
-	private HistoricAdapter _historicAdpt;
+	private ListView historicListView;
+	private List<StoredMedia> historicList = new ArrayList<StoredMedia>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setDrawerContentView(R.layout.activity_historic_media);
 		
-		_historicListView = (ListView) findViewById(R.id.historic_list);
+		historicListView = (ListView) findViewById(R.id.historic_list);
 		
 		SharedPreferences settings = getSharedPreferences("historiquePreferences", 0);
 		String filePath;
@@ -30,11 +32,11 @@ public class HistoricMediaActivity extends DrawerActivity {
 			if(filePath != null && filePath != ""){
 				comment = settings.getString("commentaire"+i, "");
 				media = new StoredMedia(filePath, comment);
-				_historicList.add(media);
+				historicList.add(media);
 			}
 		}
 		
-		HistoricAdapter adapterArray = new HistoricAdapter(_historicList, getApplicationContext());
-		_historicListView.setAdapter(adapterArray);
+		HistoricAdapter adapterArray = new HistoricAdapter(historicList, getApplicationContext());
+		historicListView.setAdapter(adapterArray);
 	}
 }

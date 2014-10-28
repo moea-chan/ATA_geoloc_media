@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.historic;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,14 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.StoredMedia;
+
 public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 
-	private List<StoredMedia> _mediaList;
+	private List<StoredMedia> mediaList;
 	private Context context;
 
 	public HistoricAdapter(List<StoredMedia> mediaList, Context ctx) {
 		super(ctx, R.layout.activity_historic_item, mediaList);
-		this._mediaList = mediaList;
+		this.mediaList = mediaList;
 		this.context = ctx;
 	}
 
@@ -37,11 +40,11 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		// Now we can fill the layout with the right values
 		TextView commentView = (TextView) convertView.findViewById(R.id.comment);
 		ImageView pictureView = (ImageView) convertView.findViewById(R.id.picture);
-		StoredMedia media = _mediaList.get(position);
+		StoredMedia media = mediaList.get(position);
 
-		commentView.setText(media.get_comment());
+		commentView.setText(media.getComment());
 
-		Uri photoUri = Uri.parse(media.get_filePath());
+		Uri photoUri = Uri.parse(media.getFilePath());
 		// Display picture in correct size
 		try {
 			Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),photoUri);

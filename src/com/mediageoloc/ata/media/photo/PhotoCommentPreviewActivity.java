@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.media.photo;
 
 
 
@@ -17,11 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.TakeMediaActivity;
+
 public class PhotoCommentPreviewActivity extends Activity {
 	
-	private Button _buttonSaveComment;
-	private EditText _editTextComment;
-	private Uri _photoUri;
+	private Button buttonSaveComment;
+	private EditText editTextComment;
+	private Uri photoUri;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,11 @@ public class PhotoCommentPreviewActivity extends Activity {
 		//display taken picture
 		Intent intent = getIntent();
 		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
-		_editTextComment = (EditText) findViewById(R.id.edit_text_comment);
-		_photoUri = Uri.parse(intent.getStringExtra("photoUri"));
+		editTextComment = (EditText) findViewById(R.id.edit_text_comment);
+		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		
 		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),_photoUri);
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
 			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
 			imageView.setImageBitmap(bitmap);
 		} catch (IOException e) {
@@ -46,8 +49,8 @@ public class PhotoCommentPreviewActivity extends Activity {
 	}
 	
 	private void addButtonSaveCommentListener(){
-		_buttonSaveComment = (Button) findViewById(R.id.button_save_comment);
-		_buttonSaveComment.setOnClickListener(new View.OnClickListener() {
+		buttonSaveComment = (Button) findViewById(R.id.button_save_comment);
+		buttonSaveComment.setOnClickListener(new View.OnClickListener() {
             @Override
 			public void onClick(View v) {
             	savePictureCommented();
@@ -94,11 +97,11 @@ private void savePictureCommented(){
 		}
 		//insertion nouvelles donnees
 		stKey= "filePath1";
-		stValue = _photoUri.toString();
+		stValue = photoUri.toString();
 		editor.putString(stKey,stValue);	
 		
 		stKey= "commentaire1";
-		stValue = _editTextComment.getText().toString();
+		stValue = editTextComment.getText().toString();
 		editor.putString(stKey,stValue);	
 		
 		editor.commit();

@@ -16,6 +16,9 @@ package com.mediageoloc.ata;
  * limitations under the License.
  */
 
+import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.media.TakeMediaActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -215,5 +218,4 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
 }

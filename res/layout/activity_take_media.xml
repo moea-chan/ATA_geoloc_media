@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mediageoloc.ata.TakeMediaActivity" >
+    tools:context="com.mediageoloc.ata.media.TakeMediaActivity" >
 
     <Button
         android:id="@+id/buttonPhoto"
@@ -16,21 +16,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
         android:text="@string/photo" />
-
-    <Button
-        android:id="@+id/buttonAudio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/buttonPhoto"
-        android:layout_below="@+id/buttonPhoto"
-        android:layout_marginTop="48dp"
-        android:text="@string/audio" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible" />
 
     <VideoView
         android:id="@+id/videoView1"

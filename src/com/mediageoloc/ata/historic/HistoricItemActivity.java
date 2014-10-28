@@ -1,7 +1,9 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.historic;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.mediageoloc.ata.R;
 
 public class HistoricItemActivity extends Activity {
 
