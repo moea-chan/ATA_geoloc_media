@@ -15,14 +15,6 @@ public class HistoricPrefManager {
 	private static final String COMMENT = "commentaire";
 	
 	
-	   
-	  //Constructeur
-//	  public HistoricPrefManager(){
-//		  super();
-//		  
-//	  }
-	   
-
 	/**
 	 * initHistoriquePreferences()
 	 * 

@@ -1,10 +1,10 @@
-package com.mediageoloc.ata;
-
-import com.mediageoloc.ata.user.User;
+package com.mediageoloc.ata.user;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.mediageoloc.ata.R;
 
 public class UserAccountActivity extends Activity {
 	
