@@ -8,8 +8,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
-import com.mediageoloc.ata.DrawerActivity;
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;

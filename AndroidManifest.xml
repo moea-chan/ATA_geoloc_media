@@ -45,15 +45,9 @@
             android:label="@string/title_activity_historic_item" >
         </activity>
         <activity
-            android:name=".DrawerActivity"
-            android:label="@string/title_activity_drawer" >
-        </activity>
-        <activity
             android:name=".UserAccountActivity"
             android:label="@string/title_activity_user_account" >
         </activity>
     </application>
-
-
 
 </manifest>
