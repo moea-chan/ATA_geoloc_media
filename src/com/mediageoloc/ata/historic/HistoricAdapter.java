@@ -1,25 +1,17 @@
 package com.mediageoloc.ata.historic;
 
-import java.io.IOException;
 import java.util.List;
 
-
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
+
 
 public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 
@@ -42,23 +34,22 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 			convertView = inflater.inflate(R.layout.activity_historic_item, parent, false);
 		}
 		// Now we can fill the layout with the right values
-		TextView commentView = (TextView) convertView.findViewById(R.id.comment);
-		ImageView pictureView = (ImageView) convertView.findViewById(R.id.picture);
 		StoredMedia media = mediaList.get(position);
-
+		
+		// set comment
+		TextView commentView = (TextView) convertView.findViewById(R.id.comment);
 		commentView.setText(media.getComment());
-		Uri photoUri = Uri.parse(media.getFilePath());
-		// Display picture in correct size
-		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),photoUri);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 120, 120, false);
-			pictureView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		//set image with async loading
+		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);
+		HistoricImageLoader imgLoader = new HistoricImageLoader(media, context);
+		imgLoader.addObserver(pictureView);
+		imgLoader.broadcast();
 
 		return convertView;
 	}
+	
+	
 	
 	/*
 	 * (non-Javadoc)
