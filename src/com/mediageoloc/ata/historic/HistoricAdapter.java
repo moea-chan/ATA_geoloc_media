@@ -47,7 +47,6 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		StoredMedia media = mediaList.get(position);
 
 		commentView.setText(media.getComment());
-
 		Uri photoUri = Uri.parse(media.getFilePath());
 		// Display picture in correct size
 		try {
@@ -59,5 +58,15 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		}
 
 		return convertView;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.widget.BaseAdapter#isEnabled(int)
+	 * disable click on item
+	 */
+	@Override
+    public boolean isEnabled(int position){
+		return false;
 	}
 }
