@@ -55,48 +55,6 @@ public class PhotoCommentPreviewActivity extends Activity {
 	}
 	
 	
-//	private void gestionHistoriquePreferences(){
-//		
-//		SharedPreferences sharedpreferences  =  getSharedPreferences("historiquePreferences", MODE_PRIVATE);
-//		
-//		String stKey;
-//		String stValue = "";
-//		
-//	
-//		//Decalage Historique 
-//		
-//		Editor editor = sharedpreferences.edit();
-//		for (int i = 9;i >0;i--)
-//		{
-//			stKey= "filePath" + String.valueOf(i);
-//			stValue = sharedpreferences.getString(stKey, "%&%p%&defValue");
-//			
-//			if (!stValue.equals("%&%p%&defValue"))
-//			{
-//				stKey= "filePath" + String.valueOf(i+1);
-//				editor.putString(stKey,stValue);	
-//			
-//				stKey= "commentaire" + String.valueOf(i);
-//				stValue = sharedpreferences.getString(stKey, "%&%p%&defValue");
-//				
-//				stKey= "commentaire" + String.valueOf(i+1);
-//				editor.putString(stKey,stValue);	
-//				
-//			}
-//		}
-//		//insertion nouvelles donnees
-//		stKey= "filePath1";
-//		stValue = photoUri.toString();
-//		editor.putString(stKey,stValue);	
-//		
-//		stKey= "commentaire1";
-//		stValue = editTextComment.getText().toString();
-//		editor.putString(stKey,stValue);	
-//		
-//		editor.commit();
-//
-//	}
-//	
 	private void returnTakeMediaActivity(){
 		
 		Intent intent = new Intent(this, TakeMediaActivity.class);
