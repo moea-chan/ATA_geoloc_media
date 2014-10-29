@@ -168,7 +168,9 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			mDrawerLayout.closeDrawers();
 			selectItem(position);
+			mDrawerLayout.closeDrawers();
 		}
 	}
 
