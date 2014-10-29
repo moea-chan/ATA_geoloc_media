@@ -1,6 +1,8 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.user;
 
-import com.mediageoloc.ata.user.User;
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.R.layout;
+import com.mediageoloc.ata.R.string;
 
 import android.app.Activity;
 import android.os.Bundle;
