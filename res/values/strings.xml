@@ -35,12 +35,15 @@
     <string name="title_activity_drawer">DrawerActivity</string>
 
 
-
     <string-array name="menu_options_array">
         <item>Capture media</item>
         <item>Last captures</item>
         <item>Account</item>
     </string-array>
+
+
+    
+   
 
     
     <!-- User account activity -->

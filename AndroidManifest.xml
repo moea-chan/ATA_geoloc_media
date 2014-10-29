@@ -45,7 +45,7 @@
             android:label="@string/title_activity_historic_item" >
         </activity>
         <activity
-            android:name=".UserAccountActivity"
+            android:name="com.mediageoloc.ata.user.UserAccountActivity"
             android:label="@string/title_activity_user_account" >
         </activity>
     </application>

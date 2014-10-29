@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
@@ -44,7 +47,6 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		StoredMedia media = mediaList.get(position);
 
 		commentView.setText(media.getComment());
-
 		Uri photoUri = Uri.parse(media.getFilePath());
 		// Display picture in correct size
 		try {
@@ -56,5 +58,15 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		}
 
 		return convertView;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.widget.BaseAdapter#isEnabled(int)
+	 * disable click on item
+	 */
+	@Override
+    public boolean isEnabled(int position){
+		return false;
 	}
 }

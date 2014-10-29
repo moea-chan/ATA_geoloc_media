@@ -28,11 +28,12 @@ public class TakeMediaActivity extends DrawerActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.activity_take_media);
+		
 		setDrawerContentView(R.layout.activity_take_media);
 
 
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
-
 
 		
 		// add listeners on buttons
