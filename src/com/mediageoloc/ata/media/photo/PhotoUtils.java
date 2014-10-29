@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Observer;
 
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
