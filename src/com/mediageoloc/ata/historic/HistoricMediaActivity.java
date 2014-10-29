@@ -3,24 +3,23 @@ package com.mediageoloc.ata.historic;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.mediageoloc.ata.DrawerActivity;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
 
 
-public class HistoricMediaActivity extends Activity {
+public class HistoricMediaActivity extends DrawerActivity {
 	private ListView historicListView;
 	private List<StoredMedia> historicList = new ArrayList<StoredMedia>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_historic_media);
+		setDrawerContentView(R.layout.activity_historic_media);
 		
 		historicListView = (ListView) findViewById(R.id.historic_list);
 		

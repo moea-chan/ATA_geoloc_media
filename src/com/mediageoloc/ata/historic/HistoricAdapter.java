@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;

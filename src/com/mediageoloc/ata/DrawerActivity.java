@@ -1,4 +1,3 @@
-
 package com.mediageoloc.ata;
 
 /*
@@ -17,17 +16,24 @@ package com.mediageoloc.ata;
  * limitations under the License.
  */
 
+import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.media.TakeMediaActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 /**
@@ -63,7 +69,7 @@ import android.widget.ListView;
  * overlay on top of the current content.
  * </p>
  */
-public class DrawerActivity extends Activity {
+public class DrawerActivity extends Activity implements DrawerContentInterface{
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -85,8 +91,8 @@ public class DrawerActivity extends Activity {
 
 		// set a custom shadow that overlays the main content when the drawer
 		// opens
-//		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
-//				GravityCompat.START);
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+				GravityCompat.START);
 		// set up the drawer's list view with items and click listener
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, mMenuOptionstTitles));
@@ -123,6 +129,13 @@ public class DrawerActivity extends Activity {
 		}
 	}
 
+	@Override
+	public void setDrawerContentView(int contentId) {
+        LinearLayout congtentLayout = (LinearLayout)findViewById(R.id.content_frame);
+        //create a view to inflate the new layout
+        getLayoutInflater().inflate(contentId, congtentLayout, true);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -161,14 +174,23 @@ public class DrawerActivity extends Activity {
 	private void selectItem(int position) {
 		// update the main content by replacing fragments
 		switch (position) {
-//		case 0:
-			//if (this.getClass() != TakeMediaActivity.class) {
-//				LayoutInflater inflater = getLayoutInflater();
-//				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
-//				inflater.inflate(R.layout.activity_take_media, container);
-//				Intent intent = new Intent(this, SoundActivity.class);
-//				startActivity(intent);
-//			}
+		case 0:
+			if (this.getClass() != TakeMediaActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_take_media, container);
+				Intent intent = new Intent(this, TakeMediaActivity.class);
+				startActivity(intent);
+			}
+			break;
+		case 1:
+			if (this.getClass() != HistoricMediaActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_take_media, container);
+				Intent intent = new Intent(this, HistoricMediaActivity.class);
+				startActivity(intent);
+			}
 		default:
 		}
 	}
@@ -197,6 +219,4 @@ public class DrawerActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
 }
-
