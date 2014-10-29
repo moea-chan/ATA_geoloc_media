@@ -2,7 +2,12 @@ package com.mediageoloc.ata.historic;
 
 import java.util.List;
 
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +18,7 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
 
 
-public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
+public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observer<Bitmap> {
 
 	private List<StoredMedia> mediaList;
 	private Context context;
@@ -42,9 +47,12 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 		
 		//set image with async loading
 		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);
-		HistoricImageLoader imgLoader = new HistoricImageLoader(media, context);
-		imgLoader.addObserver(pictureView);
-		imgLoader.broadcast();
+//		HistoricImageLoader imgLoader = new HistoricImageLoader(media, context);
+//		imgLoader.addObserver(pictureView);
+//		imgLoader.broadcast();
+		Observable o = Observable.create(new HistoricImageLoader(media, context));
+		o.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+		o.subscribe(pictureView);
 
 		return convertView;
 	}
@@ -59,5 +67,23 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> {
 	@Override
     public boolean isEnabled(int position){
 		return false;
+	}
+
+	@Override
+	public void onCompleted() {
+		// TODO Auto-generated method stub
+//		this.setImageBitmap((Bitmap)data);
+	}
+
+	@Override
+	public void onError(Throwable arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNext(Bitmap arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
