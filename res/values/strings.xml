@@ -38,8 +38,7 @@
 
     <string-array name="menu_options_array">
         <item>Capture media</item>
-        <item>Look in the area</item>
-        <item>The posts</item>
+        <item>Lasr captures</item>
         <item>Account</item>
     </string-array>
 
