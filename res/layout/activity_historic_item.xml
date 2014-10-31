@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <com.mediageoloc.ata.historic.ObserverImageView
+    <com.mediageoloc.ata.utils.ObserverImageView
         android:id="@+id/picture"
         android:layout_width="140dp"
         android:layout_height="140dp"

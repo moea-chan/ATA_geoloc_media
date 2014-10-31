@@ -1,30 +1,34 @@
 package com.mediageoloc.ata.media.photo;
 
 import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.historic.HistoricPrefManager;
+
 import com.mediageoloc.ata.media.TakeMediaActivity;
+import com.mediageoloc.ata.utils.ImageLoader;
+import com.mediageoloc.ata.utils.ObserverImageView;
 
 public class PhotoCommentPreviewActivity extends Activity {
 
-	private Button buttonSaveComment;
-	private EditText editTextComment;
+	@InjectView(R.id.photo_preview) ObserverImageView imageView;
+	@InjectView(R.id.edit_text_comment) EditText editTextComment;
+	@InjectView(R.id.button_save_comment) Button buttonSaveComment;
+	
 	private Uri photoUri;
 
 	@Override
@@ -32,22 +36,23 @@ public class PhotoCommentPreviewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo_comment_preview);
 
+		ButterKnife.inject(this);
+		
 		addButtonSaveCommentListener();
 
 		// display taken picture
 		Intent intent = getIntent();
-		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
-		editTextComment = (EditText) findViewById(R.id.edit_text_comment);
-		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
-		Bitmap bitmap = PhotoUtils.loadPhotoInImageViewByUri(
-				this.getContentResolver(), intent.getStringExtra("photoUri"),
-				190, 140);
-		imageView.setImageBitmap(bitmap);
-
+		
+		//set image with async loading
+		
+		Observable<Bitmap> o = Observable.create(new ImageLoader(intent.getStringExtra("photoUri")));
+		o.subscribeOn(Schedulers.newThread())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe(imageView);
+		
 	}
-
-	private void addButtonSaveCommentListener() {
-		buttonSaveComment = (Button) findViewById(R.id.button_save_comment);
+	
+	private void addButtonSaveCommentListener(){
 		buttonSaveComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

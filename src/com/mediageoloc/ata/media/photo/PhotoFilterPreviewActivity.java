@@ -16,12 +16,12 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.utils.ImageUtils;
 
 
 
@@ -91,7 +91,8 @@ public class PhotoFilterPreviewActivity extends Activity {
 
 			BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 			final Bitmap src = drawable.getBitmap();
-			Bitmap bmOut = PhotoUtils.brightnessFilter(value, src);
+			Bitmap bmOut = ImageUtils.brightnessFilter(value, src);
+
 			
 			imageView.setImageBitmap(bmOut);
 		}
@@ -108,6 +109,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 		if (filterAction.isChecked()){
 			
 			try {
+
 				//BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 				//final Bitmap src = drawable.getBitmap();
 				Bitmap src = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);

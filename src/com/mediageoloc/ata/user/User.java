@@ -40,5 +40,8 @@ public class User {
 		this.userPhone = userPhone;
 	}
 	
-	
+	public Boolean saveUserPrefs(){
+		
+		return true;
+	}
 }
