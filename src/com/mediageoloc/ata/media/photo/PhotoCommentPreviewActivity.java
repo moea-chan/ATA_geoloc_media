@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.TakeMediaActivity;
+import com.mediageoloc.ata.utils.ImageUtils;
 
 public class PhotoCommentPreviewActivity extends Activity {
 	
@@ -34,7 +35,7 @@ public class PhotoCommentPreviewActivity extends Activity {
 		ImageView imageView = (ImageView) findViewById(R.id.photo_preview);
 		editTextComment = (EditText) findViewById(R.id.edit_text_comment);
 		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
-		Bitmap bitmap = PhotoUtils.loadPhotoInImageViewByUri(this.getContentResolver(), intent.getStringExtra("photoUri"), 190, 140);
+		Bitmap bitmap = ImageUtils.loadPhotoInImageViewByUri(this.getContentResolver(), intent.getStringExtra("photoUri"), 190, 140);
 		imageView.setImageBitmap(bitmap);
 		
 	}

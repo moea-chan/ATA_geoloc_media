@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
+import com.mediageoloc.ata.utils.ImageLoader;
+import com.mediageoloc.ata.utils.ObserverImageView;
 
 
 public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observer<Bitmap> {
@@ -48,7 +50,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 		//set image with async loading
 		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);
 
-		Observable<Bitmap> o = Observable.create(new HistoricImageLoader(media));
+		Observable<Bitmap> o = Observable.create(new ImageLoader(media));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())
 		.subscribe(pictureView);

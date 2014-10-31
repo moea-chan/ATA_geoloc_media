@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.media.photo;
+package com.mediageoloc.ata.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-public class PhotoUtils {
+public class ImageUtils {
 	
 	public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	public static final int MEDIA_TYPE_IMAGE = 1;

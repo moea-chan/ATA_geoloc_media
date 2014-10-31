@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.historic;
+package com.mediageoloc.ata.utils;
 
 
 import rx.Observable;
@@ -9,23 +9,22 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.mediageoloc.ata.media.StoredMedia;
-import com.mediageoloc.ata.media.photo.PhotoUtils;
 
 /*
  * load an image from a media and return bitmap
  */
-public class HistoricImageLoader implements Observable.OnSubscribe<Bitmap>{
+public class ImageLoader implements Observable.OnSubscribe<Bitmap>{
 	
 	private StoredMedia media;
 	
-	public HistoricImageLoader(StoredMedia media){
+	public ImageLoader(StoredMedia media){
 		this.media = media;
 	}
 	
     @Override
     public void call(Subscriber<? super Bitmap> fileObserver) {
         try {
-        	Bitmap bitmap = PhotoUtils.decodeSampledBitmapFromFilePath(media.getFilePath(), 120, 120);
+        	Bitmap bitmap = ImageUtils.decodeSampledBitmapFromFilePath(media.getFilePath(), 120, 120);
             fileObserver.onNext(bitmap);
             fileObserver.onCompleted();
         } catch (Exception e) {
