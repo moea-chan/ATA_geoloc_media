@@ -3,10 +3,7 @@ package com.mediageoloc.ata.utils;
 
 import rx.Observable;
 import rx.Subscriber;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 
 import com.mediageoloc.ata.media.StoredMedia;
 
