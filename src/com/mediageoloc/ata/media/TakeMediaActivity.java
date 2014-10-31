@@ -13,7 +13,7 @@ import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
-import com.mediageoloc.ata.media.photo.PhotoUtils;
+import com.mediageoloc.ata.utils.ImageUtils;
 
 public class TakeMediaActivity extends DrawerActivity {
 
@@ -46,17 +46,17 @@ public class TakeMediaActivity extends DrawerActivity {
 		// create Intent to take a picture and return control to the calling application
 		Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-		photoUri = PhotoUtils.getOutputMediaFileUri(PhotoUtils.MEDIA_TYPE_IMAGE); // create a file to save the image
+		photoUri = ImageUtils.getOutputMediaFileUri(ImageUtils.MEDIA_TYPE_IMAGE); // create a file to save the image
 	    intentPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); // set the image file name
 	    
 	    // start the image capture Intent
-	    startActivityForResult(intentPhoto, PhotoUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	    startActivityForResult(intentPhoto, ImageUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == PhotoUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+	    if (requestCode == ImageUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	            // Image captured and saved to fileUri specified in the Intent
 	            Intent intent = new Intent(this, PhotoFilterPreviewActivity.class);

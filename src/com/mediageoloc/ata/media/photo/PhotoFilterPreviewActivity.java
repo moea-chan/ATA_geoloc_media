@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.utils.ImageUtils;
 
 
 public class PhotoFilterPreviewActivity extends Activity {
@@ -81,7 +82,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 
 			BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 			final Bitmap src = drawable.getBitmap();
-			Bitmap bmOut = PhotoUtils.brightnessFilter(value, src);
+			Bitmap bmOut = ImageUtils.brightnessFilter(value, src);
 			imageView.setImageBitmap(bmOut);
 		}
 		else{
@@ -96,7 +97,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 			int value=100;
 			try {
 				final Bitmap src = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-				Bitmap bmOut = PhotoUtils.brightnessFilter(value, src);
+				Bitmap bmOut = ImageUtils.brightnessFilter(value, src);
 				//MediaStore.Images.Media.insertImage(, source, title, description)
 				//TODO/ Faire sauvegarde disque
 			} catch (IOException e) {
