@@ -15,10 +15,8 @@ import android.widget.ImageView;
  */
 public class ObserverImageView extends ImageView implements Observer<Bitmap> {
 	
-	
 	public ObserverImageView(Context context) {
 		super(context);
-		
 	}
 	
 	public ObserverImageView(Context context, AttributeSet attrs, int defStyle) {
@@ -29,23 +27,17 @@ public class ObserverImageView extends ImageView implements Observer<Bitmap> {
 		super(context, attrs);
 	}
 
-	
-
-	@Override
-	public void onCompleted() {
-		
-	}
-
 	@Override
 	public void onError(Throwable arg0) {
 		Log.e("rxjava", "image load failed");
-		
 	}
 
 	@Override
 	public void onNext(Bitmap arg0) {
-		// TODO Auto-generated method stub
 		this.setImageBitmap(arg0);
 	}
+
+	@Override
+	public void onCompleted() {}
 	
 }
