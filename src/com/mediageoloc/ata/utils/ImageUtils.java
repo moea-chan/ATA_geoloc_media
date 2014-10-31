@@ -56,41 +56,7 @@ public class ImageUtils {
 	    return mediaFile;
 	}
 	
-	public static Bitmap loadPhotoInImageViewByUri(ContentResolver contentResolver, String uri, int height, int width){
-		Uri photoUri = Uri.parse(uri);
-		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photoUri);
-			bitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
-			return bitmap;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
-	
-	/**
-	 * 
-	 * -Verifie l'existence de l'historiquePreferences et le complete eventuellement
-	 * 		avec filePathX pour les URI et commentaireX pour les commentaires (0 < X < 11)
-	 */
-	public static void initHistoriquePreferences(SharedPreferences sharedpreferences){
-		String existHisto = sharedpreferences.getString("filePath10", "%&%p%&defValue");
-		String stKey;
-		String stValue = "";
-		
-		if (existHisto.equals("%&%p%&defValue")){
-			//Historique inexistant => Création
-			Editor editor = sharedpreferences.edit();
-			for (int i = 1; i < 11; i++){
-				stKey = "filePath" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-				stKey = "commentaire" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-			}
-			editor.commit();
-		}		
-	}
 	
 	/**
 	 * brightnessFilter

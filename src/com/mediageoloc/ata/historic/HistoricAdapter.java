@@ -50,7 +50,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 		//set image with async loading
 		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);
 
-		Observable<Bitmap> o = Observable.create(new ImageLoader(media));
+		Observable<Bitmap> o = Observable.create(new ImageLoader(media.getFilePath()));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())
 		.subscribe(pictureView);
