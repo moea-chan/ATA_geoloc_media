@@ -6,9 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +21,6 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -89,11 +93,58 @@ public class PhotoFilterPreviewActivity extends Activity {
 			
 			int value=100;
 
+			
 			BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 			final Bitmap src = drawable.getBitmap();
+
+			BitmapFactory.Options options = new BitmapFactory.Options();
+	        options.inJustDecodeBounds = true;
+
+	        Bitmap bMap = BitmapFactory.decodeFile(photoUri.getPath(),options);
+	        int imageHeight = options.outHeight;
+	        int imageWidth = options.outWidth;
+
+			
+	        
+	        
+	        
+	        
+	        
 			Bitmap bmOut = PhotoUtils.brightnessFilter(value, src);
 			
-			imageView.setImageBitmap(bmOut);
+			
+			Observable<Bitmap> observable = Observable.create(new PhotoUtils());
+
+			Observer<Bitmap> observer = new Observer<Bitmap>() {
+
+				@Override
+				public void onCompleted() {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onError(Throwable arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onNext(Bitmap arg0) {
+					// TODO Auto-generated method stub
+					imageView.setImageBitmap(arg0);
+				}
+			};
+			
+			Observable <Bitmap> o2=observable.subscribeOn(Schedulers.io());
+			Observable <Bitmap> o3=o2.observeOn(AndroidSchedulers.mainThread());
+			o3.subscribe(observer);
+			
+			
+			
+			//Bitmap bmOut = PhotoUtils.brightnessFilter(value, src);
+			
+			//imageView.setImageBitmap(bmOut);
 		}
 		else{
 			chargeImageSourcePreview();
@@ -131,7 +182,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 			}
 		}
 	}
-	
+
 
 
 

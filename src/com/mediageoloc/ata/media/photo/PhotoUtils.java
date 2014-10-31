@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Observer;
+import java.util.concurrent.Callable;
 
+import rx.Observable;
+import rx.Subscriber;
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,10 +20,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-public class PhotoUtils {
+public class PhotoUtils implements Observable.OnSubscribe<Bitmap> {
 	
 	public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	public static final int MEDIA_TYPE_IMAGE = 1;
+	
+	private static Bitmap bmOutO;
 	
 	/** Create a file Uri for saving an image or video */
 	public static Uri getOutputMediaFileUri(int type){
@@ -94,6 +98,12 @@ public class PhotoUtils {
 		}		
 	}
 	
+	@Override
+	public void call(Subscriber<? super Bitmap> subscriber) {
+		// TODO Auto-generated method stub
+		subscriber.onNext(bmOutO);
+		subscriber.onCompleted();
+	}
 	/**
 	 * brightnessFilter
 	 * @param value : for Brightness
@@ -137,6 +147,7 @@ public class PhotoUtils {
 				bmOut.setPixel(x, y, Color.argb(A, R, G, B));
 			}
 		}
+		bmOutO=bmOut;
 		return bmOut;
 	}
 	
@@ -179,5 +190,8 @@ public class PhotoUtils {
 	
 	    return inSampleSize;
 	}
+
+
+
 	
 }
