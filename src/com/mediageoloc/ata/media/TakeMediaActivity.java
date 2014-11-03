@@ -1,5 +1,6 @@
 package com.mediageoloc.ata.media;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +9,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.bddsqlite.GeolocMediaDbHelper;
-import com.mediageoloc.ata.bddsqlite.GeolocMediaDbReader;
-import com.mediageoloc.ata.bddsqlite.GeolocMediaDbWriter;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
@@ -20,6 +18,7 @@ import com.mediageoloc.ata.utils.ImageUtils;
 
 public class TakeMediaActivity extends DrawerActivity {
 
+	private static Context context;
 	private Uri photoUri;
 
 	@Override
@@ -27,7 +26,7 @@ public class TakeMediaActivity extends DrawerActivity {
 		super.onCreate(savedInstanceState);
 
 		setDrawerContentView(R.layout.activity_take_media);
-
+		TakeMediaActivity.context = getApplicationContext();
 		ButterKnife.inject(this);
 
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
@@ -48,6 +47,13 @@ public class TakeMediaActivity extends DrawerActivity {
 //		GeolocMediaDbReader.readUsersDB(this);
 		GitHubService.getCollaborators();	
 	}
+/**
+ * getAppContext : return application context
+ * @return
+ */
+	public static Context getAppContext() {
+	        return TakeMediaActivity.context;
+	    }
 
 	public void startPhotoActivity() {
 		// create Intent to take a picture and return control to the calling
