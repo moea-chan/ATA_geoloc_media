@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,13 +18,15 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.media.StoredMedia;
+import com.mediageoloc.ata.utils.ImageLoader;
 import com.mediageoloc.ata.utils.ImageUtils;
+import com.mediageoloc.ata.utils.ObserverImageView;
 
 
 
@@ -48,7 +53,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 
 
 	private Uri photoUri;
-	private ImageView imageView;
+	private ObserverImageView imageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +64,24 @@ public class PhotoFilterPreviewActivity extends Activity {
 		
 		//display taken picture
 		Intent intent = getIntent();
-		imageView = (ImageView) findViewById(R.id.photo_preview);
+		imageView = (ObserverImageView) findViewById(R.id.observerImageViewFilterPreview);
 		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 
 		chargeImageSourcePreview();
 	}
 
-
+/**
+ * chargeImageSourcePreview : use observable com.mediageoloc.utils.Imageloader
+ */
 	private void chargeImageSourcePreview() {
-		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
-			imageView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//set image with async loading
+		ObserverImageView pictureView = (ObserverImageView) findViewById(R.id.observerImageViewFilterPreview);
+		StoredMedia media = new StoredMedia(photoUri.getPath(), "");
+		
+		Observable<Bitmap> o = Observable.create(new ImageLoader(media));
+		o.subscribeOn(Schedulers.newThread())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe(pictureView);
 	}
 
 
@@ -109,13 +117,8 @@ public class PhotoFilterPreviewActivity extends Activity {
 		if (filterAction.isChecked()){
 			
 			try {
-
-				//BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-				//final Bitmap src = drawable.getBitmap();
 				Bitmap src = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-				
 				String pathFile=photoUri.getPath();
-				
 				
 				File file = new File(pathFile); 
 				OutputStream out = new FileOutputStream(file); 
@@ -125,10 +128,8 @@ public class PhotoFilterPreviewActivity extends Activity {
 	            out.close();
 
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

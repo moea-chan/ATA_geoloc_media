@@ -73,7 +73,8 @@ public class HistoricPrefManager {
 		}
 		//insertion nouvelles donnees en position 1
 		stKey= FILE_PATH + "1";
-		stValue = uri.toString();
+		//stValue = uri.toString();
+		stValue = uri.getPath();
 		editor.putString(stKey,stValue);	
 		
 		stKey= COMMENT + "1";

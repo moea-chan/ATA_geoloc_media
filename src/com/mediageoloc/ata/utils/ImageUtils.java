@@ -70,29 +70,6 @@ public class ImageUtils {
 	
 	
 	/**
-	 * 
-	 * -Verifie l'existence de l'historiquePreferences et le complete eventuellement
-	 * 		avec filePathX pour les URI et commentaireX pour les commentaires (0 < X < 11)
-	 */
-	public static void initHistoriquePreferences(SharedPreferences sharedpreferences){
-		String existHisto = sharedpreferences.getString("filePath10", "%&%p%&defValue");
-		String stKey;
-		String stValue = "";
-		
-		if (existHisto.equals("%&%p%&defValue")){
-			//Historique inexistant => Création
-			Editor editor = sharedpreferences.edit();
-			for (int i = 1; i < 11; i++){
-				stKey = "filePath" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-				stKey = "commentaire" + String.valueOf(i);
-				editor.putString(stKey,stValue);
-			}
-			editor.commit();
-		}		
-	}
-	
-	/**
 	 * brightnessFilter
 	 * @param value : for Brightness
 	 * @param src : Bitmap to modify
@@ -139,7 +116,7 @@ public class ImageUtils {
 	}
 	
 	public static Bitmap decodeSampledBitmapFromFilePath(String filePath, int reqWidth, int reqHeight) {
-		filePath = filePath.substring(7, filePath.length());
+		//filePath = filePath.substring(7, filePath.length());
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
         

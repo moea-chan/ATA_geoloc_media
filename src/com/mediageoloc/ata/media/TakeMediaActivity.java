@@ -8,10 +8,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbHelper;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbReader;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbWriter;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
+import com.mediageoloc.ata.user.GitHubService;
 import com.mediageoloc.ata.utils.ImageUtils;
 
 public class TakeMediaActivity extends DrawerActivity {
@@ -27,7 +31,22 @@ public class TakeMediaActivity extends DrawerActivity {
 		ButterKnife.inject(this);
 
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
-
+//		GeolocMediaDbHelper localeDB = new GeolocMediaDbHelper(this);
+//		GeolocMediaDbWriter.writeUserDB(this, 1, "nom1", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this,2, "nom2", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 3, "nom3", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 4, "nom4", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 5, "nom5", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 6, "nom6", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 7, "nom7", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 8, "nom8", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 9, "nom9", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 10, "nom10", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 11, "nom11", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 12, "nom12", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbWriter.writeUserDB(this, 13, "nom13", "prenom1", "mail1", "telephone1");
+//		GeolocMediaDbReader.readUsersDB(this);
+		GitHubService.getCollaborators();	
 	}
 
 	public void startPhotoActivity() {
