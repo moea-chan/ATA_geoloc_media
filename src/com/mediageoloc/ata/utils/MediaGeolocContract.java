@@ -1,0 +1,22 @@
+package com.mediageoloc.ata.utils;
+
+import android.provider.BaseColumns;
+
+public final class MediaGeolocContract {
+	
+    // To prevent someone from accidentally instantiating the   
+	// contract class, give it an empty and/or private constructor.
+    private MediaGeolocContract() {}
+
+    /* Inner class that defines the table contents */
+    public static abstract class Users implements BaseColumns {
+        public static final String TABLE_NAME = "user";
+        public static final String COLUMN_NAME_NOM = "nom";
+        public static final String COLUMN_NAME_PRENOM = "prenom";
+        public static final String COLUMN_NAME_MAIL = "mail";
+        public static final String COLUMN_NAME_TELEPHONE = "telephone";
+    }
+	
+   
+
+}

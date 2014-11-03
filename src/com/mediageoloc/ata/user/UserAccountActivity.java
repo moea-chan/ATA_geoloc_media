@@ -26,7 +26,8 @@ public class UserAccountActivity extends DrawerActivity {
 		super.onCreate(savedInstanceState);
 		setDrawerContentView(R.layout.activity_user_account);
 		ButterKnife.inject(this);
-		GitHubService.getUsers();
+		GitHubService service = new GitHubService();
+		service.getUsers(getApplicationContext());
 	}
 	
 	
