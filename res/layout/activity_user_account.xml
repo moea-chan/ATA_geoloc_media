@@ -66,7 +66,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/user_mail" />
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/userMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
