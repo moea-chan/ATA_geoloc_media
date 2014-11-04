@@ -66,7 +66,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/user_mail" />
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/userMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -104,4 +104,14 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="140dp"
         android:ems="10" />
+
+    <Button
+        android:id="@+id/showFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="69dp"
+        android:text="@string/followers" />
+
 </RelativeLayout>

@@ -5,23 +5,21 @@ import rx.Observable;
 import rx.Subscriber;
 import android.graphics.Bitmap;
 
-import com.mediageoloc.ata.media.StoredMedia;
-
 /*
  * load an image from a media and return bitmap
  */
 public class ImageLoader implements Observable.OnSubscribe<Bitmap>{
 	
-	private StoredMedia media;
+	private String imagePath;
 	
-	public ImageLoader(StoredMedia media){
-		this.media = media;
+	public ImageLoader(String imagePath){
+		this.imagePath = imagePath;
 	}
 	
     @Override
     public void call(Subscriber<? super Bitmap> fileObserver) {
         try {
-        	Bitmap bitmap = ImageUtils.decodeSampledBitmapFromFilePath(media.getFilePath(), 120, 120);
+        	Bitmap bitmap = ImageUtils.decodeSampledBitmapFromFilePath(imagePath, 120, 120);
             fileObserver.onNext(bitmap);
             fileObserver.onCompleted();
         } catch (Exception e) {

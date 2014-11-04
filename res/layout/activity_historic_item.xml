@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <com.mediageoloc.ata.historic.ObserverImageView
+    <com.mediageoloc.ata.utils.ObserverImageView
         android:id="@+id/picture"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:contentDescription="TODO"
+        android:contentDescription=""
         android:maxHeight="140dp"
         android:maxWidth="140dp"
         android:src="@drawable/ic_launcher" />
