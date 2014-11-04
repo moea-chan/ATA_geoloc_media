@@ -5,8 +5,6 @@ import rx.Observable;
 import rx.Subscriber;
 import android.graphics.Bitmap;
 
-import com.mediageoloc.ata.media.StoredMedia;
-
 /*
  * load an image from a media and return bitmap
  */
