@@ -169,5 +169,6 @@ public static void writeListCollaboratorDB(Context ctx, ArrayList<Collaborator> 
 	    }
 	    db.close();
 	
-}
+	}
+
 }

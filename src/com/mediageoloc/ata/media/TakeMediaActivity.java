@@ -9,6 +9,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.UserFollowActivity;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbHelper;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbReader;
+import com.mediageoloc.ata.bddsqlite.GeolocMediaDbWriter;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
@@ -45,7 +49,7 @@ public class TakeMediaActivity extends DrawerActivity {
 //		GeolocMediaDbWriter.writeUserDB(this, 12, "nom12", "prenom1", "mail1", "telephone1");
 //		GeolocMediaDbWriter.writeUserDB(this, 13, "nom13", "prenom1", "mail1", "telephone1");
 //		GeolocMediaDbReader.readUsersDB(this);
-		GitHubService.getCollaborators();	
+//		GitHubService.getCollaborators();	
 	}
 /**
  * getAppContext : return application context
@@ -66,7 +70,7 @@ public class TakeMediaActivity extends DrawerActivity {
 	    
 	    // start the image capture Intent
 	    startActivityForResult(intentPhoto, ImageUtils.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-
+	    
 	}
 
 	@Override
@@ -94,11 +98,18 @@ public class TakeMediaActivity extends DrawerActivity {
 
 	@OnClick(R.id.buttonAudio)
 	void addButtonAudioListener() {
-		startHistoricMediaActivity();
+		//startHistoricMediaActivity();
+		starUserFollowActivity();
 	}
 
 	private void startHistoricMediaActivity() {
 		Intent intent = new Intent(this, HistoricMediaActivity.class);
+		startActivity(intent);
+	}
+
+	//TODO: a supprimer
+	private void starUserFollowActivity() {
+		Intent intent = new Intent(this, UserFollowActivity.class);
 		startActivity(intent);
 	}
 

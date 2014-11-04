@@ -17,23 +17,16 @@
     <string name="from_gallery_video">Galerie</string>
     <string name="from_snapshot_audio">Prendre un son</string>
     <string name="from_gallery_audio">Galerie</string>
-
     <string name="start_sound_recording">Enregistrement son</string>
     <string name="stop_sound_recording">Fin enregistrement</string>
-    
-
-    
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="photo_file">com.mediageoloc.ata.photoFile</string>
     <string name="ok">OK</string>
     <string name="apply_NB_filter">Noir et Blanc</string>
-    
     <string name="title_activity_historic_media">HistoricMediaActivity</string>
     <string name="title_activity_historic_item">HistoricItemActivity</string>
     <string name="title_activity_drawer">DrawerActivity</string>
-
 
     <string-array name="menu_options_array">
         <item>Capture media</item>
@@ -41,17 +34,13 @@
         <item>Account</item>
     </string-array>
 
-
-    
-   
-
-    
     <!-- User account activity -->
     <string name="title_activity_user_account">UserAccountActivity</string>
-	<string name="user_last_name">Nom</string>
-	<string name="user_first_name">Prénom</string>
-	<string name="user_mail">Mail</string>
-	<string name="user_phone">Tel</string>
-	
+    <string name="user_last_name">Nom</string>
+    <string name="user_first_name">Prénom</string>
+    <string name="user_mail">Mail</string>
+    <string name="user_phone">Tel</string>
+    <string name="title_activity_user_followers">UserFollowersActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
