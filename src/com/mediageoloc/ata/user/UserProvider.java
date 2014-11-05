@@ -106,6 +106,8 @@ public class UserProvider extends ContentProvider {
       throw new SQLException("Failed to add a record into " + uri);
    }
 
+   
+   
    @Override
    synchronized public Cursor query(Uri uri, String[] projection, String selection,	
                        String[] selectionArgs, String sortOrder) {
@@ -124,8 +126,8 @@ public class UserProvider extends ContentProvider {
          throw new IllegalArgumentException("Unknown URI " + uri);
       }
       
-      Cursor c = qb.query(db,	projection,	selection, selectionArgs, 
-                          null, null, sortOrder);
+      Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, null, "10");
+    		 
       /** 
        * register to watch a content URI for changes
        */
