@@ -1,4 +1,4 @@
-package com.mediageoloc.ata;
+package com.mediageoloc.ata.map;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.R.id;
+import com.mediageoloc.ata.R.layout;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 
 public class MapActivity extends DrawerActivity {

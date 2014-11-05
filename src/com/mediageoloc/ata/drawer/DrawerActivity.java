@@ -16,9 +16,9 @@ package com.mediageoloc.ata.drawer;
  * limitations under the License.
  */
 
-import com.mediageoloc.ata.MapActivity;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
 import com.mediageoloc.ata.user.UserAccountActivity;
 
