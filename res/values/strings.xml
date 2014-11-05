@@ -32,6 +32,7 @@
         <item>Capture media</item>
         <item>Last captures</item>
         <item>Account</item>
+        <item>Map</item>
     </string-array>
 
     <!-- User account activity -->
@@ -43,5 +44,6 @@
     <string name="followers">Voir mes followers</string>
     <string name="title_activity_followers">FollowersActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

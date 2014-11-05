@@ -16,6 +16,7 @@ package com.mediageoloc.ata.drawer;
  * limitations under the License.
  */
 
+import com.mediageoloc.ata.MapActivity;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
@@ -204,6 +205,15 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
 				inflater.inflate(R.layout.activity_user_account, container);
 				Intent intent = new Intent(this, UserAccountActivity.class);
+				startActivity(intent);
+			}
+			break;
+		case 3:
+			if (this.getClass() != MapActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_map, container);
+				Intent intent = new Intent(this, MapActivity.class);
 				startActivity(intent);
 			}
 			break;

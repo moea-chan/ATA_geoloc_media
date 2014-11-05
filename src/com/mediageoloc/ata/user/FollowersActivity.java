@@ -37,8 +37,8 @@ public class FollowersActivity extends Activity {
 			    Users.COLUMN_NAME_TELEPHONE
 			    };
 		
-		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM };
-		int[] toControlIds = new int[] { R.id.follower_item };
+		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
+		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
 
 		CursorLoader loader = new CursorLoader(this,
 		   UserProvider.CONTENT_URI, projection, null, null, null);
