@@ -68,7 +68,7 @@
             android:label="@string/title_activity_followers" >
         </activity>
 		<activity
-            android:name="com.mediageoloc.ata.map.MapActivity"
+            android:name=".map.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
         <provider
