@@ -8,8 +8,9 @@ import android.provider.MediaStore;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import com.mediageoloc.ata.MapTestActivity;
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.UserFollowActivity;
+import com.mediageoloc.ata.user.UserFollowActivity;
 import com.mediageoloc.ata.bddsqlite.GeolocMediaDbHelper;
 import com.mediageoloc.ata.bddsqlite.GeolocMediaDbReader;
 import com.mediageoloc.ata.bddsqlite.GeolocMediaDbWriter;
@@ -98,8 +99,7 @@ public class TakeMediaActivity extends DrawerActivity {
 
 	@OnClick(R.id.buttonAudio)
 	void addButtonAudioListener() {
-		//startHistoricMediaActivity();
-		starUserFollowActivity();
+		startHistoricMediaActivity();
 	}
 
 	private void startHistoricMediaActivity() {
@@ -112,5 +112,8 @@ public class TakeMediaActivity extends DrawerActivity {
 		Intent intent = new Intent(this, UserFollowActivity.class);
 		startActivity(intent);
 	}
-
+	private void starMapTestActivity() {
+		Intent intent = new Intent(this, MapTestActivity.class);
+		startActivity(intent);
+	}
 }

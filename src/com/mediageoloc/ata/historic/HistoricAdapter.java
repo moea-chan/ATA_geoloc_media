@@ -3,7 +3,6 @@ package com.mediageoloc.ata.historic;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import android.content.Context;
@@ -20,7 +19,7 @@ import com.mediageoloc.ata.utils.ImageLoader;
 import com.mediageoloc.ata.utils.ObserverImageView;
 
 
-public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observer<Bitmap> {
+public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 
 	private List<StoredMedia> mediaList;
 	private Context context;
@@ -50,7 +49,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 		//set image with async loading
 		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);
 
-		Observable<Bitmap> o = Observable.create(new ImageLoader(media));
+		Observable<Bitmap> o = Observable.create(new ImageLoader(media.getFilePath()));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())
 		.subscribe(pictureView);
@@ -60,31 +59,5 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 	
 	
 	
-	/*
-	 * (non-Javadoc)
-	 * @see android.widget.BaseAdapter#isEnabled(int)
-	 * disable click on item
-	 */
-	@Override
-    public boolean isEnabled(int position){
-		return false;
-	}
-
-	@Override
-	public void onCompleted() {
-		// TODO Auto-generated method stub
-//		this.setImageBitmap((Bitmap)data);
-	}
-
-	@Override
-	public void onError(Throwable arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onNext(Bitmap arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

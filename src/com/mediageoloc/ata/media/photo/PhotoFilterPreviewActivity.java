@@ -78,7 +78,7 @@ public class PhotoFilterPreviewActivity extends Activity {
 		ObserverImageView pictureView = (ObserverImageView) findViewById(R.id.observerImageViewFilterPreview);
 		StoredMedia media = new StoredMedia(photoUri.getPath(), "");
 		
-		Observable<Bitmap> o = Observable.create(new ImageLoader(media));
+		Observable<Bitmap> o = Observable.create(new ImageLoader(media.getFilePath()));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())
 		.subscribe(pictureView);
