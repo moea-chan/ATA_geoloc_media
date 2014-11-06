@@ -2,6 +2,7 @@ package com.mediageoloc.ata.user;
 
 public class User {
 	
+	private final String id = "5071272";
 	private String login;
 	private String url;
 	private String repos_url;
@@ -15,6 +16,10 @@ public class User {
 		avatar_url = phone;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
 	public String getUserFirstName() {
 		return login;
 	}

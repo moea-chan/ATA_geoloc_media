@@ -61,7 +61,6 @@
         </activity>
         <activity
             android:name=".historic.HistoricItemActivity"
-            android:label="@string/title_activity_historic_item"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
@@ -70,8 +69,8 @@
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
-            android:name=".user.FollowersActivity"
-            android:label="@string/title_activity_followers"  
+            android:name=".user.UsersActivity"
+            android:label="@string/title_activity_users"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
 		<activity
@@ -80,7 +79,7 @@
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <provider
-            android:name=".user.UserProvider"
+            android:name=".user.UsersProvider"
             android:authorities="com.mediageoloc.ata" >
         </provider>
 

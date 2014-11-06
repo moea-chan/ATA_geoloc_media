@@ -1,20 +1,21 @@
 package com.mediageoloc.ata.user;
 
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
-public class UsersActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
 
 	@InjectView(R.id.followers_list)
 	ListView followersViewList;
@@ -36,7 +37,7 @@ public class UsersActivity extends Activity implements LoaderCallbacks<Cursor> {
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = {
-			    Users._ID,
+			    BaseColumns._ID,
 			    Users.COLUMN_NAME_NOM,
 			    Users.COLUMN_NAME_PRENOM,
 			    Users.COLUMN_NAME_MAIL,

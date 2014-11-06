@@ -72,7 +72,6 @@ public class PhotoCommentPreviewActivity extends Activity {
 	}
 
 	private void returnTakeMediaActivity() {
-
 		Intent intent = new Intent(this, TakeMediaActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
