@@ -33,6 +33,7 @@
         <item>Last captures</item>
         <item>Account</item>
         <item>Map</item>
+        <item>Users</item>
     </string-array>
 
     <!-- User account activity -->

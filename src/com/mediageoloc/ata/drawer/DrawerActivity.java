@@ -21,6 +21,7 @@ import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
 import com.mediageoloc.ata.user.UserAccountActivity;
+import com.mediageoloc.ata.user.UsersActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -217,6 +218,16 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 				startActivity(intent);
 			}
 			break;
+		case 4:
+			if (this.getClass() != MapActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_users, container);
+				Intent intent = new Intent(this, UsersActivity.class);
+		        startActivity(intent);
+			}
+			break;
+			
 		default:
 		}
 	}
