@@ -3,7 +3,6 @@ package com.mediageoloc.ata.historic;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import android.content.Context;
@@ -20,13 +19,13 @@ import com.mediageoloc.ata.utils.ImageLoader;
 import com.mediageoloc.ata.utils.ObserverImageView;
 
 
-public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observer<Bitmap> {
+public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 
 	private List<StoredMedia> mediaList;
 	private Context context;
 
 	public HistoricAdapter(List<StoredMedia> mediaList, Context ctx) {
-		super(ctx, R.layout.activity_historic_item, mediaList);
+		super(ctx, R.layout.historic_item, mediaList);
 		this.mediaList = mediaList;
 		this.context = ctx;
 	}
@@ -38,7 +37,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 		if (convertView == null) {
 			// This a new view we inflate the new layout
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.activity_historic_item, parent, false);
+			convertView = inflater.inflate(R.layout.historic_item, parent, false);
 		}
 		// Now we can fill the layout with the right values
 		StoredMedia media = mediaList.get(position);
@@ -60,31 +59,5 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia> implements Observ
 	
 	
 	
-	/*
-	 * (non-Javadoc)
-	 * @see android.widget.BaseAdapter#isEnabled(int)
-	 * disable click on item
-	 */
-	@Override
-    public boolean isEnabled(int position){
-		return false;
-	}
-
-	@Override
-	public void onCompleted() {
-		// TODO Auto-generated method stub
-//		this.setImageBitmap((Bitmap)data);
-	}
-
-	@Override
-	public void onError(Throwable arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onNext(Bitmap arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

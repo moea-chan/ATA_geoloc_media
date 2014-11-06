@@ -43,8 +43,8 @@ public class PhotoCommentPreviewActivity extends Activity {
 		// display taken picture
 		Intent intent = getIntent();
 		
+		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		//set image with async loading
-		
 		Observable<Bitmap> o = Observable.create(new ImageLoader(intent.getStringExtra("photoUri")));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())

@@ -1,27 +1,40 @@
 package com.mediageoloc.ata.user;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.drawer.DrawerActivity;
 
-public class UserAccountActivity extends Activity {
-	
+public class UserAccountActivity extends DrawerActivity {
+
 	private User user;
-	
-	 @InjectView(R.string.user_last_name) EditText lastNameET;
-	 @InjectView(R.string.user_first_name) EditText firstNameET;
-	 @InjectView(R.string.user_mail) EditText mailET;
-	 @InjectView(R.string.user_phone) EditText phoneET;
 
-	
+	@InjectView(R.id.lastName)
+	EditText lastNameET;
+	@InjectView(R.id.firstName)
+	EditText firstNameET;
+	@InjectView(R.id.userMail)
+	EditText mailET;
+	@InjectView(R.id.tel)
+	EditText phoneET;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_account);
+		setDrawerContentView(R.layout.activity_user_account);
 		ButterKnife.inject(this);
+		
 	}
+	
+	@OnClick(R.id.showFollowers)
+	public void showFollowers() {
+		//TODO
+	}
+
+
 }

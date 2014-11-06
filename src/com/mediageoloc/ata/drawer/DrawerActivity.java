@@ -18,7 +18,10 @@ package com.mediageoloc.ata.drawer;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
+import com.mediageoloc.ata.user.UserAccountActivity;
+import com.mediageoloc.ata.user.UsersActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -111,12 +114,14 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 		R.string.drawer_open, /* "open drawer" description for accessibility */
 		R.string.drawer_close /* "close drawer" description for accessibility */
 		) {
+			@Override
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
 				invalidateOptionsMenu(); // creates call to
 											// onPrepareOptionsMenu()
 			}
 
+			@Override
 			public void onDrawerOpened(View drawerView) {
 				getActionBar().setTitle(mDrawerTitle);
 				invalidateOptionsMenu(); // creates call to
@@ -194,6 +199,35 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 				Intent intent = new Intent(this, HistoricMediaActivity.class);
 				startActivity(intent);
 			}
+			break;
+		case 2:
+			if (this.getClass() != UserAccountActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_user_account, container);
+				Intent intent = new Intent(this, UserAccountActivity.class);
+				startActivity(intent);
+			}
+			break;
+		case 3:
+			if (this.getClass() != MapActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_map, container);
+				Intent intent = new Intent(this, MapActivity.class);
+				startActivity(intent);
+			}
+			break;
+		case 4:
+			if (this.getClass() != MapActivity.class) {
+				LayoutInflater inflater = getLayoutInflater();
+				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
+				inflater.inflate(R.layout.activity_users, container);
+				Intent intent = new Intent(this, UsersActivity.class);
+		        startActivity(intent);
+			}
+			break;
+			
 		default:
 		}
 	}

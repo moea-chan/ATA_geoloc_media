@@ -2,42 +2,42 @@ package com.mediageoloc.ata.user;
 
 public class User {
 	
-	private String userFirstName;
-	private String userLastName;
-	private String userMail;
-	private String userPhone;
+	private String login;
+	private String url;
+	private String repos_url;
+	private String avatar_url;
 	
 	public User(String firstName, String lastName, String mail, String phone){
 		super();
-		userFirstName = firstName;
-		userLastName = lastName;
-		userMail = mail;
-		userPhone = phone;
+		login = firstName;
+		url = lastName;
+		repos_url = mail;
+		avatar_url = phone;
 	}
 	
 	public String getUserFirstName() {
-		return userFirstName;
+		return login;
 	}
 	public void setUserFirstName(String userFirstName) {
-		this.userFirstName = userFirstName;
+		this.login = userFirstName;
 	}
 	public String getUserLastName() {
-		return userLastName;
+		return url;
 	}
 	public void setUserLastName(String userLastName) {
-		this.userLastName = userLastName;
+		this.url = userLastName;
 	}
 	public String getUserMail() {
-		return userMail;
+		return repos_url;
 	}
 	public void setUserMail(String userMail) {
-		this.userMail = userMail;
+		this.repos_url = userMail;
 	}
 	public String getUserPhone() {
-		return userPhone;
+		return avatar_url;
 	}
 	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
+		this.avatar_url = userPhone;
 	}
 	
 	public Boolean saveUserPrefs(){
