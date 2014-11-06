@@ -33,8 +33,7 @@ public class UserAccountActivity extends DrawerActivity {
 	
 	@OnClick(R.id.showFollowers)
 	public void showFollowers() {
-		Intent intent = new Intent(this, UsersActivity.class);
-        startActivity(intent);
+		//TODO
 	}
 
 
