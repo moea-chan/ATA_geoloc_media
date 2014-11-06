@@ -9,8 +9,6 @@ import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
-import com.mediageoloc.ata.utils.GitHubService;
 
 public class UserAccountActivity extends DrawerActivity {
 
@@ -35,7 +33,7 @@ public class UserAccountActivity extends DrawerActivity {
 	
 	@OnClick(R.id.showFollowers)
 	public void showFollowers() {
-		Intent intent = new Intent(this, FollowersActivity.class);
+		Intent intent = new Intent(this, UsersActivity.class);
         startActivity(intent);
 	}
 

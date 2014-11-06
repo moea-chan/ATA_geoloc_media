@@ -16,7 +16,7 @@ import android.net.Uri;
 
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
-public class UserProvider extends ContentProvider {
+public class UsersProvider extends ContentProvider {
 
    static final String PROVIDER_NAME = "com.mediageoloc.ata";
    static final String URL = "content://" + PROVIDER_NAME + "/" + Users.TABLE_NAME;

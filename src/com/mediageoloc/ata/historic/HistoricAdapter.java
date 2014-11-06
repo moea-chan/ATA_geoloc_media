@@ -25,7 +25,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 	private Context context;
 
 	public HistoricAdapter(List<StoredMedia> mediaList, Context ctx) {
-		super(ctx, R.layout.activity_historic_item, mediaList);
+		super(ctx, R.layout.historic_item, mediaList);
 		this.mediaList = mediaList;
 		this.context = ctx;
 	}
@@ -37,7 +37,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 		if (convertView == null) {
 			// This a new view we inflate the new layout
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.activity_historic_item, parent, false);
+			convertView = inflater.inflate(R.layout.historic_item, parent, false);
 		}
 		// Now we can fill the layout with the right values
 		StoredMedia media = mediaList.get(position);

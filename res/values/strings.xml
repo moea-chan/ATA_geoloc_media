@@ -41,7 +41,8 @@
     <string name="user_first_name">Prénom</string>
     <string name="user_mail">Mail</string>
     <string name="user_phone">Tel</string>
-    <string name="followers">Voir mes followers</string>
+    <string name="see_followers">Voir mes followers</string>
+    <string name="see_users">Voir les users</string>
     <string name="title_activity_followers">FollowersActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_map">MapActivity</string>

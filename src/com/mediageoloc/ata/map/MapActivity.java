@@ -13,8 +13,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.user.UserProvider;
-import com.mediageoloc.ata.utils.GitHubService;
+import com.mediageoloc.ata.user.GitHubService;
+import com.mediageoloc.ata.user.UsersProvider;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class MapActivity extends DrawerActivity implements LoaderCallbacks<Cursor>{
@@ -66,7 +66,7 @@ public class MapActivity extends DrawerActivity implements LoaderCallbacks<Curso
 		//create loader 
 		String[] projection = {Users.COLUMN_NAME_PRENOM};
 		return new CursorLoader(this,
-				UserProvider.CONTENT_URI, projection, null, null, null);
+				UsersProvider.CONTENT_URI, projection, null, null, null);
 	}
 
 	@Override
