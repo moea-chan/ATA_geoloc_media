@@ -6,6 +6,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.ListView;
 import butterknife.ButterKnife;
@@ -36,7 +37,7 @@ public class UsersActivity extends Activity implements LoaderCallbacks<Cursor> {
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = {
-			    Users._ID,
+			    BaseColumns._ID,
 			    Users.COLUMN_NAME_NOM,
 			    Users.COLUMN_NAME_PRENOM,
 			    Users.COLUMN_NAME_MAIL,

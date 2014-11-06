@@ -61,7 +61,6 @@
         </activity>
         <activity
             android:name=".historic.HistoricItemActivity"
-            android:label="@string/title_activity_historic_item"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity

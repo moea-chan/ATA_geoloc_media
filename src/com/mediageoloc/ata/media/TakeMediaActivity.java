@@ -9,7 +9,6 @@ import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.historic.HistoricMediaActivity;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
 import com.mediageoloc.ata.utils.ImageUtils;
@@ -67,14 +66,8 @@ public class TakeMediaActivity extends DrawerActivity {
 
 	}
 
-	@OnClick(R.id.buttonAudio)
-	void addButtonAudioListener() {
-		startHistoricMediaActivity();
-	}
+	
 
-	private void startHistoricMediaActivity() {
-		Intent intent = new Intent(this, HistoricMediaActivity.class);
-		startActivity(intent);
-	}
+	
 
 }

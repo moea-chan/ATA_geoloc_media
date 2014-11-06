@@ -1,6 +1,5 @@
 package com.mediageoloc.ata.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import butterknife.ButterKnife;
@@ -27,8 +26,7 @@ public class UserAccountActivity extends DrawerActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setDrawerContentView(R.layout.activity_user_account);
-		ButterKnife.inject(this);
-		
+		ButterKnife.inject(this);	
 	}
 	
 	@OnClick(R.id.showFollowers)
