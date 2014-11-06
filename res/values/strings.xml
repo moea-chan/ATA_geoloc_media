@@ -37,10 +37,11 @@
     <string name="title_activity_followers">Mes Followers</string>
   
     <!-- Map activity -->
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_map">Carte</string>
 
     <!-- Users activity -->
     <string name="see_users">Voir les users</string>
+    <string name="title_activity_users">Les Utilisateurs</string>
     
     <!-- Generic controls -->
     <string name="save_button">Enregistrer</string>
