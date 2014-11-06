@@ -79,7 +79,7 @@
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <provider
-            android:name=".user.UserProvider"
+            android:name=".user.UsersProvider"
             android:authorities="com.mediageoloc.ata" >
         </provider>
 
