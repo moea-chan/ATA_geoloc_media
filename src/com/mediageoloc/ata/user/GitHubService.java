@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.utils;
+package com.mediageoloc.ata.user;
 
 import java.util.List;
 
@@ -11,8 +11,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 
-import com.mediageoloc.ata.user.User;
-import com.mediageoloc.ata.user.UserProvider;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class GitHubService
@@ -57,7 +55,7 @@ public class GitHubService
 					values.put(Users.COLUMN_NAME_TELEPHONE, user.getUserPhone());
 					
 					// Insert, the primary key value of the new row is returned
-					context.getContentResolver().insert(UserProvider.CONTENT_URI, values);
+					context.getContentResolver().insert(UsersProvider.CONTENT_URI, values);
 				}
 			 }
 		 });

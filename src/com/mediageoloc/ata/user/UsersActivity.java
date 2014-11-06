@@ -12,10 +12,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.utils.GitHubService;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
-public class FollowersActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class UsersActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 	@InjectView(R.id.followers_list)
 	ListView followersViewList;
@@ -44,7 +43,7 @@ public class FollowersActivity extends Activity implements LoaderCallbacks<Curso
 			    Users.COLUMN_NAME_TELEPHONE
 			    };
 		return new CursorLoader(this,
-				   UserProvider.CONTENT_URI, projection, null, null, null);
+				   UsersProvider.CONTENT_URI, projection, null, null, null);
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class FollowersActivity extends Activity implements LoaderCallbacks<Curso
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
 		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.activity_follower_item, data, fromColumns, toControlIds);
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.follower_item, data, fromColumns, toControlIds);
 		followersViewList.setAdapter(adapter);
 	}
 
