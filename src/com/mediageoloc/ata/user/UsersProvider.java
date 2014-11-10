@@ -143,13 +143,18 @@ public class UsersProvider extends ContentProvider {
 		case USERS:
 			qb.setTables(USERS_TABLE_NAME);
 			qb.setProjectionMap(USERS_PROJECTION_MAP);
-			break;
-		case FOLLOWERS:
-			qb.setTables(USERS_TABLE_NAME + ", " + USERS_TABLE_NAME);
-			qb.setProjectionMap(USERS_PROJECTION_MAP);
 			c = qb.query(db, projection, selection, selectionArgs, null, null,
 					null, "10");
-
+			break;
+		case FOLLOWERS:
+			qb.setTables(USERS_TABLE_NAME + "," + FOLLOWERS_TABLE_NAME);
+			qb.setProjectionMap(USERS_PROJECTION_MAP);
+			String selection_ = "SELECT * FROM ? WHERE ? = ?";
+			String[] selectionArgs_ = new String[] { USERS_TABLE_NAME,
+					USERS_TABLE_NAME + "._ID",
+					FOLLOWERS_TABLE_NAME + "." + Users.USER_ID };
+			c = qb.query(db, null, selection_, selectionArgs_, null, null,
+					null, "10");
 			break;
 		case USER_ID:
 			qb.appendWhere(_ID + "=" + uri.getPathSegments().get(1));
