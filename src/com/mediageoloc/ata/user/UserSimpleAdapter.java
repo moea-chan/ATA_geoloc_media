@@ -15,7 +15,7 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class UserSimpleAdapter extends SimpleCursorAdapter {
-
+	
 	Cursor myCursor;
 	Context myContext;
 	
