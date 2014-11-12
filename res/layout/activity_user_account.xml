@@ -4,156 +4,171 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <RelativeLayout
+        android:id="@+id/editMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       	android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/user_first_name" />
-    <EditText
-        android:id="@+id/firstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="20dp"
-        android:ems="10" />
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       	android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/user_last_name" />
-    
-	<TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       	android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/user_mail" />
-    <EditText
-        android:id="@+id/userMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="100dp"
-        android:ems="10" />
-    
-	<TextView
-	    android:id="@+id/textView4"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentStart="true"
-	    android:layout_alignParentTop="true"
-	    android:layout_marginLeft="20dp"
-	    android:layout_marginStart="20dp"
-	    android:layout_marginTop="140dp"
-	    android:text="@string/user_phone" />
+        <!--  -->
 
-    <EditText
-        android:id="@+id/tel"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp"
+            android:text="@string/user_first_name" />
+
+        <EditText
+            android:id="@+id/firstNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textView1"
+            android:ems="12"
+            android:inputType="text"
+             >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:paddingTop="17dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp"
+            android:text="@string/user_last_name" />
+
+        <EditText
+            android:id="@+id/lastNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstNameET"
+            android:layout_alignLeft="@+id/firstNameET"
+            android:layout_toRightOf="@id/textView2"
+            android:ems="12"
+            android:inputType="text"
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:paddingTop="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="17dp"
+            android:text="@string/user_mail" />
+
+        <EditText
+            android:id="@+id/userMailET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lastNameET"
+            android:layout_alignLeft="@+id/lastNameET"
+            android:layout_toRightOf="@id/textView3"
+            android:ems="12"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:paddingTop="17dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp"
+            android:text="@string/user_phone" />
+
+        <EditText
+            android:id="@+id/telET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userMailET"
+            android:layout_alignLeft="@+id/userMailET"
+            android:layout_toRightOf="@id/textView4"
+            android:ems="12"
+            android:inputType="phone"/>
+
+        <Button
+            android:id="@+id/saveEditUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="20dp"
+            android:text="@string/save_button" />
+
+        <Button
+            android:id="@+id/cancelEditUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/saveEditUserButton"
+            android:text="@string/cancel_button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/displayMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="140dp"
-        android:ems="10" />
+        android:layout_centerHorizontal="true" >
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/firstName"
-        android:layout_marginLeft="19dp"
-        android:layout_toRightOf="@+id/showFollowers"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/firstNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp" 
+            android:paddingLeft="10dp" 
+            android:paddingBottom="10dp" />
 
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignTop="@+id/textView5"
-        android:ems="10"
-        android:inputType="text" >
+        <TextView
+            android:id="@+id/lastNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/firstNameTV"
+            android:paddingTop="10dp" 
+            android:paddingLeft="5dp"
+            android:paddingBottom="10dp"  />
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/mailTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstNameTV"
+            android:padding="10dp" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_below="@+id/textView2"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/phoneTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mailTV"
+            android:padding="10dp" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView6"
-        android:layout_below="@+id/textView3"
-        android:text="TextView" />
+        <Button
+            android:id="@+id/editUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phoneTV"
+            android:text="@string/edit_button" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/textView7"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/showFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="96dp"
-        android:text="@string/see_followers" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/showFollowers"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_marginBottom="43dp"
-        android:text="Button" />
+        <Button
+            android:id="@+id/showFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phoneTV"
+            android:layout_toRightOf="@id/editUserButton"
+            android:padding="10dp"
+            android:text="@string/see_followers" />
+    </RelativeLayout>
 
 </RelativeLayout>

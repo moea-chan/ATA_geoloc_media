@@ -1,16 +1,13 @@
 package com.mediageoloc.ata.media.photo;
 
 import rx.Observable;
-
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import android.app.Activity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +15,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.mediageoloc.ata.R;
-
 import com.mediageoloc.ata.media.TakeMediaActivity;
 import com.mediageoloc.ata.utils.ImageLoader;
 import com.mediageoloc.ata.utils.ObserverImageView;
