@@ -34,7 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.historic.HistoricMediaEtsyActivity;
 import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
 import com.mediageoloc.ata.user.UserAccountActivity;
@@ -192,11 +192,11 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 			}
 			break;
 		case 1:
-			if (this.getClass() != HistoricMediaActivity.class) {
+			if (this.getClass() != HistoricMediaEtsyActivity.class) {
 				LayoutInflater inflater = getLayoutInflater();
 				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
 				inflater.inflate(R.layout.activity_take_media, container);
-				Intent intent = new Intent(this, HistoricMediaActivity.class);
+				Intent intent = new Intent(this, HistoricMediaEtsyActivity.class);
 				startActivity(intent);
 			}
 			break;

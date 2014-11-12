@@ -11,19 +11,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:contentDescription=""
-        android:maxHeight="140dp"
-        android:maxWidth="140dp"
         android:src="@drawable/ic_launcher" />
-
-    <TextView
+	<com.etsy.android.grid.util.DynamicHeightTextView
         android:id="@+id/comment"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/picture"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/picture"
-        android:gravity="left"
+        android:gravity="center"
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:layout_below="@+id/picture"/>
+
 
 </RelativeLayout>
