@@ -10,7 +10,7 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 
 public class UserAccountActivity extends DrawerActivity {
-
+	
 	private User user;
 
 	@InjectView(R.id.lastName)
