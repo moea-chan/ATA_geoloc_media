@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
 import com.mediageoloc.ata.utils.ImageLoader;
@@ -43,7 +44,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 		StoredMedia media = mediaList.get(position);
 		
 		// set comment
-		TextView commentView = (TextView) convertView.findViewById(R.id.comment);
+		DynamicHeightTextView commentView = (DynamicHeightTextView) convertView.findViewById(R.id.comment);
 		commentView.setText(media.getComment());
 		
 		//set image with async loading

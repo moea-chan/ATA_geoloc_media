@@ -59,6 +59,11 @@
             android:label="@string/title_activity_historic_media"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
+         <activity
+            android:name=".historic.HistoricMediaEtsyActivity"
+            android:label="@string/title_activity_historic_media"  
+             android:windowSoftInputMode="stateUnchanged">
+        </activity>
         <activity
             android:name=".historic.HistoricItemActivity"
              android:windowSoftInputMode="stateUnchanged">
