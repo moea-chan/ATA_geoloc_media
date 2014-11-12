@@ -49,7 +49,6 @@ public class UserAccountActivity extends DrawerActivity {
 		ButterKnife.inject(this);
 		setUser(UserPrefsManager.getUserPrefs(getApplicationContext()));
 		setUserMode();
-		
 	}
 
 	private void setUser(User newUser){
@@ -59,6 +58,10 @@ public class UserAccountActivity extends DrawerActivity {
 			firstNameET.setText(user.getUserFirstName());
 			mailET.setText(user.getUserMail());
 			phoneET.setText(user.getUserPhone());
+			lastNameTV.setText(user.getUserLastName());
+			firstNameTV.setText(user.getUserFirstName());
+			mailTV.setText(user.getUserMail());
+			phoneTV.setText(user.getUserPhone());
 		}
 	}
 	
