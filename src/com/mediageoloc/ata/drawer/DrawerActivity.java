@@ -16,13 +16,6 @@ package com.mediageoloc.ata.drawer;
  * limitations under the License.
  */
 
-import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.historic.HistoricMediaActivity;
-import com.mediageoloc.ata.map.MapActivity;
-import com.mediageoloc.ata.media.TakeMediaActivity;
-import com.mediageoloc.ata.user.UserAccountActivity;
-import com.mediageoloc.ata.user.UsersActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -39,6 +32,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.mediageoloc.ata.R;
+import com.mediageoloc.ata.historic.HistoricMediaActivity;
+import com.mediageoloc.ata.map.MapActivity;
+import com.mediageoloc.ata.media.TakeMediaActivity;
+import com.mediageoloc.ata.user.UserAccountActivity;
+import com.mediageoloc.ata.user.UsersActivity;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget in the
