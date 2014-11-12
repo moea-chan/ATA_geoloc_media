@@ -1,7 +1,14 @@
 package com.mediageoloc.ata.user;
 
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,35 +47,22 @@ public class UserSimpleAdapter extends SimpleCursorAdapter {
 			row = inflater.inflate(R.layout.follower_item, parent, false); 
 		}
 		ButterKnife.inject(this, row);
-//		followersImageView = (ImageView)row.findViewById(R.id.follower_picture);
-//		followersPseudo = (TextView)row.findViewById(R.id.follower_item);
-
+		
 		myCursor.moveToPosition(position);
 
 		String pseudo = myCursor.getString(myCursor.getColumnIndex(Users.COLUMN_NAME_PRENOM));
 		String avatarPicUrl = myCursor.getString(myCursor.getColumnIndex(Users.COLUMN_NAME_TELEPHONE));
 		followersPseudo.setText(pseudo);
 
-		String[] thumbColumns = {Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE};
-//		CursorLoader thumbCursorLoader = new CursorLoader(
-//				myContext, 
-//				UserProvider.CONTENT_URI, 
-//				thumbColumns, 
-//				thumb_IMAGE_ID + "=" + myID, 
-//				null, 
-//				null);
-//		Cursor thumbCursor = thumbCursorLoader.loadInBackground();
-//
-//		Bitmap myBitmap = null;
-//		if(thumbCursor.moveToFirst()){
-//			int thCulumnIndex = thumbCursor.getColumnIndex(thumb_DATA);
-//			String thumbPath = thumbCursor.getString(thCulumnIndex);
-//			myBitmap = BitmapFactory.decodeFile(thumbPath);
-//			thumbV.setImageBitmap(myBitmap);
-//		}
+		Bitmap myBitmap = null;
+
+//			myBitmap = BitmapFactory.decodeByteArray(data, offset, length);
+//					decodeFile(avatarPicUrl);
+//			followersImageView.setImageBitmap(myBitmap);
 
 		return row;
 	}
 
-
+	
+	
 }
