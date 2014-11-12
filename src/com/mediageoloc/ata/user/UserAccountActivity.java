@@ -2,12 +2,9 @@ package com.mediageoloc.ata.user;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -16,7 +13,7 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 
 public class UserAccountActivity extends DrawerActivity {
-
+	
 	private User user;
 
 	@InjectView(R.id.lastNameET)
@@ -47,6 +44,7 @@ public class UserAccountActivity extends DrawerActivity {
 		super.onCreate(savedInstanceState);
 		setDrawerContentView(R.layout.activity_user_account);
 		ButterKnife.inject(this);
+		
 		setUser(UserPrefsManager.getUserPrefs(getApplicationContext()));
 		setUserMode();
 	}
@@ -58,6 +56,7 @@ public class UserAccountActivity extends DrawerActivity {
 			firstNameET.setText(user.getUserFirstName());
 			mailET.setText(user.getUserMail());
 			phoneET.setText(user.getUserPhone());
+			
 			lastNameTV.setText(user.getUserLastName());
 			firstNameTV.setText(user.getUserFirstName());
 			mailTV.setText(user.getUserMail());
