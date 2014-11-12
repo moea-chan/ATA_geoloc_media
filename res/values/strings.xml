@@ -38,6 +38,7 @@
   
     <!-- Map activity -->
     <string name="title_activity_map">Carte</string>
+    <string name="google_services_unavailable">Votre matériel n\'est pas compatible</string>
 
     <!-- Users activity -->
     <string name="see_users">Voir les users</string>

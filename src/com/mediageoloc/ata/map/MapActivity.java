@@ -1,11 +1,16 @@
 package com.mediageoloc.ata.map;
 
+import android.app.Dialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,9 +30,29 @@ public class MapActivity extends DrawerActivity implements LoaderCallbacks<Curso
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
-		fragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+		checkGooglePlayServicesAvailable();
 	}
 	
+	/*
+	 * check if google play services are available
+	 * if not redirect user to play store
+	 * else launch map
+	 */
+	private void checkGooglePlayServicesAvailable() {
+		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		  if (status != ConnectionResult.SUCCESS) {
+		    if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
+		      GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
+		    } else {
+		      Toast.makeText(this, R.string.google_services_unavailable, 
+		          Toast.LENGTH_LONG).show();
+		      finish();
+		    }
+		}
+	    else{
+	    	fragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+	    }
+	}
 	@Override
 	protected void onResume(){
 		super.onResume();
