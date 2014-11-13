@@ -44,7 +44,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 		
 		// set comment
 		TextView commentView = (TextView) convertView.findViewById(R.id.comment);
-		commentView.setText(media.getComment());
+		commentView.setText(media.getComment()+"\n (Lat:"+String.format("%.6f",media.getLatitude())+" Long:"+String.format("%.6f",media.getLongitude())+ " - "+ media.getTypeMedia()+")");
 		
 		//set image with async loading
 		ObserverImageView pictureView = (ObserverImageView) convertView.findViewById(R.id.picture);

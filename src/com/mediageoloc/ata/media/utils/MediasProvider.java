@@ -1,4 +1,5 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.media.utils;
+
 
 import java.util.HashMap;
 
@@ -15,34 +16,25 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
-public class UsersProvider extends ContentProvider {
+public class MediasProvider extends ContentProvider {
 
    static final String PROVIDER_NAME = "com.mediageoloc.ata";
-   static final String URL = "content://" + PROVIDER_NAME + "/" + Users.TABLE_NAME;
+   static final String URL = "content://" + PROVIDER_NAME + "/" + Medias.TABLE_NAME;
    public static final Uri CONTENT_URI = Uri.parse(URL);
-   static final String URL_MEDIAS = "content://" + PROVIDER_NAME + "/" + Medias.TABLE_NAME;
-   public static final Uri CONTENT_URI_MEDIAS = Uri.parse(URL_MEDIAS);
-
 
    static final String _ID = "_id";
 
-   private static HashMap<String, String> USERS_PROJECTION_MAP;
    private static HashMap<String, String> MEDIAS_PROJECTION_MAP;
 
-   static final int USERS = 1;
-   static final int USER_ID = 2;
-   static final int UMEDIAS = 3;
-   
+   static final int MEDIAS = 1;
+   static final int MEDIA_ID = 2;
 
    static final UriMatcher uriMatcher;
    static{
       uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-      uriMatcher.addURI(PROVIDER_NAME, Users.TABLE_NAME, USERS);
-      uriMatcher.addURI(PROVIDER_NAME, Users.TABLE_NAME + "/#", USER_ID);
-      uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME, UMEDIAS);
-      
+      uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME, MEDIAS);
+      uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME + "/#", MEDIA_ID);
    }
 
    /**
@@ -50,19 +42,9 @@ public class UsersProvider extends ContentProvider {
     */
    private SQLiteDatabase db;
    static final String DATABASE_NAME = "MediaGeoLoc";
-   static final String USERS_TABLE_NAME = Users.TABLE_NAME;
+   static final String MEDIAS_TABLE_NAME = Medias.TABLE_NAME;
    static final int DATABASE_VERSION = 3;
    
-   private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + Users.TABLE_NAME + ";";
-   private static final String SQL_CREATE_USERS =
-   	    "CREATE TABLE " + Users.TABLE_NAME + " (" +
-   	    Users._ID + " INTEGER PRIMARY KEY," +
-   	    Users.COLUMN_NAME_NOM + " TEXT," +
-   	    Users.COLUMN_NAME_PRENOM + " TEXT," +
-   	    Users.COLUMN_NAME_MAIL + " TEXT," +
-   	    Users.COLUMN_NAME_TELEPHONE + " TEXT" +
-   	    " );";
-
    private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
    private static final String SQL_CREATE_MEDIAS =
    	    "CREATE TABLE " + Medias.TABLE_NAME + " (" +
@@ -85,14 +67,12 @@ public class UsersProvider extends ContentProvider {
 
        @Override
        public void onCreate(SQLiteDatabase db){
-          db.execSQL(SQL_CREATE_USERS);
           db.execSQL(SQL_CREATE_MEDIAS);
        }
        
        @Override
        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-           db.execSQL("DROP TABLE IF EXISTS " +  USERS_TABLE_NAME + ";");
-           db.execSQL("DROP TABLE IF EXISTS " +  Medias.TABLE_NAME + ";");
+          db.execSQL(SQL_DELETE_MEDIAS);
           onCreate(db);
        }
    }
@@ -111,99 +91,50 @@ public class UsersProvider extends ContentProvider {
 
    @Override
    synchronized public Uri insert(Uri uri, ContentValues values) {
-	   
-	  if (uri == CONTENT_URI)
-	  {
-	      /**
-	       * Add a new record
-	       */
-	      long rowID = db.insert(USERS_TABLE_NAME, null, values);
-	      /** 
-	       * If record is added successfully
-	       */
-	    	   
-	      if (rowID > 0)
-	      {
-	         Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
-	         getContext().getContentResolver().notifyChange(_uri, null);
-	         return _uri;
-	      }
-	      throw new SQLException("Failed to add a record into " + uri);
-       }
-	       
-	   if (uri == CONTENT_URI_MEDIAS)
-	   {      /**
-	 	       * Add a new record
-	 	       */
-	 	      long rowIDm = db.insert(Medias.TABLE_NAME, null, values);
-	 	      /** 
-	 	       * If record is added successfully
-	 	       */
-	 	    	   
-	 	      if (rowIDm > 0)
-	 	      {
-	 	         Uri _uri = ContentUris.withAppendedId(CONTENT_URI_MEDIAS, rowIDm);
-	 	         getContext().getContentResolver().notifyChange(_uri, null);
-	 	         return _uri;
-	 	      }
-	 	      throw new SQLException("Failed to add a record into " + uri);
-	   }
-	   
-	   return uri;
-	}
+      /**
+       * Add a new record
+       */
+      long rowID = db.insert(MEDIAS_TABLE_NAME, null, values);
+      /** 
+       * If record is added successfully
+       */
+      if (rowID > 0)
+      {
+         Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
+         getContext().getContentResolver().notifyChange(_uri, null);
+         return _uri;
+      }
+      throw new SQLException("Failed to add a record into " + uri);
+   }
 
    
    
    @Override
    synchronized public Cursor query(Uri uri, String[] projection, String selection,	
                        String[] selectionArgs, String sortOrder) {
-	   Cursor c;
+      
       SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+      qb.setTables(MEDIAS_TABLE_NAME);
       
+      switch (uriMatcher.match(uri)) {
+      case MEDIAS:
+         qb.setProjectionMap(MEDIAS_PROJECTION_MAP);
+         break;
+      case MEDIA_ID:
+         qb.appendWhere( _ID + "=" + uri.getPathSegments().get(1));
+         break;
+      default:
+         throw new IllegalArgumentException("Unknown URI " + uri);
+      }
       
-      
-      if (uri == CONTENT_URI)
-	  {
-		  qb.setTables(USERS_TABLE_NAME);
-	      
-	      switch (uriMatcher.match(uri)) {
-	      case USERS:
-	         qb.setProjectionMap(USERS_PROJECTION_MAP);
-	         break;
-	      case USER_ID:
-	         qb.appendWhere( _ID + "=" + uri.getPathSegments().get(1));
-	         break;
-	      default:
-	         throw new IllegalArgumentException("Unknown URI " + uri);
-	      }
-	      
-	  
-	      
-	  }
-      
-      if (uri == CONTENT_URI_MEDIAS)
-	   {
-    	  qb.setTables(Medias.TABLE_NAME);
-	      
-	      switch (uriMatcher.match(uri)) {
-	      case UMEDIAS:
-	         qb.setProjectionMap(MEDIAS_PROJECTION_MAP);
-	         break;
-	      default:
-	         throw new IllegalArgumentException("Unknown URI " + uri);
-	      }
-	
-      
-	   }
-      
-      c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder, "10");
-		 
+      Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, null, "10");
+    		 
       /** 
        * register to watch a content URI for changes
        */
       c.setNotificationUri(getContext().getContentResolver(), uri);
-  
-      return c;  
+
+      return c;
    }
 
    @Override
@@ -270,23 +201,4 @@ public class UsersProvider extends ContentProvider {
 	   return "TODO";
    }
 
-   synchronized public Uri insertMedias(Uri uri, ContentValues values) {
-	      /**
-	       * Add a new record
-	       */
-	      long rowID = db.insert(Medias.TABLE_NAME, null, values);
-	      /** 
-	       * If record is added successfully
-	       */
-	      if (rowID > 0)
-	      {
-	         Uri _uri = ContentUris.withAppendedId(CONTENT_URI_MEDIAS, rowID);
-	         getContext().getContentResolver().notifyChange(_uri, null);
-	         return _uri;
-	      }
-	      throw new SQLException("Failed to add a record into " + uri);
-	   }
-
 }
-
-

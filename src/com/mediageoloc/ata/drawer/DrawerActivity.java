@@ -219,7 +219,7 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 			}
 			break;
 		case 4:
-			if (this.getClass() != MapActivity.class) {
+			if (this.getClass() != UsersActivity.class) {
 				LayoutInflater inflater = getLayoutInflater();
 				LinearLayout container = (LinearLayout) findViewById(R.id.content_frame);
 				inflater.inflate(R.layout.activity_users, container);

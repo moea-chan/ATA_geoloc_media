@@ -11,12 +11,11 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -61,7 +60,6 @@
         </activity>
         <activity
             android:name=".historic.HistoricItemActivity"
-            android:label="@string/title_activity_historic_item"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
@@ -70,19 +68,21 @@
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
-            android:name=".user.FollowersActivity"
-            android:label="@string/title_activity_followers"  
-             android:windowSoftInputMode="stateUnchanged">
+            android:name=".user.UsersActivity"
+            android:label="@string/title_activity_users"  
+            android:windowSoftInputMode="stateUnchanged">
         </activity>
 		<activity
             android:name=".map.MapActivity"
             android:label="@string/title_activity_map"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
+        
         <provider
-            android:name=".user.UserProvider"
+            android:name=".user.UsersProvider"
             android:authorities="com.mediageoloc.ata" >
-        </provider>
+        	</provider>
+        
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

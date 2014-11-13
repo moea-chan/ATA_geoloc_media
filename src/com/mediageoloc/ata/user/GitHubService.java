@@ -29,7 +29,7 @@ public class GitHubService
 		 .setEndpoint(GITHUB_DOMAIN)
 		 .build();
 		
-		 //call github service te get all users
+		 //call github service to get all users
 		 GitHubServiceStub service = restAdapter.create(GitHubServiceStub.class);
 		 Observable<List<User>> users = service.users();
 		
