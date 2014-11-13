@@ -30,6 +30,8 @@ public class DistantImageLoader implements Observable.OnSubscribe<Bitmap>{
             final BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
             final Bitmap bm = BitmapFactory.decodeStream(bis);
             bis.close();
+            //tester si fileobserver est tjs inscrit pour appel de next et completed
+            //sinon fermeture
             fileObserver.onNext(bm);
             fileObserver.onCompleted();
         } catch (IOException e) {

@@ -15,7 +15,7 @@ import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
-
+	
 	@InjectView(R.id.followers_list)
 	ListView followersViewList;
 		
