@@ -6,23 +6,23 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
 	
-	@InjectView(R.id.followers_list)
-	ListView followersViewList;
-		
+	@InjectView(R.id.users_list)
+	StaggeredGridView usersViewList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_followers);
+		setContentView(R.layout.activity_users);
 		
 		ButterKnife.inject(this);
 		
@@ -52,7 +52,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
 
 		UserSimpleAdapter adapter = new UserSimpleAdapter(getApplicationContext(), R.layout.follower_item, data, fromColumns, toControlIds, 0);
-		followersViewList.setAdapter(adapter);
+		usersViewList.setAdapter(adapter);
 	}
 
 	@Override

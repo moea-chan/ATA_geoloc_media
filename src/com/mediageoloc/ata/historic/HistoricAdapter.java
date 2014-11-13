@@ -1,14 +1,9 @@
 package com.mediageoloc.ata.historic;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +18,6 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.StoredMedia;
 import com.squareup.picasso.Callback.EmptyCallback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Callback.EmptyCallback;
-import com.squareup.picasso.Picasso.LoadedFrom;
-import com.squareup.picasso.Target;
 
 public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 
@@ -36,9 +28,6 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 	ImageView pictureView;
 	@InjectView(R.id.comment)
 	DynamicHeightTextView commentView;
-
-
-	File pictureFile;
 
 	public HistoricAdapter(List<StoredMedia> mediaList, Context ctx) {
 		super(ctx, R.layout.historic_item, mediaList);
@@ -63,10 +52,10 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 		commentView.setText(media.getComment());
 
 
-		//set image with async loading
+		//set file from path (string)
 		String filePath = media.getFilePath();
 		filePath = filePath.substring(7, filePath.length());
-		pictureFile = new File(filePath);
+		File pictureFile = new File(filePath);
 		
 		final ProgressBar progressBar = ButterKnife.findById(convertView,R.id.loading);
 
@@ -84,10 +73,6 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 				progressBar.setVisibility(View.GONE);
 			} 
 		});
-
 		return convertView;
 	}
-
-
-
 }

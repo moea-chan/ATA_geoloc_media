@@ -7,55 +7,72 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.squareup.picasso.Callback.EmptyCallback;
 import com.squareup.picasso.Picasso;
 
 public class UserSimpleAdapter extends SimpleCursorAdapter {
-	
-	Cursor myCursor;
-	Context myContext;
-	
+
+	Cursor cursor;
+	Context context;
+
 	@InjectView(R.id.user_picture)
 	ImageView userImageView;
 	@InjectView(R.id.user_item)
-	TextView userPseudo;
-	
+	DynamicHeightTextView userPseudo;
+
 	public UserSimpleAdapter(Context context, int layout, Cursor c, String[] from,
 			int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
-		
-		myCursor = c;
-		myContext = context;
+
+		this.cursor = c;
+		this.context = context;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View row = convertView;
-		if(row == null){
-			LayoutInflater inflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row = inflater.inflate(R.layout.user_item, parent, false); 
+		if(convertView == null){
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.user_item, parent, false); 
 		}
-		
-		ButterKnife.inject(this, row);
-		
-		myCursor.moveToPosition(position);
+
+		ButterKnife.inject(this, convertView);
+
+		cursor.moveToPosition(position);
 
 		//pseudo
-		String pseudo = myCursor.getString(myCursor.getColumnIndex(Users.COLUMN_NAME_PRENOM));
+		String pseudo = cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_PRENOM));
 		userPseudo.setText(pseudo);
-		
-		//image
-		String avatarPicUrl = myCursor.getString(myCursor.getColumnIndex(Users.COLUMN_NAME_TELEPHONE));
-		Picasso.with(myContext).load(avatarPicUrl).into(userImageView);
 
-		return row;
+		//image
+		String avatarPicUrl = cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_TELEPHONE));
+
+		final ProgressBar progressBar = ButterKnife.findById(convertView, R.id.loading);
+
+		Picasso.with(context)
+		.load(avatarPicUrl)
+		.error(R.drawable.ic_launcher)
+		.resize(120, 120)
+		.centerCrop()
+		.into(userImageView, new EmptyCallback() {
+			@Override public void onSuccess() {
+				progressBar.setVisibility(View.GONE);
+			} 
+			@Override
+			public void onError() {
+				progressBar.setVisibility(View.GONE);
+			} 
+		});
+
+		return convertView;
 	}
 
-	
-	
+
+
 }
