@@ -9,10 +9,10 @@ public class HistoricPrefManager {
 
 	private static SharedPreferences sharedPreferences;
 	
-	private static final String HISTORIC_PREFS_NAME = "historiquePreferences";
+	public static final String HISTORIC_PREFS_NAME = "historiquePreferences";
 	
-	private static final String FILE_PATH = "filePath";
-	private static final String COMMENT = "commentaire";
+	public static final String FILE_PATH = "filePath";
+	public static final String COMMENT = "commentaire";
 	
 	
 	/**

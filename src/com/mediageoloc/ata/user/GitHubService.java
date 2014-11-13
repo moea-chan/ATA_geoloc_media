@@ -22,8 +22,10 @@ public class GitHubService
 		// get all users
 		@GET("/users")
 		Observable<List<User>> users();
+		
 	}
 
+	
 	public void getUsers(final Context context){	
 		 RestAdapter restAdapter = new RestAdapter.Builder()
 		 .setEndpoint(GITHUB_DOMAIN)
