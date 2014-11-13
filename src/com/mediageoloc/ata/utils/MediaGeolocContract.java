@@ -11,8 +11,9 @@ public final class MediaGeolocContract {
     /* Inner class that defines the table contents */
     public static abstract class Users implements BaseColumns {
         public static final String USERS_TABLE_NAME = "users";
-        public static final String FOLLOWERS_TABLE_NAME = "followers";
+        public static final String FOLLOWERS_NAME = "followers";
         public static final String USER_ID = "user_id";
+        public static final String COLUMN_NAME_FOLLOWED = "followed";
         public static final String COLUMN_NAME_NOM = "nom";
         public static final String COLUMN_NAME_PRENOM = "prenom";
         public static final String COLUMN_NAME_MAIL = "mail";

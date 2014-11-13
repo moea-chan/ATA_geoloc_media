@@ -23,7 +23,7 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_followers);
+		setDrawerContentView(R.layout.activity_followers);
 		
 		ButterKnife.inject(this);
 		
@@ -36,15 +36,8 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		String[] projection = {
-			    BaseColumns._ID,
-			    Users.COLUMN_NAME_NOM,
-			    Users.COLUMN_NAME_PRENOM,
-			    Users.COLUMN_NAME_MAIL,
-			    Users.COLUMN_NAME_TELEPHONE
-			    };
 		return new CursorLoader(this,
-				   UsersProvider.USERS_CONTENT_URI, projection, null, null, null);
+				   UsersProvider.FOLLOWERS_CONTENT_URI, null, null, null, null);
 	}
 
 	@Override

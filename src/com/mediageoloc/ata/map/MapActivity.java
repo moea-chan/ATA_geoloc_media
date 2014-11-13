@@ -1,9 +1,7 @@
 package com.mediageoloc.ata.map;
 
-import android.app.Dialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.DialogInterface;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -34,7 +32,7 @@ public class MapActivity extends DrawerActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_map);
+		setDrawerContentView(R.layout.activity_map);
 		fragment = (MapFragment) getFragmentManager()
 				.findFragmentById(R.id.map);
 		mLocationClient = new LocationClient(this, this, this);
