@@ -16,7 +16,7 @@ import butterknife.InjectView;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.media.TakeMediaActivity;
-import com.mediageoloc.ata.utils.ImageLoader;
+import com.mediageoloc.ata.utils.LocalImageLoader;
 import com.mediageoloc.ata.utils.ObserverImageView;
 
 public class PhotoCommentPreviewActivity extends Activity {
@@ -41,7 +41,7 @@ public class PhotoCommentPreviewActivity extends Activity {
 		
 		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 		//set image with async loading
-		Observable<Bitmap> o = Observable.create(new ImageLoader(intent.getStringExtra("photoUri")));
+		Observable<Bitmap> o = Observable.create(new LocalImageLoader(intent.getStringExtra("photoUri")));
 		o.subscribeOn(Schedulers.newThread())
 		.observeOn(AndroidSchedulers.mainThread())
 		.subscribe(imageView);

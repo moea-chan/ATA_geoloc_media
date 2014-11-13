@@ -8,11 +8,11 @@ import android.graphics.Bitmap;
 /*
  * load an image from a media and return bitmap
  */
-public class ImageLoader implements Observable.OnSubscribe<Bitmap>{
+public class LocalImageLoader implements Observable.OnSubscribe<Bitmap>{
 	
 	private String imagePath;
 	
-	public ImageLoader(String imagePath){
+	public LocalImageLoader(String imagePath){
 		this.imagePath = imagePath;
 	}
 	
