@@ -20,7 +20,7 @@ import com.mediageoloc.ata.utils.ImageLoader;
 import com.mediageoloc.ata.utils.ObserverImageView;
 
 public class PhotoCommentPreviewActivity extends Activity {
-
+	
 	@InjectView(R.id.photo_preview) ObserverImageView imageView;
 	@InjectView(R.id.edit_text_comment) EditText editTextComment;
 	@InjectView(R.id.button_save_comment) Button buttonSaveComment;
