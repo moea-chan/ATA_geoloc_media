@@ -6,22 +6,24 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
-
+	
 	@InjectView(R.id.users_list)
-	ListView usersViewList;
-		
+	StaggeredGridView usersViewList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
