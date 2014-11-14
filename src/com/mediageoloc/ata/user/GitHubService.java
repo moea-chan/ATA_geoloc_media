@@ -57,7 +57,7 @@ public class GitHubService
 					values.put(Users.COLUMN_NAME_TELEPHONE, user.getUserPhone());
 					
 					// Insert, the primary key value of the new row is returned
-					context.getContentResolver().insert(UsersProvider.CONTENT_URI, values);
+					context.getContentResolver().update(UsersProvider.CONTENT_URI, values, "", null);
 				}
 			 }
 		 });
