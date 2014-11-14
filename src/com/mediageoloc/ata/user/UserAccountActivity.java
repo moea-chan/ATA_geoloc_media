@@ -66,7 +66,7 @@ public class UserAccountActivity extends DrawerActivity {
 	
 	//edit or display mode of user infos
 	private void setUserMode() {
-		if(user == null){
+		if(user.getUserFirstName().toString() == ""){
 			setEditModeVisible();
 		}
 		else{

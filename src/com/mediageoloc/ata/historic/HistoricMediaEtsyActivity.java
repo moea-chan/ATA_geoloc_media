@@ -5,11 +5,6 @@ import java.util.List;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -18,9 +13,8 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.media.StoredMedia;
 
-public class HistoricMediaEtsyActivity extends DrawerActivity implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener {
-
-    private static final String TAG = "StaggeredGridActivity";
+public class HistoricMediaEtsyActivity extends DrawerActivity  {
+//	implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener
 
     private List<StoredMedia> historicList = new ArrayList<StoredMedia>();
 	
@@ -57,28 +51,23 @@ public class HistoricMediaEtsyActivity extends DrawerActivity implements AbsList
 //        historicListView.setOnItemClickListener(this);
     }
 
-    @Override
-    protected void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
-    @Override
-    public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-        Log.d(TAG, "onScrollStateChanged:" + scrollState);
-    }
+//    @Override
+//    public void onScrollStateChanged(final AbsListView view, final int scrollState) {
+//        Log.d(TAG, "onScrollStateChanged:" + scrollState);
+//    }
+//
+//    @Override
+//    public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
+//        Log.d(TAG, "onScroll firstVisibleItem:" + firstVisibleItem +
+//                            " visibleItemCount:" + visibleItemCount +
+//                            " totalItemCount:" + totalItemCount);
+//    }
+//
+//    @Override
+//    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+//    }
 
-    @Override
-    public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
-        Log.d(TAG, "onScroll firstVisibleItem:" + firstVisibleItem +
-                            " visibleItemCount:" + visibleItemCount +
-                            " totalItemCount:" + totalItemCount);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-    }
-
-   
-
+    
 }
