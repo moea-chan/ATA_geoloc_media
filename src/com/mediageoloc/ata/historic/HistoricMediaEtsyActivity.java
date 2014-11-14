@@ -24,7 +24,7 @@ public class HistoricMediaEtsyActivity extends DrawerActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDrawerContentView(R.layout.activity_historic_media);
+        setContentView(R.layout.activity_historic_media);
 
         ButterKnife.inject(this);
         
