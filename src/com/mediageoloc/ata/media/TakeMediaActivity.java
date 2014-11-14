@@ -69,4 +69,9 @@ public class TakeMediaActivity extends DrawerActivity {
 		startPhotoActivity();
 
 	}
+
+	
+
+	
+
 }

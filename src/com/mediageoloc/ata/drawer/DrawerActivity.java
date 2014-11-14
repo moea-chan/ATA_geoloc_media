@@ -36,7 +36,6 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaEtsyActivity;
 import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
-import com.mediageoloc.ata.user.FollowersActivity;
 import com.mediageoloc.ata.user.UserAccountActivity;
 import com.mediageoloc.ata.user.UsersActivity;
 
@@ -213,11 +212,11 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 			}
 			break;
 		case 5:
-			if (this.getClass() != FollowersActivity.class) {
-
-				Intent intent = new Intent(this, FollowersActivity.class);
-		        startActivity(intent);
-			}
+//			if (this.getClass() != FollowersActivity.class) {
+//
+//				Intent intent = new Intent(this, FollowersActivity.class);
+//		        startActivity(intent);
+//			}
 			break;			
 		default:
 		}
