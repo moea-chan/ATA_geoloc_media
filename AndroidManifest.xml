@@ -43,31 +43,17 @@
             android:name=".media.photo.PhotoCommentPreviewActivity"
             android:label="@string/app_name" 
              android:windowSoftInputMode="stateUnchanged">
-        </activity>
-        <activity
-            android:name=".media.user.FollowersActivity"
-            android:label="@string/app_name"  
-             android:windowSoftInputMode="stateUnchanged">
-        </activity>
+        </activity>      
         <activity
             android:name=".media.photo.PhotoFilterPreviewActivity"
             android:label="@string/app_name"  
              android:windowSoftInputMode="stateUnchanged">
-        </activity>
-        <activity
-            android:name=".historic.HistoricMediaActivity"
-            android:label="@string/title_activity_historic_media"  
-             android:windowSoftInputMode="stateUnchanged">
-        </activity>
+        </activity>       
          <activity
             android:name=".historic.HistoricMediaEtsyActivity"
             android:label="@string/title_activity_historic_media"  
              android:windowSoftInputMode="stateUnchanged">
-        </activity>
-        <activity
-            android:name=".historic.HistoricItemActivity"
-             android:windowSoftInputMode="stateUnchanged">
-        </activity>
+        </activity>  
         <activity
             android:name=".user.UserAccountActivity"
             android:label="@string/title_activity_user_account"  
