@@ -49,7 +49,7 @@ public class HistoricAdapter extends ArrayAdapter<StoredMedia>  {
 		StoredMedia media = mediaList.get(position);
 
 		// set comment
-		commentView.setText(media.getComment()+"\n (Lat:"+String.format("%.6f",media.getLatitude())+" Long:"+String.format("%.6f",media.getLongitude())+ " - "+ media.getTypeMedia()+")");
+		commentView.setText(media.getComment());
 
 
 		//set file from path (string)
