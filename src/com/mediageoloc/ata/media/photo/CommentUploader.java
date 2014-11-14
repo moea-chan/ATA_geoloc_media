@@ -32,3 +32,4 @@ class CommentUploader implements Observable.OnSubscribe<CommentUri> {
 		}
 	}
 }
+

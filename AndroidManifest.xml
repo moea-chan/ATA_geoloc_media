@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="19"
         android:targetSdkVersion="21" />
 
     <uses-feature android:name="android.hardware.camera" />
@@ -78,11 +78,17 @@
             android:label="@string/title_activity_users"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
+        <activity
+            android:name=".user.FollowersActivity"
+            android:label="@string/title_activity_followers"  
+             android:windowSoftInputMode="stateUnchanged">
+        </activity>
 		<activity
             android:name=".map.MapActivity"
             android:label="@string/title_activity_map"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
+        
         <provider
             android:name=".user.UsersProvider"
             android:authorities="com.mediageoloc.ata" >
