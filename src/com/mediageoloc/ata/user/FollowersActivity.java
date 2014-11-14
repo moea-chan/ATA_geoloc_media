@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,7 +29,7 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 		setDrawerContentView(R.layout.activity_followers);
 		
 		ButterKnife.inject(this);
-		
+	
 		// init github service to get all users
 		GitHubService service = new GitHubService();
 		service.getUsers(getApplicationContext());

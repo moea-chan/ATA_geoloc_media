@@ -6,7 +6,10 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -16,16 +19,24 @@ import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
 public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
 
-	@InjectView(R.id.followers_list)
-	ListView followersViewList;
+	@InjectView(R.id.users_list)
+	ListView usersViewList;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_followers);
+		setDrawerContentView(R.layout.activity_users);
 		
 		ButterKnife.inject(this);
-		
+		usersViewList.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+		});		
 		// init github service to get all users
 		GitHubService service = new GitHubService();
 		service.getUsers(getApplicationContext());
@@ -49,10 +60,10 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
-		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
+		int[] toControlIds = new int[] { R.id.user_item, R.id.follower_picture };
 
-		UserSimpleAdapter adapter = new UserSimpleAdapter(getApplicationContext(), R.layout.follower_item, data, fromColumns, toControlIds, 0);
-		followersViewList.setAdapter(adapter);
+		UserSimpleAdapter adapter = new UserSimpleAdapter(getApplicationContext(), R.layout.user_item, data, fromColumns, toControlIds, 0);
+		usersViewList.setAdapter(adapter);
 	}
 
 	@Override
