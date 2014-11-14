@@ -184,30 +184,35 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 		case 0:
 			if (this.getClass() != TakeMediaActivity.class) {
 				Intent intent = new Intent(this, TakeMediaActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 			}
 			break;
 		case 1:
 			if (this.getClass() != HistoricMediaEtsyActivity.class) {
 				Intent intent = new Intent(this, HistoricMediaEtsyActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 			}
 			break;
 		case 2:
 			if (this.getClass() != UserAccountActivity.class) {
 				Intent intent = new Intent(this, UserAccountActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 			}
 			break;
 		case 3:
 			if (this.getClass() != MapActivity.class) {
 				Intent intent = new Intent(this, MapActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 			}
 			break;
 		case 4:
 			if (this.getClass() != UsersActivity.class) {
 				Intent intent = new Intent(this, UsersActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		        startActivity(intent);
 			}
 			break;
@@ -215,6 +220,7 @@ public class DrawerActivity extends Activity implements DrawerContentInterface{
 //			if (this.getClass() != FollowersActivity.class) {
 //
 //				Intent intent = new Intent(this, FollowersActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 //		        startActivity(intent);
 //			}
 			break;			
