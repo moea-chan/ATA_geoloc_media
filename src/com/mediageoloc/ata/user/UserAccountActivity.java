@@ -116,7 +116,7 @@ public class UserAccountActivity extends DrawerActivity {
 		User newUser = new User(firstName, lastName, mail, phone);
 		UserPrefsManager.setUserPreferences(newUser, getApplicationContext());	
 		setUser(UserPrefsManager.getUserPrefs(getApplicationContext()));
-		resetEditFields();
+		
 		setDisplayModeVisible();
 	}
 	
