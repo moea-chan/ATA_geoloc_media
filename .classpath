@@ -12,5 +12,12 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/Etsy"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/google-play-services_lib"/>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="libs/butterknife-6.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="libs/picasso-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/retrofit-1.7.1.jar"/>
+	<classpathentry kind="lib" path="libs/rxandroid-0.22.1-dev.19+0.x-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/rxjava-0.20.1-dev.194+1.x-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

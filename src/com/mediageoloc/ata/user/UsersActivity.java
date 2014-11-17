@@ -28,15 +28,11 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		setDrawerContentView(R.layout.activity_users);
 		
 		ButterKnife.inject(this);
-		usersViewList.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				
-			}
-		});		
+//		usersViewList.setOnItemClickListener(new OnItemClickListener(){
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {}
+//		});		
 		// init github service to get all users
 		GitHubService service = new GitHubService();
 		service.getUsers(getApplicationContext());
@@ -60,7 +56,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
-		int[] toControlIds = new int[] { R.id.user_item, R.id.follower_picture };
+		int[] toControlIds = new int[] { R.id.user_item, R.id.user_picture };
 
 		UserSimpleAdapter adapter = new UserSimpleAdapter(getApplicationContext(), R.layout.user_item, data, fromColumns, toControlIds, 0);
 		usersViewList.setAdapter(adapter);
