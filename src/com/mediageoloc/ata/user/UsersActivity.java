@@ -1,11 +1,13 @@
 package com.mediageoloc.ata.user;
 
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,6 +24,9 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 	@InjectView(R.id.users_list)
 	StaggeredGridView usersViewList;
 	
+	UserSimpleAdapter adapter;
+	String currentUser;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,8 +38,10 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
-				
+				Cursor cursor = adapter.getCursor();
+				cursor.moveToPosition(arg2);
+				currentUser = cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_PRENOM));
+				addNewFollowed();
 			}
 		});		
 		// init github service to get all users
@@ -44,25 +51,39 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		getLoaderManager().initLoader(0, null, this);
 	}
 
+	private void addNewFollowed(){
+		 getLoaderManager().initLoader(1, null, this);
+	}
+	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = {
 			    BaseColumns._ID,
-			    Users.COLUMN_NAME_NOM,
 			    Users.COLUMN_NAME_PRENOM,
-			    Users.COLUMN_NAME_MAIL,
 			    Users.COLUMN_NAME_TELEPHONE
 			    };
-		return new CursorLoader(this,
-				   UsersProvider.USERS_CONTENT_URI, projection, null, null, null);
+		Loader<Cursor> cursorLoader = null;
+		switch (id) {
+		//get all users
+		case 0:
+			return new CursorLoader(this,
+					   UsersProvider.USERS_CONTENT_URI, projection, null, null, null);
+		//set followed to true
+		case 1:
+			return new CursorLoader(this,
+					   UsersProvider.FOLLOWERS_UPDATE_URI, projection, null, null, null);
+		default:
+			break;
+		}
+		return cursorLoader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
-		int[] toControlIds = new int[] { R.id.user_item, R.id.follower_picture };
+		int[] toControlIds = new int[] { R.id.user_item, R.id.user_picture };
 
-		UserSimpleAdapter adapter = new UserSimpleAdapter(
+		adapter = new UserSimpleAdapter(
 				getApplicationContext(), 
 				R.layout.user_item, 
 				data, 

@@ -5,11 +5,11 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.widget.ListView;
+import android.provider.BaseColumns;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
@@ -17,7 +17,7 @@ import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 public class FollowersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
 
 	@InjectView(R.id.followers_list)
-	ListView followersViewList;
+	StaggeredGridView followersViewList;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,13 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		String[] projection = {
+			    BaseColumns._ID,
+			    Users.COLUMN_NAME_PRENOM,
+			    Users.COLUMN_NAME_TELEPHONE
+			    };
 		return new CursorLoader(this,
-				   UsersProvider.FOLLOWERS_CONTENT_URI, null, null, null, null);
+				   UsersProvider.FOLLOWERS_CONTENT_URI, projection, null, null, null);
 	}
 
 	@Override
@@ -40,7 +45,7 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
 		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
 
-		UserSimpleAdapter adapter = new UserSimpleAdapter(
+		FollowerSimpleAdapter adapter = new FollowerSimpleAdapter(
 				getApplicationContext(), 
 				R.layout.follower_item, 
 				data, 

@@ -48,6 +48,7 @@ public class GitHubService
 			 @Override
 			 public void onNext(List<User> arg0) {
 				 //insert user in DB
+				 int test = 1;
 				for (User user : arg0) {
 					// Create a new map of values, where column names are the keys
 					ContentValues values = new ContentValues();
@@ -55,10 +56,11 @@ public class GitHubService
 					values.put(Users.COLUMN_NAME_PRENOM, user.getUserFirstName());
 					values.put(Users.COLUMN_NAME_MAIL, user.getUserMail());
 					values.put(Users.COLUMN_NAME_TELEPHONE, user.getUserPhone());
-					values.put(Users.COLUMN_NAME_FOLLOWED, false);
+					values.put(Users.COLUMN_NAME_FOLLOWED, test);
 					
 					// Insert, the primary key value of the new row is returned
 					context.getContentResolver().insert(UsersProvider.USERS_CONTENT_URI, values);
+					test = test == 1?0:1;
 				}
 			 }
 		 });
