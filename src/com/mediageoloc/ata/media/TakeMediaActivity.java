@@ -1,5 +1,6 @@
 package com.mediageoloc.ata.media;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
+import com.mediageoloc.ata.geoloc.GetGeoLocFragment;
 import com.mediageoloc.ata.historic.HistoricPrefManager;
 import com.mediageoloc.ata.media.photo.PhotoFilterPreviewActivity;
 import com.mediageoloc.ata.utils.ImageUtils;
@@ -24,7 +26,9 @@ public class TakeMediaActivity extends DrawerActivity {
 		setDrawerContentView(R.layout.activity_take_media);
 
 		ButterKnife.inject(this);
-
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+	    ft.add(new GetGeoLocFragment(), "TFGPS");
+	    ft.commit();
 		HistoricPrefManager.initHistoriquePreferences(getApplicationContext());
 
 	}

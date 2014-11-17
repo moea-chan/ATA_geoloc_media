@@ -19,4 +19,14 @@ public final class MediaGeolocContract {
         public static final String COLUMN_NAME_MAIL = "mail";
         public static final String COLUMN_NAME_TELEPHONE = "telephone";
     }
+    
+    /* Inner class that defines the table Medias contents */
+    public static abstract class Medias implements BaseColumns {
+        public static final String TABLE_NAME = "medias";
+        public static final String COLUMN_NAME_CHEMINFICHIER = "cheminfichier";
+        public static final String COLUMN_NAME_COMMENTAIRE = "commentaire";
+        public static final String COLUMN_NAME_LATITUDE = "latitude";
+        public static final String COLUMN_NAME_LONGITUDE = "longitude";
+        public static final String COLUMN_NAME_TYPEMEDIA = "typemedia";
+    }
 }
