@@ -62,7 +62,12 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
 		int[] toControlIds = new int[] { R.id.user_item, R.id.follower_picture };
 
-		UserSimpleAdapter adapter = new UserSimpleAdapter(getApplicationContext(), R.layout.user_item, data, fromColumns, toControlIds, 0);
+		UserSimpleAdapter adapter = new UserSimpleAdapter(
+				getApplicationContext(), 
+				R.layout.user_item, 
+				data, 
+				fromColumns, 
+				toControlIds, 0);
 		usersViewList.setAdapter(adapter);
 	}
 

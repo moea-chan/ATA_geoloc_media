@@ -26,10 +26,6 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 		
 		ButterKnife.inject(this);
 	
-		// init github service to get all users
-		GitHubService service = new GitHubService();
-		service.getUsers(getApplicationContext());
-		
 		getLoaderManager().initLoader(0, null, this);
 	}
 
@@ -44,7 +40,15 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 		String[] fromColumns = new String[] { Users.COLUMN_NAME_PRENOM, Users.COLUMN_NAME_TELEPHONE };
 		int[] toControlIds = new int[] { R.id.follower_item, R.id.follower_picture };
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.follower_item, data, fromColumns, toControlIds);
+		UserSimpleAdapter adapter = new UserSimpleAdapter(
+				getApplicationContext(), 
+				R.layout.follower_item, 
+				data, 
+				fromColumns, 
+				toControlIds,
+				0
+				);
+		
 		followersViewList.setAdapter(adapter);
 	}
 
