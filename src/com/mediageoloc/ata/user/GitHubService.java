@@ -55,9 +55,10 @@ public class GitHubService
 					values.put(Users.COLUMN_NAME_PRENOM, user.getUserFirstName());
 					values.put(Users.COLUMN_NAME_MAIL, user.getUserMail());
 					values.put(Users.COLUMN_NAME_TELEPHONE, user.getUserPhone());
+					values.put(Users.COLUMN_NAME_FOLLOWED, false);
 					
 					// Insert, the primary key value of the new row is returned
-					context.getContentResolver().update(UsersProvider.USERS_CONTENT_URI, values, "", null);
+					context.getContentResolver().insert(UsersProvider.USERS_CONTENT_URI, values);
 				}
 			 }
 		 });

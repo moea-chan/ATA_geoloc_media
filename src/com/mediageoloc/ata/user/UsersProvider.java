@@ -21,6 +21,7 @@ public class UsersProvider extends ContentProvider {
 
 	static final String PROVIDER_NAME = "com.mediageoloc.ata";
 	static final String URL = "content://" + PROVIDER_NAME;
+	
 	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/"
 			+ Users.USERS_TABLE_NAME);
 	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/"
@@ -55,7 +56,7 @@ public class UsersProvider extends ContentProvider {
 	private SQLiteDatabase db;
 	static final String DATABASE_NAME = "MediaGeoLoc";
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
-	static final int DATABASE_VERSION = 3;
+	static final int DATABASE_VERSION = 4;
 
 	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
 			+ Users.USERS_TABLE_NAME + ";";
@@ -63,7 +64,7 @@ public class UsersProvider extends ContentProvider {
 			+ Users.USERS_TABLE_NAME + " (" + Users._ID
 			+ " INTEGER PRIMARY KEY," + Users.COLUMN_NAME_NOM + " TEXT,"
 			+ Users.COLUMN_NAME_PRENOM + " TEXT," + Users.COLUMN_NAME_MAIL
-			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT"
+			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT,"
 			+ Users.COLUMN_NAME_FOLLOWED + " BOOLEAN" + " );";
 	
    private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
@@ -130,7 +131,7 @@ public class UsersProvider extends ContentProvider {
 			rowID = db.insert(USERS_TABLE_NAME, null, values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(USERS_CONTENT_URI, rowID);
-				getContext().getContentResolver().notifyChange(_uri, null);
+				getContext().getContentResolver().notifyChange(uri, null);
 				return _uri;
 			}
 			break;
@@ -167,9 +168,6 @@ public class UsersProvider extends ContentProvider {
 
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		
-
-
-
 		Cursor c = null;
 		switch (uriMatcher.match(uri)) {
 		case USERS:
@@ -205,8 +203,8 @@ public class UsersProvider extends ContentProvider {
 		/**
 			 * register to watch a content URI for changes
 			 */
-			if (c != null) {
-				c.setNotificationUri(getContext().getContentResolver(), uri);
+		if (c != null) {
+			c.setNotificationUri(getContext().getContentResolver(), uri);
  		}
 		
 		return c;
