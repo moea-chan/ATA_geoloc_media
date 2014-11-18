@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -21,6 +22,7 @@ public class UsersProvider extends ContentProvider {
 
 	static final String PROVIDER_NAME = "com.mediageoloc.ata";
 	static final String URL = "content://" + PROVIDER_NAME;
+	
 	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/"
 			+ Users.USERS_TABLE_NAME);
 	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/"
@@ -55,7 +57,7 @@ public class UsersProvider extends ContentProvider {
 	private SQLiteDatabase db;
 	static final String DATABASE_NAME = "MediaGeoLoc";
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
-	static final int DATABASE_VERSION = 3;
+	static final int DATABASE_VERSION = 7;
 
 	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
 			+ Users.USERS_TABLE_NAME + ";";
@@ -63,8 +65,8 @@ public class UsersProvider extends ContentProvider {
 			+ Users.USERS_TABLE_NAME + " (" + Users._ID
 			+ " INTEGER PRIMARY KEY," + Users.COLUMN_NAME_NOM + " TEXT,"
 			+ Users.COLUMN_NAME_PRENOM + " TEXT," + Users.COLUMN_NAME_MAIL
-			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT"
-			+ Users.COLUMN_NAME_FOLLOWED + " BOOLEAN" + " );";
+			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT,"
+			+ Users.COLUMN_NAME_FOLLOWED + " INTEGER" + " );";
 	
    private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
    private static final String SQL_CREATE_MEDIAS =
@@ -130,12 +132,12 @@ public class UsersProvider extends ContentProvider {
 			rowID = db.insert(USERS_TABLE_NAME, null, values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(USERS_CONTENT_URI, rowID);
-				getContext().getContentResolver().notifyChange(_uri, null);
+				getContext().getContentResolver().notifyChange(uri, null);
 				return _uri;
 			}
 			break;
 		case FOLLOWERS:
-			rowID = db.insert(USERS_TABLE_NAME, null, values);
+			rowID = db.update(USERS_TABLE_NAME, values, null, null);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(FOLLOWERS_CONTENT_URI,
 						rowID);
@@ -160,6 +162,30 @@ public class UsersProvider extends ContentProvider {
 		throw new SQLException("Failed to add a record into " + uri);
 	}
 
+	@Override
+	synchronized public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
+		/**
+		 * Add a new record
+		 */
+		int rowID;
+		
+		switch (uriMatcher.match(uri)) {
+		case FOLLOWERS:
+			rowID = db.update(USERS_TABLE_NAME, values, selection, selectionArgs);
+			if (rowID > 0) {
+				Uri _uri = ContentUris.withAppendedId(FOLLOWERS_CONTENT_URI,
+						rowID);
+				getContext().getContentResolver().notifyChange(_uri, null);
+				return rowID;
+			}
+			break;
+		default:
+			throw new IllegalArgumentException("Unknown URI " + uri);
+		}
+
+		throw new SQLException("Failed to add a record into " + uri);
+	}
 	
 	@Override
 	synchronized public Cursor query(Uri uri, String[] projection,
@@ -167,9 +193,6 @@ public class UsersProvider extends ContentProvider {
 
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		
-
-
-
 		Cursor c = null;
 		switch (uriMatcher.match(uri)) {
 		case USERS:
@@ -181,9 +204,8 @@ public class UsersProvider extends ContentProvider {
 		case FOLLOWERS:
 	  	    qb.setTables(USERS_TABLE_NAME);
 			qb.setProjectionMap(USERS_PROJECTION_MAP);
-			String selection_ = "? = TRUE";
-			String[] selectionArgs_ = new String[] { USERS_TABLE_NAME + "."
-					+ Users.COLUMN_NAME_FOLLOWED };
+			String selection_ = Users.COLUMN_NAME_FOLLOWED + "= ?";
+			String[] selectionArgs_ = new String[] {"1"};
 			c = qb.query(db, null, selection_, selectionArgs_, null, null,
 					null, "10");
 			break;
@@ -205,8 +227,8 @@ public class UsersProvider extends ContentProvider {
 		/**
 			 * register to watch a content URI for changes
 			 */
-			if (c != null) {
-				c.setNotificationUri(getContext().getContentResolver(), uri);
+		if (c != null) {
+			c.setNotificationUri(getContext().getContentResolver(), uri);
  		}
 		
 		return c;
@@ -234,8 +256,8 @@ public class UsersProvider extends ContentProvider {
 		return count;
 	}
 
-	@Override
-	public int update(Uri uri, ContentValues values, String selection,
+	//@Override
+	public int updates(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 		int count = 0;
 

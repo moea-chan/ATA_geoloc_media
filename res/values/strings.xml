@@ -12,7 +12,7 @@
         <item>Compte</item>
         <item>Carte</item>
         <item>Utilisateurs</item>
-<!--         <item>Mes suivis</item> -->
+        <item>Mes suivis</item> 
 
     </string-array>
 	<string name="drawer_open" >Ouvrir le menu tiroir</string>

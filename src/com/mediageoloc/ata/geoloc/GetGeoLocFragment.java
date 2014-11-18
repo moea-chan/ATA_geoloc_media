@@ -7,13 +7,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.model.LatLng;
 /**
  * GetGeoLocFragment : This class get last gps position or zero values if not available.
  * @author Thierry
@@ -27,7 +20,8 @@ public class GetGeoLocFragment extends Fragment implements LocationListener{
 	  private String provider;
 	  private Location location;
 	  
-	  public void onCreate(Bundle savedInstanceState) {
+	  @Override
+	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 
 		     // Get the location manager and get position all 5s
