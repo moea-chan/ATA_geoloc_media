@@ -56,14 +56,12 @@ public class FollowersActivity extends DrawerActivity implements
 						// "swipe right : pos="+reverseSortedPositions[0]);
 						Context context = getApplicationContext();
 						// Create a new map of values, where column names are the keys
-						ContentValues values = new ContentValues();
 						
-						int index = cursor.getCount();
+						int index = reverseSortedPositions[0];
 						cursor.move(index);
-						values.put(Users.COLUMN_NAME_FOLLOWED, 1);
 						
 						// Insert, the primary key value of the new row is returned
-						//context.getContentResolver().update(UsersProvider.FOLLOWERS_CONTENT_URI, values, "_id = ?", new String[]{Integer.toString(index)});
+						context.getContentResolver().delete(UsersProvider.FOLLOWERS_CONTENT_URI, "_id = ?", new String[]{Integer.toString(index)});
 
 					}
 				}, true, // example : left action = dismiss
