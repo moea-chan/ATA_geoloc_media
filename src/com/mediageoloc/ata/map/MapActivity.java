@@ -186,7 +186,6 @@ public class MapActivity extends DrawerActivity implements
 	
 	@Override
 	protected void onDestroy() {
-		MapPrefsManager.setZoomMapPrefs(mMap.getMinZoomLevel(), getApplicationContext());
 		super.onDestroy();
 	}
 
