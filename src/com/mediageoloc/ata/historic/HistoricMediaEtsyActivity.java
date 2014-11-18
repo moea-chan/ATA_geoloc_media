@@ -16,12 +16,11 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.media.StoredMedia;
-import com.mediageoloc.ata.user.UsersProvider;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
 
 public class HistoricMediaEtsyActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
-//	implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener
-
+	
     private List<StoredMedia> historicList = new ArrayList<StoredMedia>();
 	
     @InjectView(R.id.historic_list)
@@ -86,7 +85,7 @@ public class HistoricMediaEtsyActivity extends DrawerActivity implements LoaderC
 			    Medias.COLUMN_NAME_TYPEMEDIA
 			    };
 		//return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, null, "_ID DESC LIMIT 10");
-		return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, "_ID DESC");
+		return new CursorLoader(this,GeolocProvider.CONTENT_URI_MEDIAS, projection, null, null, "_ID DESC");
 	}
 
 	@Override

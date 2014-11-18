@@ -55,17 +55,17 @@
              android:windowSoftInputMode="stateUnchanged">
         </activity>  
         <activity
-            android:name=".user.UserAccountActivity"
+            android:name="com.mediageoloc.ata.user.account.UserAccountActivity"
             android:label="@string/title_activity_user_account"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
-            android:name=".user.UsersActivity"
+            android:name="com.mediageoloc.ata.user.users.UsersActivity"
             android:label="@string/title_activity_users"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
         <activity
-            android:name=".user.FollowersActivity"
+            android:name="com.mediageoloc.ata.user.follower.FollowersActivity"
             android:label="@string/title_activity_followers"  
              android:windowSoftInputMode="stateUnchanged">
         </activity>
@@ -78,7 +78,7 @@
         </activity>
         
         <provider
-            android:name=".user.UsersProvider"
+            android:name=".utils.contentProvider.GeolocProvider"
             android:authorities="com.mediageoloc.ata" >
         </provider>
 

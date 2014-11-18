@@ -1,5 +1,6 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.user.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
+import com.mediageoloc.ata.user.User;
+import com.mediageoloc.ata.user.follower.FollowersActivity;
 
 public class UserAccountActivity extends DrawerActivity {
 	
@@ -122,7 +125,9 @@ public class UserAccountActivity extends DrawerActivity {
 	
 	@OnClick(R.id.showFollowers)
 	public void showFollowers() {
-		//TODO
+		Intent intent = new Intent(this, FollowersActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
 	}
 
 
