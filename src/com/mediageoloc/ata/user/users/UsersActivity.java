@@ -1,10 +1,14 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.user.users;
+
+import org.apache.http.client.utils.URIUtils;
 
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
@@ -17,7 +21,9 @@ import butterknife.InjectView;
 import com.etsy.android.grid.StaggeredGridView;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.service.GitHubService;
 
 public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
 	
@@ -25,7 +31,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 	StaggeredGridView usersViewList;
 	
 	UserSimpleAdapter adapter;
-	String currentUser;
+	int currentUserId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 					long arg3) {
 				Cursor cursor = adapter.getCursor();
 				cursor.moveToPosition(arg2);
-				currentUser = cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_PRENOM));
+				currentUserId = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
 				addNewFollowed();
 			}
 		});		
@@ -52,7 +58,10 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 	}
 
 	private void addNewFollowed(){
-		 getLoaderManager().initLoader(1, null, this);
+		ContentValues newVvalues = new ContentValues();
+		newVvalues.put(Users.COLUMN_NAME_FOLLOWED, 1);
+		getApplicationContext().getContentResolver().update(
+				ContentUris.withAppendedId(GeolocProvider.FOLLOWERS_CONTENT_URI, currentUserId), newVvalues, null, null);
 	}
 	
 	@Override
@@ -67,11 +76,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		//get all users
 		case 0:
 			return new CursorLoader(this,
-					   UsersProvider.USERS_CONTENT_URI, projection, null, null, null);
-		//set followed to true
-		case 1:
-			return new CursorLoader(this,
-					   UsersProvider.FOLLOWERS_UPDATE_URI, projection, null, null, null);
+					   GeolocProvider.USERS_CONTENT_URI, projection, null, null, null);
 		default:
 			break;
 		}

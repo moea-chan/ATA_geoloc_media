@@ -22,6 +22,7 @@ import butterknife.OnClick;
 
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.utils.ImageUtils;
+import com.squareup.picasso.Picasso;
 
 
 
@@ -31,24 +32,30 @@ import com.mediageoloc.ata.utils.ImageUtils;
  *
  */
 public class PhotoFilterPreviewActivity extends Activity {
-
-	@InjectView(R.id.button_go_to_comment_preview) Button buttonGoToCommentPreview;
+	private Uri photoUri;
+	
+	@InjectView(R.id.photo_preview)
+	ImageView imageView;
+	
+	@InjectView(R.id.button_go_to_comment_preview) 
+	Button buttonGoToCommentPreview;
+	
 	@OnClick(R.id.button_go_to_comment_preview)
 	public void saveAndGotoComment(Button button) {
 		saveFilteredPictures();
 		startCommentPreviewActivity();
-		
 	}
 	
-	@InjectView(R.id.check_box_filter) CheckBox filterAction;
+	@InjectView(R.id.check_box_filter) 
+	CheckBox filterAction;
+	
 	@OnClick(R.id.check_box_filter)
 	public void applyFilter(CheckBox checkbox) {
 		doFilter();
 	}
 
-
-	private Uri photoUri;
-	private ImageView imageView;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,6 @@ public class PhotoFilterPreviewActivity extends Activity {
 		
 		//display taken picture
 		Intent intent = getIntent();
-		imageView = (ImageView) findViewById(R.id.photo_preview);
 		photoUri = Uri.parse(intent.getStringExtra("photoUri"));
 
 		chargeImageSourcePreview();
@@ -67,13 +73,12 @@ public class PhotoFilterPreviewActivity extends Activity {
 
 
 	private void chargeImageSourcePreview() {
-		try {
-			Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 190, false);
-			imageView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Picasso.with(getApplicationContext())
+		.load(photoUri)
+		.error(R.drawable.ic_launcher)
+		.resize(120, 120)
+		.centerCrop()
+		.into(imageView);
 	}
 
 
@@ -107,15 +112,10 @@ public class PhotoFilterPreviewActivity extends Activity {
 	private void saveFilteredPictures() {
 		//if need
 		if (filterAction.isChecked()){
-			
 			try {
-
-				//BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-				//final Bitmap src = drawable.getBitmap();
 				Bitmap src = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
-				
-				String pathFile=photoUri.getPath();
-				
+			
+				String pathFile = photoUri.getPath();
 				
 				File file = new File(pathFile); 
 				OutputStream out = new FileOutputStream(file); 
@@ -125,16 +125,11 @@ public class PhotoFilterPreviewActivity extends Activity {
 	            out.close();
 
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 	}
 	
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.user.follower;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -13,21 +13,21 @@ import butterknife.InjectView;
 
 import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.mediageoloc.ata.R;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
 import com.squareup.picasso.Callback.EmptyCallback;
 import com.squareup.picasso.Picasso;
 
-public class UserSimpleAdapter extends SimpleCursorAdapter {
+public class FollowerSimpleAdapter extends SimpleCursorAdapter {
 
 	Cursor cursor;
 	Context context;
 
-	@InjectView(R.id.user_picture)
+	@InjectView(R.id.follower_picture)
 	ImageView userImageView;
-	@InjectView(R.id.user_item)
+	@InjectView(R.id.follower_item)
 	DynamicHeightTextView userPseudo;
 
-	public UserSimpleAdapter(Context context, int layout, Cursor c, String[] from,
+	public FollowerSimpleAdapter(Context context, int layout, Cursor c, String[] from,
 			int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
 
@@ -39,7 +39,7 @@ public class UserSimpleAdapter extends SimpleCursorAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(convertView == null){
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.user_item, parent, false); 
+			convertView = inflater.inflate(R.layout.follower_item, parent, false); 
 		}
 
 		ButterKnife.inject(this, convertView);

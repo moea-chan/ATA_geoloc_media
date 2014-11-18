@@ -1,6 +1,9 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.utils.contentProvider;
 
 import java.util.HashMap;
+
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -13,24 +16,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.provider.SyncStateContract.Columns;
 import android.text.TextUtils;
 
-import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
-
-public class UsersProvider extends ContentProvider {
+public class GeolocProvider extends ContentProvider {
 
 	static final String PROVIDER_NAME = "com.mediageoloc.ata";
 	static final String URL = "content://" + PROVIDER_NAME;
 
-	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/"
-			+ Users.USERS_TABLE_NAME);
-	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/"
-			+ Users.FOLLOWERS_NAME);
-	public static final Uri FOLLOWERS_UPDATE_URI = Uri.parse(URL + "/"
-			+ Users.FOLLOWERS_NAME + "/#");
-	static final String URL_MEDIAS = "content://" + PROVIDER_NAME + "/" + Medias.TABLE_NAME;
-	public static final Uri CONTENT_URI_MEDIAS = Uri.parse(URL_MEDIAS);
+	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/" + Users.USERS_TABLE_NAME);
+	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/" + Users.FOLLOWERS_NAME);
+	public static final Uri CONTENT_URI_MEDIAS = Uri.parse(URL + "/" + Medias.TABLE_NAME);
 
 
 	static final String _ID = "_id";
@@ -42,15 +38,16 @@ public class UsersProvider extends ContentProvider {
 	static final int FOLLOWERS = 2;
 	static final int USER_ID = 3;
 	static final int UMEDIAS = 4;
+	static final int FOLLOWER_ID = 5;
 
 	static final UriMatcher uriMatcher;
 	static {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME, USERS);
 		uriMatcher.addURI(PROVIDER_NAME, Users.FOLLOWERS_NAME, FOLLOWERS);
-		uriMatcher
-		.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
+		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
 		uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME, UMEDIAS);
+		uriMatcher.addURI(PROVIDER_NAME, Users.FOLLOWERS_NAME + "/#", FOLLOWER_ID);
 	}
 
 	/**
@@ -61,14 +58,16 @@ public class UsersProvider extends ContentProvider {
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
 	static final int DATABASE_VERSION = 4;
 
-	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
-			+ Users.USERS_TABLE_NAME + ";";
-	private static final String SQL_CREATE_USERS = "CREATE TABLE "
-			+ Users.USERS_TABLE_NAME + " (" + Users._ID
-			+ " INTEGER PRIMARY KEY," + Users.COLUMN_NAME_NOM + " TEXT,"
-			+ Users.COLUMN_NAME_PRENOM + " TEXT," + Users.COLUMN_NAME_MAIL
-			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT,"
-			+ Users.COLUMN_NAME_FOLLOWED + " INTEGER" + " );";
+	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + Users.USERS_TABLE_NAME + ";";
+	private static final String SQL_CREATE_USERS = 
+			"CREATE TABLE " + Users.USERS_TABLE_NAME + " (" + 
+					Users._ID + " INTEGER PRIMARY KEY," + 
+					Users.COLUMN_NAME_NOM + " TEXT," + 
+					Users.COLUMN_NAME_PRENOM + " TEXT," + 
+					Users.COLUMN_NAME_MAIL + " TEXT," + 
+					Users.COLUMN_NAME_TELEPHONE + " TEXT," + 
+					Users.COLUMN_NAME_FOLLOWED + " INTEGER" + 
+					" );";
 
 	private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
 	private static final String SQL_CREATE_MEDIAS =
@@ -164,7 +163,6 @@ public class UsersProvider extends ContentProvider {
 		throw new SQLException("Failed to add a record into " + uri);
 	}
 
-
 	@Override
 	synchronized public Cursor query(Uri uri, String[] projection,
 			String selection, String[] selectionArgs, String sortOrder) {
@@ -217,7 +215,7 @@ public class UsersProvider extends ContentProvider {
 	}
 
 	@Override
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
+	synchronized public int delete(Uri uri, String selection, String[] selectionArgs) {
 		int count = 0;
 
 		// switch (uriMatcher.match(uri)){
@@ -239,33 +237,46 @@ public class UsersProvider extends ContentProvider {
 	}
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection,
+	synchronized public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 
 		int mRowsUpdated = 0;
+		int idStr;
+		String where;
 		switch (uriMatcher.match(uri)){
-		case FOLLOWERS:
-			ContentValues newVvalues = new ContentValues();
-			values.put(Users.COLUMN_NAME_FOLLOWED, 1);
-			
-			String idStr = uri.getLastPathSegment();
-			String where = Users.COLUMN_NAME_PRENOM + " = " + idStr;
+		
+		case FOLLOWER_ID://set follower field to false
+			idStr = Integer.parseInt(uri.getLastPathSegment());
+			where = Columns._ID + " = " + idStr;
 			if (!TextUtils.isEmpty(selection)) {
 				where += " AND " + selection;
 			}
-
 			// Defines a variable to contain the number of updated rows
 			mRowsUpdated = db.update(
-					Users.COLUMN_NAME_PRENOM,
-					newVvalues,
+					Users.USERS_TABLE_NAME,
+					values,
 					where,
 					selectionArgs);
-
-
+			break;
+		
+		case USER_ID://set follower field to true
+			idStr = Integer.parseInt(uri.getLastPathSegment());
+			where = Columns._ID + " = " + idStr;
+			if (!TextUtils.isEmpty(selection)) {
+				where += " AND " + selection;
+			}
+			// Defines a variable to contain the number of updated rows
+			mRowsUpdated = db.update(
+					Users.USERS_TABLE_NAME,
+					values,
+					where,
+					selectionArgs);
 			break;
 		}
 		if (mRowsUpdated > 0) {
-			getContext().getContentResolver().notifyChange(uri, null);
+			//avertit les observer de l'uri followers et users
+			getContext().getContentResolver().notifyChange(GeolocProvider.FOLLOWERS_CONTENT_URI, null);
+			getContext().getContentResolver().notifyChange(GeolocProvider.USERS_CONTENT_URI, null);
 		}
 		return mRowsUpdated;
 

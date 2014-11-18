@@ -36,9 +36,9 @@ import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.historic.HistoricMediaEtsyActivity;
 import com.mediageoloc.ata.map.MapActivity;
 import com.mediageoloc.ata.media.TakeMediaActivity;
-import com.mediageoloc.ata.user.FollowersActivity;
-import com.mediageoloc.ata.user.UserAccountActivity;
-import com.mediageoloc.ata.user.UsersActivity;
+import com.mediageoloc.ata.user.account.UserAccountActivity;
+import com.mediageoloc.ata.user.follower.FollowersActivity;
+import com.mediageoloc.ata.user.users.UsersActivity;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget in the

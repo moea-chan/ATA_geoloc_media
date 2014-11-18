@@ -16,9 +16,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.user.GitHubService;
-import com.mediageoloc.ata.user.UsersProvider;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.service.GitHubService;
 
 public class MapActivity extends DrawerActivity implements
 		LoaderCallbacks<Cursor>, GooglePlayServicesClient.ConnectionCallbacks,
@@ -95,7 +95,7 @@ public class MapActivity extends DrawerActivity implements
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// create loader
 		String[] projection = { Users.COLUMN_NAME_PRENOM };
-		return new CursorLoader(this, UsersProvider.USERS_CONTENT_URI, projection,
+		return new CursorLoader(this, GeolocProvider.USERS_CONTENT_URI, projection,
 				null, null, null);
 	}
 
