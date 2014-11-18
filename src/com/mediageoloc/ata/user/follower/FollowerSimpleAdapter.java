@@ -64,6 +64,7 @@ public class FollowerSimpleAdapter extends SimpleCursorAdapter {
 		
 		final Button removeFollow = ButterKnife.findById(convertView, R.id.remove_follow);
 		removeFollow.setVisibility(View.GONE);
+		
 		final int curPosition = position;
 		
 		//add event on button to 
