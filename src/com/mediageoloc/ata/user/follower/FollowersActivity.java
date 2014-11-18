@@ -1,16 +1,11 @@
 package com.mediageoloc.ata.user.follower;
 
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -21,9 +16,10 @@ import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
 import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
 
 public class FollowersActivity extends DrawerActivity implements LoaderCallbacks<Cursor> {
-
+	
 	@InjectView(R.id.followers_list)
 	StaggeredGridView followersViewList;
+	
 	
 	FollowerSimpleAdapter adapter;
 	int currentUserId;
@@ -35,26 +31,10 @@ public class FollowersActivity extends DrawerActivity implements LoaderCallbacks
 		
 		ButterKnife.inject(this);
 	
-		followersViewList.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				Cursor cursor = adapter.getCursor();
-				cursor.moveToPosition(arg2);
-				currentUserId = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
-				removeFollowed();
-			}
-		});	
 		getLoaderManager().initLoader(0, null, this);
 	}
 	
-	private void removeFollowed(){
-		ContentValues newVvalues = new ContentValues();
-		newVvalues.put(Users.COLUMN_NAME_FOLLOWED, 0);
-		getApplicationContext().getContentResolver().update(
-				ContentUris.withAppendedId(GeolocProvider.USERS_CONTENT_URI, currentUserId), newVvalues, null, null);
-	}
+	
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {

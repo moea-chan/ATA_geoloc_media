@@ -37,7 +37,8 @@
     
     <!-- Followers activity -->
     <string name="see_followers" >Voir mes followers</string>
-    <string name="title_activity_followers">Mes Followers</string>
+    <string name="title_activity_followers">Mes Amis</string>
+    <string name="remove_follow" >-</string>
   
     <!-- Map activity -->
     <string name="title_activity_map">Carte</string>
@@ -46,6 +47,7 @@
     <!-- Users activity -->
     <string name="see_users">Voir les users</string>
     <string name="title_activity_users">Les Utilisateurs</string>
+    <string name="add_follow" >+</string>
     
     <!-- Generic controls -->
     <string name="save_button">Enregistrer</string>
