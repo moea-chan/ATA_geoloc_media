@@ -72,8 +72,9 @@
         
 		<activity
             android:name=".map.MapActivity"
-            android:label="@string/title_activity_map"  
-             android:windowSoftInputMode="stateUnchanged">
+            android:label="@string/title_activity_map"
+            android:windowSoftInputMode="stateUnchanged">
+            >
         </activity>
         
         <provider
