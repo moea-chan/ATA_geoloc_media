@@ -55,4 +55,9 @@
     <string name="edit_button">Modifier</string>
     <string name="ok_button">OK</string>
     
+    <!-- GPS Message -->
+    <string name="gps_off">Penser à activer votre GPS !!!</string>
+    <string name="gps_on">Merci !!!</string>
+    
+    
 </resources>
