@@ -1,5 +1,6 @@
 package com.mediageoloc.ata.map;
 
+import retrofit.http.HEAD;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -23,7 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.user.UsersProvider;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
 
 
 /**
@@ -165,6 +166,7 @@ public class MapActivity extends DrawerActivity implements
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
 		String[] projection = {
 			    BaseColumns._ID,
 			    Medias.COLUMN_NAME_CHEMINFICHIER,
@@ -175,6 +177,7 @@ public class MapActivity extends DrawerActivity implements
 			    };
 		//return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, null, "_ID DESC LIMIT 10");
 		return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, null);
+
 	}
 /**
  * Put marker on map

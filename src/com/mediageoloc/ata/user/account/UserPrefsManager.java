@@ -1,4 +1,6 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.user.account;
+
+import com.mediageoloc.ata.user.User;
 
 import android.content.Context;
 import android.content.SharedPreferences;
