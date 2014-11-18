@@ -44,8 +44,7 @@ public class UsersProvider extends ContentProvider {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME, USERS);
 		uriMatcher.addURI(PROVIDER_NAME, Users.FOLLOWERS_NAME, FOLLOWERS);
-		uriMatcher
-				.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
+		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
 		uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME, UMEDIAS);
 	}
 
@@ -55,7 +54,7 @@ public class UsersProvider extends ContentProvider {
 	private SQLiteDatabase db;
 	static final String DATABASE_NAME = "MediaGeoLoc";
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
-	static final int DATABASE_VERSION = 3;
+	static final int DATABASE_VERSION = 4;
 
 	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
 			+ Users.USERS_TABLE_NAME + ";";
@@ -63,7 +62,7 @@ public class UsersProvider extends ContentProvider {
 			+ Users.USERS_TABLE_NAME + " (" + Users._ID
 			+ " INTEGER PRIMARY KEY," + Users.COLUMN_NAME_NOM + " TEXT,"
 			+ Users.COLUMN_NAME_PRENOM + " TEXT," + Users.COLUMN_NAME_MAIL
-			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT"
+			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT,"
 			+ Users.COLUMN_NAME_FOLLOWED + " BOOLEAN" + " );";
 	
    private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
@@ -167,9 +166,6 @@ public class UsersProvider extends ContentProvider {
 
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		
-
-
-
 		Cursor c = null;
 		switch (uriMatcher.match(uri)) {
 		case USERS:
