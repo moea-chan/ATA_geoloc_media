@@ -25,6 +25,12 @@ import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.user.UsersProvider;
 import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
 
+
+/**
+ * MapActivity: Show Media position on map
+ * @author Thierry
+ *
+ */
 public class MapActivity extends DrawerActivity implements
 		LoaderCallbacks<Cursor>, GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener, GoogleMap.OnMapLoadedCallback {
@@ -38,6 +44,7 @@ public class MapActivity extends DrawerActivity implements
 	private LatLngBounds.Builder builder;
 	private CameraPosition cameraPosition;
 	private Integer lastNbMarker;
+	private Boolean zoomAuto;
 	
 	LocationClient mLocationClient;
 
@@ -49,6 +56,7 @@ public class MapActivity extends DrawerActivity implements
 		mLocationClient = new LocationClient(this, this, this);
 		getLoaderManager();
 	    LoaderManager.enableDebugLogging(true);
+	    zoomAuto=true;
 		
 	}
 
@@ -71,7 +79,9 @@ public class MapActivity extends DrawerActivity implements
 		mLocationClient.disconnect();
 		super.onStop();
 	}
-
+/**
+ * Prepare call back for MapLoad and for medias
+ */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -86,10 +96,14 @@ public class MapActivity extends DrawerActivity implements
 	   super.onSaveInstanceState(outState);
 	}
 
+	/**
+	 * We made autozoom only on new activity
+	 * @param savedState
+	 */
 	@Override
 	protected void onRestoreInstanceState(Bundle savedState) {
 	   super.onRestoreInstanceState(savedState);
-	   
+	   zoomAuto=false;
 	}
 
 	
@@ -97,7 +111,7 @@ public class MapActivity extends DrawerActivity implements
 	 * mapMediasToMarkers
 	 * @param cursor
 	 * for every media found in db create a marker on map
-	 * and prepare value for automatique zoom
+	 * and prepare value for autozoom
 	 */
 	private void mapMediasToMarkers(Cursor cursor) {	
 		Marker marker;
@@ -136,14 +150,14 @@ public class MapActivity extends DrawerActivity implements
 
 	/**
 	 * onMapLoaded:
-	 * 	Apply calculated zoom only if no personnal zoom
+	 * 	Autozoom only on newactivity
 	 */
 	@Override
 	public void onMapLoaded() {
 		// TODO Auto-generated method stub
-		if (lastNbMarker>0){
+		if (zoomAuto && lastNbMarker>0){
 			LatLngBounds bounds = builder.build();
-			int padding = 20; // offset from edges of the map in pixels
+			int padding = 40; // offset from edges of the map in pixels
 			CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 			mMap.moveCamera(cu);
 		}
@@ -164,7 +178,11 @@ public class MapActivity extends DrawerActivity implements
 		return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, null);
 
 	}
-
+/**
+ * Put marker on map
+ * @param loader
+ * @param data
+ */
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		mapMediasToMarkers(data);
