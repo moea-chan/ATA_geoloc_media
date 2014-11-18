@@ -158,7 +158,7 @@ public class MapActivity extends DrawerActivity implements
 		// TODO Auto-generated method stub
 		if (zoomAuto && lastNbMarker>0){
 			LatLngBounds bounds = builder.build();
-			int padding = 20; // offset from edges of the map in pixels
+			int padding = 40; // offset from edges of the map in pixels
 			CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 			mMap.moveCamera(cu);
 		}
