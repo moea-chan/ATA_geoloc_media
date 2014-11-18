@@ -1,16 +1,11 @@
 package com.mediageoloc.ata.user.users;
 
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -35,17 +30,7 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		setDrawerContentView(R.layout.activity_users);
 		
 		ButterKnife.inject(this);
-		usersViewList.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				Cursor cursor = adapter.getCursor();
-				cursor.moveToPosition(arg2);
-				currentUserId = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
-				addNewFollowed();
-			}
-		});		
+				
 		// init github service to get all users
 		GitHubService service = new GitHubService();
 		service.getUsers(getApplicationContext());
@@ -53,13 +38,6 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 		getLoaderManager().initLoader(0, null, this);
 	}
 
-	private void addNewFollowed(){
-		ContentValues newVvalues = new ContentValues();
-		newVvalues.put(Users.COLUMN_NAME_FOLLOWED, 1);
-		getApplicationContext().getContentResolver().update(
-				ContentUris.withAppendedId(GeolocProvider.FOLLOWERS_CONTENT_URI, currentUserId), newVvalues, null, null);
-	}
-	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = {
