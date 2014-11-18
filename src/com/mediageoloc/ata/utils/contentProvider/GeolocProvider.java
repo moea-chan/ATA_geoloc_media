@@ -2,9 +2,6 @@ package com.mediageoloc.ata.utils.contentProvider;
 
 import java.util.HashMap;
 
-import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
-import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -18,6 +15,9 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.SyncStateContract.Columns;
 import android.text.TextUtils;
+
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
 
 public class GeolocProvider extends ContentProvider {
 

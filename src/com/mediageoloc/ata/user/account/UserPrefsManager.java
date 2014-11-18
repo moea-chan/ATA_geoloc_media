@@ -1,10 +1,10 @@
 package com.mediageoloc.ata.user.account;
 
-import com.mediageoloc.ata.user.User;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.mediageoloc.ata.user.User;
 
 public class UserPrefsManager {
 	private static SharedPreferences sharedPreferences;

@@ -1,6 +1,5 @@
 package com.mediageoloc.ata.map;
 
-import retrofit.http.HEAD;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
