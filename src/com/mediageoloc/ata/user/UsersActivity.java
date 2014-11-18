@@ -40,10 +40,6 @@ public class UsersActivity extends DrawerActivity implements LoaderCallbacks<Cur
 				ContentValues values = new ContentValues();
 				int index = cursor.getCount()- (int)arg3;
 				cursor.move(index);
-				//values.put(Users.COLUMN_NAME_NOM, cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_NOM)));
-				//values.put(Users.COLUMN_NAME_PRENOM, cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_PRENOM)));
-				//values.put(Users.COLUMN_NAME_MAIL, cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_MAIL)));
-				//values.put(Users.COLUMN_NAME_TELEPHONE, cursor.getString(cursor.getColumnIndex(Users.COLUMN_NAME_TELEPHONE)));
 				values.put(Users.COLUMN_NAME_FOLLOWED, 1);
 				
 				// Insert, the primary key value of the new row is returned

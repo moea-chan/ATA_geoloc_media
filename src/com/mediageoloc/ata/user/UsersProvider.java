@@ -57,8 +57,8 @@ public class UsersProvider extends ContentProvider {
 	private SQLiteDatabase db;
 	static final String DATABASE_NAME = "MediaGeoLoc";
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
-	static final int DATABASE_VERSION = 7;
-
+	static final int DATABASE_VERSION = 8;
+	
 	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
 			+ Users.USERS_TABLE_NAME + ";";
 	private static final String SQL_CREATE_USERS = "CREATE TABLE "
