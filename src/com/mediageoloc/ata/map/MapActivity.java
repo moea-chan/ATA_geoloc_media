@@ -4,11 +4,16 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.location.LocationClient;
+//import com.google.android.gms.common.GooglePlayServicesClient;
+//import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -20,13 +25,14 @@ import com.mediageoloc.ata.user.GitHubService;
 import com.mediageoloc.ata.user.UsersProvider;
 import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
 
-public class MapActivity extends DrawerActivity implements
-		LoaderCallbacks<Cursor>, GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+public class MapActivity extends DrawerActivity implements LocationListener,
+		LoaderCallbacks<Cursor>, GoogleApiClient.ConnectionCallbacks,
+		GoogleApiClient.OnConnectionFailedListener {
 	private GoogleMap mMap;
 	private MapFragment fragment;
 
-	LocationClient mLocationClient;
+	GoogleApiClient mLocationClient;
+	LocationRequest mLocationRequest;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,10 @@ public class MapActivity extends DrawerActivity implements
 		setDrawerContentView(R.layout.activity_map);
 		fragment = (MapFragment) getFragmentManager()
 				.findFragmentById(R.id.map);
-		mLocationClient = new LocationClient(this, this, this);
+
+		mLocationClient = new GoogleApiClient.Builder(this)
+				.addApi(LocationServices.API).addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this).build();
 	}
 
 	/*
@@ -95,8 +104,8 @@ public class MapActivity extends DrawerActivity implements
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// create loader
 		String[] projection = { Users.COLUMN_NAME_PRENOM };
-		return new CursorLoader(this, UsersProvider.USERS_CONTENT_URI, projection,
-				null, null, null);
+		return new CursorLoader(this, UsersProvider.USERS_CONTENT_URI,
+				projection, null, null, null);
 	}
 
 	@Override
@@ -112,18 +121,29 @@ public class MapActivity extends DrawerActivity implements
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void onConnected(Bundle connectionHint) {
+	public void onConnectionSuspended(int i) {
+		// TODO Auto-generated method stub
+	}
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(1000); // Update location every second
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+        		mLocationClient, mLocationRequest, this);
+    }
+
+	@Override
+	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void onDisconnected() {
-		// TODO Auto-generated method stub
-		
-	}
 }
