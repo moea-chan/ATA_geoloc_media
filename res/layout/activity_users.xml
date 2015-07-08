@@ -4,6 +4,7 @@
         android:id="@+id/users_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-	app:column_count="3"
+		app:column_count="3"
         app:item_margin="8dp"
-/>
+        />
+

@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.user;
+package com.mediageoloc.ata.utils.contentProvider;
 
 import java.util.HashMap;
 
@@ -13,22 +13,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.provider.SyncStateContract.Columns;
+import android.text.TextUtils;
 
-import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Users;
 
-public class UsersProvider extends ContentProvider {
+public class GeolocProvider extends ContentProvider {
 
 	static final String PROVIDER_NAME = "com.mediageoloc.ata";
 	static final String URL = "content://" + PROVIDER_NAME;
 
-	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/"
-			+ Users.USERS_TABLE_NAME);
-	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/"
-			+ Users.FOLLOWERS_NAME);
-	static final String URL_MEDIAS = "content://" + PROVIDER_NAME + "/"
-			+ Medias.TABLE_NAME;
-	public static final Uri CONTENT_URI_MEDIAS = Uri.parse(URL_MEDIAS);
+	public static final Uri USERS_CONTENT_URI = Uri.parse(URL + "/" + Users.USERS_TABLE_NAME);
+	public static final Uri FOLLOWERS_CONTENT_URI = Uri.parse(URL + "/" + Users.FOLLOWERS_NAME);
+	public static final Uri CONTENT_URI_MEDIAS = Uri.parse(URL + "/" + Medias.TABLE_NAME);
+
 
 	static final String _ID = "_id";
 
@@ -39,15 +38,16 @@ public class UsersProvider extends ContentProvider {
 	static final int FOLLOWERS = 2;
 	static final int USER_ID = 3;
 	static final int UMEDIAS = 4;
+	static final int FOLLOWER_ID = 5;
 
 	static final UriMatcher uriMatcher;
 	static {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME, USERS);
 		uriMatcher.addURI(PROVIDER_NAME, Users.FOLLOWERS_NAME, FOLLOWERS);
-		uriMatcher
-				.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
+		uriMatcher.addURI(PROVIDER_NAME, Users.USERS_TABLE_NAME + "/#", USER_ID);
 		uriMatcher.addURI(PROVIDER_NAME, Medias.TABLE_NAME, UMEDIAS);
+		uriMatcher.addURI(PROVIDER_NAME, Users.FOLLOWERS_NAME + "/#", FOLLOWER_ID);
 	}
 
 	/**
@@ -56,26 +56,29 @@ public class UsersProvider extends ContentProvider {
 	private SQLiteDatabase db;
 	static final String DATABASE_NAME = "MediaGeoLoc";
 	static final String USERS_TABLE_NAME = Users.USERS_TABLE_NAME;
-	static final int DATABASE_VERSION = 8;
+	static final int DATABASE_VERSION = 4;
 
-	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS "
-			+ Users.USERS_TABLE_NAME + ";";
-	private static final String SQL_CREATE_USERS = "CREATE TABLE "
-			+ Users.USERS_TABLE_NAME + " (" + Users._ID
-			+ " INTEGER PRIMARY KEY," + Users.COLUMN_NAME_NOM + " TEXT,"
-			+ Users.COLUMN_NAME_PRENOM + " TEXT," + Users.COLUMN_NAME_MAIL
-			+ " TEXT," + Users.COLUMN_NAME_TELEPHONE + " TEXT,"
-			+ Users.COLUMN_NAME_FOLLOWED + " INTEGER" + " );";
+	private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + Users.USERS_TABLE_NAME + ";";
+	private static final String SQL_CREATE_USERS = 
+			"CREATE TABLE " + Users.USERS_TABLE_NAME + " (" + 
+					Users._ID + " INTEGER PRIMARY KEY," + 
+					Users.COLUMN_NAME_NOM + " TEXT," + 
+					Users.COLUMN_NAME_PRENOM + " TEXT," + 
+					Users.COLUMN_NAME_MAIL + " TEXT," + 
+					Users.COLUMN_NAME_TELEPHONE + " TEXT," + 
+					Users.COLUMN_NAME_FOLLOWED + " INTEGER" + 
+					" );";
 
-	private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS "
-			+ Medias.TABLE_NAME + ";";
-	private static final String SQL_CREATE_MEDIAS = "CREATE TABLE "
-			+ Medias.TABLE_NAME + " (" + Medias._ID + " INTEGER PRIMARY KEY,"
-			+ Medias.COLUMN_NAME_CHEMINFICHIER + " TEXT,"
-			+ Medias.COLUMN_NAME_COMMENTAIRE + " TEXT,"
-			+ Medias.COLUMN_NAME_LATITUDE + " REAL,"
-			+ Medias.COLUMN_NAME_LONGITUDE + " REAL,"
-			+ Medias.COLUMN_NAME_TYPEMEDIA + " TEXT" + " );";
+	private static final String SQL_DELETE_MEDIAS = "DROP TABLE IF EXISTS " + Medias.TABLE_NAME + ";";
+	private static final String SQL_CREATE_MEDIAS =
+			"CREATE TABLE " + Medias.TABLE_NAME + " (" +
+					Medias._ID + " INTEGER PRIMARY KEY," +
+					Medias.COLUMN_NAME_CHEMINFICHIER + " TEXT," +
+					Medias.COLUMN_NAME_COMMENTAIRE + " TEXT," +
+					Medias.COLUMN_NAME_LATITUDE + " REAL," +
+					Medias.COLUMN_NAME_LONGITUDE + " REAL," +
+					Medias.COLUMN_NAME_TYPEMEDIA + " TEXT" +
+					" );";
 
 	/**
 	 * Helper class that actually creates and manages the provider's underlying
@@ -135,7 +138,7 @@ public class UsersProvider extends ContentProvider {
 			}
 			break;
 		case FOLLOWERS:
-			rowID = db.update(USERS_TABLE_NAME, values, null, null);
+			rowID = db.insert(USERS_TABLE_NAME, null, values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(FOLLOWERS_CONTENT_URI,
 						rowID);
@@ -146,39 +149,13 @@ public class UsersProvider extends ContentProvider {
 
 		case UMEDIAS:
 			rowID = db.insert(Medias.TABLE_NAME, null, values);
-			if (rowID > 0) {
-				Uri _uri = ContentUris
-						.withAppendedId(CONTENT_URI_MEDIAS, rowID);
+			if (rowID > 0)
+			{
+				Uri _uri = ContentUris.withAppendedId(CONTENT_URI_MEDIAS, rowID);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
 			throw new SQLException("Failed to add a record into " + uri);
-		default:
-			throw new IllegalArgumentException("Unknown URI " + uri);
-		}
-
-		throw new SQLException("Failed to add a record into " + uri);
-	}
-
-	@Override
-	synchronized public int update(Uri uri, ContentValues values,
-			String selection, String[] selectionArgs) {
-		/**
-		 * Add a new record
-		 */
-		int rowID;
-
-		switch (uriMatcher.match(uri)) {
-		case FOLLOWERS:
-			rowID = db.update(USERS_TABLE_NAME, values, selection,
-					selectionArgs);
-			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(FOLLOWERS_CONTENT_URI,
-						rowID);
-				getContext().getContentResolver().notifyChange(_uri, null);
-				return rowID;
-			}
-			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
@@ -193,20 +170,24 @@ public class UsersProvider extends ContentProvider {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
 		Cursor c = null;
+		String selection_ = null;
+
 		switch (uriMatcher.match(uri)) {
 		case USERS:
 			qb.setTables(USERS_TABLE_NAME);
 			qb.setProjectionMap(USERS_PROJECTION_MAP);
-			c = qb.query(db, projection, selection, selectionArgs, null, null,
-					null, "10");
+			selection_ = Users.COLUMN_NAME_FOLLOWED+" = 0";
+			c = qb.query(db, projection, selection_, selectionArgs, null, null,
+					sortOrder, "10");
 			break;
 		case FOLLOWERS:
 			qb.setTables(USERS_TABLE_NAME);
 			qb.setProjectionMap(USERS_PROJECTION_MAP);
-			String selection_ = Users.COLUMN_NAME_FOLLOWED + "= ?";
-			String[] selectionArgs_ = new String[] { "1" };
-			c = qb.query(db, null, selection_, selectionArgs_, null, null,
-					null, "10");
+			selection_ = Users.COLUMN_NAME_FOLLOWED+" = 1";
+			//			String[] selectionArgs_ = new String[] { USERS_TABLE_NAME + "."
+			//					+ Users.COLUMN_NAME_FOLLOWED };
+			c = qb.query(db, projection, selection_, selectionArgs, null, null,
+					sortOrder, "10");
 			break;
 		case USER_ID:
 			qb.setTables(USERS_TABLE_NAME);
@@ -218,8 +199,7 @@ public class UsersProvider extends ContentProvider {
 		case UMEDIAS:
 			qb.setTables(Medias.TABLE_NAME);
 			qb.setProjectionMap(MEDIAS_PROJECTION_MAP);
-			c = qb.query(db, projection, selection, selectionArgs, null, null,
-					sortOrder, "10");
+			c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder, "10");
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
@@ -235,44 +215,71 @@ public class UsersProvider extends ContentProvider {
 	}
 
 	@Override
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		int count = 0;
-		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
-		switch (uriMatcher.match(uri)) {
-		case FOLLOWERS:
-			qb.setTables(USERS_TABLE_NAME);
-			count = db.delete(USERS_TABLE_NAME, selection, selectionArgs);
-			break;
-		default:
-			throw new IllegalArgumentException("Unknown URI " + uri);
-		}
-
-		getContext().getContentResolver().notifyChange(uri, null);
-		return count;
-	}
-
-	// @Override
-	public int updates(Uri uri, ContentValues values, String selection,
-			String[] selectionArgs) {
+	synchronized public int delete(Uri uri, String selection, String[] selectionArgs) {
 		int count = 0;
 
 		// switch (uriMatcher.match(uri)){
 		// case STUDENTS:
-		// count = db.update(STUDENTS_TABLE_NAME, values,
-		// selection, selectionArgs);
+		// count = db.delete(STUDENTS_TABLE_NAME, selection, selectionArgs);
 		// break;
 		// case STUDENT_ID:
-		// count = db.update(STUDENTS_TABLE_NAME, values, _ID +
-		// " = " + uri.getPathSegments().get(1) +
+		// String id = uri.getPathSegments().get(1);
+		// count = db.delete( STUDENTS_TABLE_NAME, _ID + " = " + id +
 		// (!TextUtils.isEmpty(selection) ? " AND (" +
 		// selection + ')' : ""), selectionArgs);
 		// break;
 		// default:
-		// throw new IllegalArgumentException("Unknown URI " + uri );
+		// throw new IllegalArgumentException("Unknown URI " + uri);
 		// }
+		//
 		// getContext().getContentResolver().notifyChange(uri, null);
 		return count;
+	}
+
+	@Override
+	synchronized public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
+
+		int mRowsUpdated = 0;
+		int idStr;
+		String where;
+		switch (uriMatcher.match(uri)){
+		
+		case FOLLOWER_ID://set follower field to false
+			idStr = Integer.parseInt(uri.getLastPathSegment());
+			where = Columns._ID + " = " + idStr;
+			if (!TextUtils.isEmpty(selection)) {
+				where += " AND " + selection;
+			}
+			// Defines a variable to contain the number of updated rows
+			mRowsUpdated = db.update(
+					Users.USERS_TABLE_NAME,
+					values,
+					where,
+					selectionArgs);
+			break;
+		
+		case USER_ID://set follower field to true
+			idStr = Integer.parseInt(uri.getLastPathSegment());
+			where = Columns._ID + " = " + idStr;
+			if (!TextUtils.isEmpty(selection)) {
+				where += " AND " + selection;
+			}
+			// Defines a variable to contain the number of updated rows
+			mRowsUpdated = db.update(
+					Users.USERS_TABLE_NAME,
+					values,
+					where,
+					selectionArgs);
+			break;
+		}
+		if (mRowsUpdated > 0) {
+			//avertit les observer de l'uri followers et users
+			getContext().getContentResolver().notifyChange(GeolocProvider.FOLLOWERS_CONTENT_URI, null);
+			getContext().getContentResolver().notifyChange(GeolocProvider.USERS_CONTENT_URI, null);
+		}
+		return mRowsUpdated;
+
 	}
 
 	@Override

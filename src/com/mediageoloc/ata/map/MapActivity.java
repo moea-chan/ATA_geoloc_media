@@ -1,11 +1,13 @@
 package com.mediageoloc.ata.map;
 
+import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 
 import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GooglePlayServicesClient;
@@ -14,25 +16,37 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mediageoloc.ata.R;
 import com.mediageoloc.ata.drawer.DrawerActivity;
-import com.mediageoloc.ata.user.GitHubService;
-import com.mediageoloc.ata.user.UsersProvider;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Users;
+import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
 
 public class MapActivity extends DrawerActivity implements LocationListener,
 		LoaderCallbacks<Cursor>, GoogleApiClient.ConnectionCallbacks,
-		GoogleApiClient.OnConnectionFailedListener {
+		GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMapLoadedCallback {
 	private GoogleMap mMap;
 	private MapFragment fragment;
 
-	GoogleApiClient mLocationClient;
+	GoogleApiClient mGoogleApiClient;
 	LocationRequest mLocationRequest;
+	
+	private Double minLat=0.0;
+	private Double maxLat=0.0;
+	private Double minLng=0.0;
+	private Double maxLng=0.0;
+	private LatLngBounds.Builder builder;
+	private CameraPosition cameraPosition;
+	private Integer lastNbMarker;
+	private Boolean zoomAuto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +55,11 @@ public class MapActivity extends DrawerActivity implements LocationListener,
 		fragment = (MapFragment) getFragmentManager()
 				.findFragmentById(R.id.map);
 
-		mLocationClient = new GoogleApiClient.Builder(this)
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
 				.addApi(LocationServices.API).addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
+	    LoaderManager.enableDebugLogging(true);
+	    zoomAuto=true;
 	}
 
 	/*
@@ -53,7 +69,7 @@ public class MapActivity extends DrawerActivity implements LocationListener,
 	protected void onStart() {
 		super.onStart();
 		// Connect the client.
-		mLocationClient.connect();
+		mGoogleApiClient.connect();
 	}
 
 	/*
@@ -62,55 +78,113 @@ public class MapActivity extends DrawerActivity implements LocationListener,
 	@Override
 	protected void onStop() {
 		// Disconnecting the client invalidates it.
-		mLocationClient.disconnect();
+		mGoogleApiClient.disconnect();
 		super.onStop();
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mMap = fragment.getMap();
-		getUsers();
-	}
-
-	// for every user found in db create a marker on map
-	private void mapUsersToMarkers(Cursor cursor) {
-		cursor.moveToFirst();
-
-		Marker marker;
-		String pseudo;
-
-		while (!cursor.isAfterLast()) {
-			pseudo = cursor.getString(cursor
-					.getColumnIndexOrThrow(Users.COLUMN_NAME_PRENOM));
-			marker = mMap.addMarker(new MarkerOptions().position(
-					new LatLng(Math.random() * 100, Math.random() * 100))
-					.title(pseudo));
-			cursor.moveToNext();
+	/**
+	 * Prepare call back for MapLoad and for medias
+	 */
+		@Override
+		protected void onResume() {
+			super.onResume();
+			mMap = fragment.getMap();
+			mMap.setOnMapLoadedCallback(this);
+			getLoaderManager().initLoader(4, null, this);
 		}
-		cursor.close();
-	}
 
-	// get github user and init loader
-	private void getUsers() {
-		// init github service to get all users
-		GitHubService service = new GitHubService();
-		service.getUsers(getApplicationContext());
-		// get loader or create it
-		getLoaderManager().initLoader(0, null, this);
-	}
+		
+		@Override
+		protected void onSaveInstanceState(Bundle outState) {
+		   super.onSaveInstanceState(outState);
+		}
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// create loader
-		String[] projection = { Users.COLUMN_NAME_PRENOM };
-		return new CursorLoader(this, UsersProvider.USERS_CONTENT_URI,
-				projection, null, null, null);
-	}
+		/**
+		 * We made autozoom only on new activity
+		 * @param savedState
+		 */
+		@Override
+		protected void onRestoreInstanceState(Bundle savedState) {
+		   super.onRestoreInstanceState(savedState);
+		   zoomAuto=false;
+		}
+
+		
+		/**
+		 * mapMediasToMarkers
+		 * @param cursor
+		 * for every media found in db create a marker on map
+		 * and prepare value for autozoom
+		 */
+		private void mapMediasToMarkers(Cursor cursor) {	
+			Marker marker;
+			String comment;
+			
+			cursor.moveToFirst();
+			lastNbMarker=0;
+			minLat=maxLat=minLng=maxLng=0.0;
+			
+			builder = new LatLngBounds.Builder();
+
+			while (!cursor.isAfterLast()) {
+				if (minLat>cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE)))
+					minLat=cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE));
+				if (maxLat<cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE)))
+					maxLat=cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE));
+				if (minLng>cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE)))
+					minLng=cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE));
+				if (maxLng<cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE)))
+					maxLng=cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE));
+				
+				comment = cursor.getString(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_COMMENTAIRE));
+				marker = mMap.addMarker(new MarkerOptions().position(
+						new LatLng(cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE)), 
+								cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE))))
+						.title(comment));
+			 
+				builder.include(new LatLng(cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LATITUDE)), 
+						cursor.getDouble(cursor.getColumnIndexOrThrow(Medias.COLUMN_NAME_LONGITUDE))));
+				lastNbMarker++;
+				cursor.moveToNext();
+				
+			}
+			
+		}
+
+		/**
+		 * onMapLoaded:
+		 * 	Autozoom only on newactivity
+		 */
+		@Override
+		public void onMapLoaded() {
+			// TODO Auto-generated method stub
+			if (zoomAuto && lastNbMarker>0){
+				LatLngBounds bounds = builder.build();
+				int padding = 40; // offset from edges of the map in pixels
+				CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+				mMap.moveCamera(cu);
+			}
+		}
+		
+		@Override
+		public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+			String[] projection = {
+				    BaseColumns._ID,
+				    Medias.COLUMN_NAME_CHEMINFICHIER,
+				    Medias.COLUMN_NAME_COMMENTAIRE,
+				    Medias.COLUMN_NAME_LATITUDE,
+				    Medias.COLUMN_NAME_LONGITUDE,
+				    Medias.COLUMN_NAME_TYPEMEDIA
+				    };
+			//return new CursorLoader(this,UsersProvider.CONTENT_URI_MEDIAS, projection, null, null, null, "_ID DESC LIMIT 10");
+			return new CursorLoader(this, GeolocProvider.CONTENT_URI_MEDIAS, projection, null, null, null);
+
+		}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-		mapUsersToMarkers(data);
+		mapMediasToMarkers(data);
 	}
 
 	@Override
@@ -137,7 +211,7 @@ public class MapActivity extends DrawerActivity implements LocationListener,
         mLocationRequest.setInterval(1000); // Update location every second
 
         LocationServices.FusedLocationApi.requestLocationUpdates(
-        		mLocationClient, mLocationRequest, this);
+        		mGoogleApiClient, mLocationRequest, this);
     }
 
 	@Override

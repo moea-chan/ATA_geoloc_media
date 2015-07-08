@@ -1,5 +1,7 @@
 package com.mediageoloc.ata.geoloc;
 
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
@@ -7,6 +9,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.mediageoloc.ata.R;
 /**
  * GetGeoLocFragment : This class get last gps position or zero values if not available.
  * @author Thierry
@@ -19,11 +24,13 @@ public class GetGeoLocFragment extends Fragment implements LocationListener{
 	  private LocationManager locationManager;
 	  private String provider;
 	  private Location location;
-	  
+	  private Context context;
+
 	  @Override
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 
+	        context=getActivity().getApplicationContext();
 		     // Get the location manager and get position all 5s
 	        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 		    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,-1,GetGeoLocFragment.this);
@@ -41,7 +48,7 @@ public class GetGeoLocFragment extends Fragment implements LocationListener{
 		      setLastLongitude(0.0);
 		    }
 	  }
-
+	  
 	   /**
 	    * All 5s
 	    */
@@ -53,12 +60,12 @@ public class GetGeoLocFragment extends Fragment implements LocationListener{
 
 		    @Override
 		    public void onProviderDisabled(String arg0) {
-		        // nothing todo
+		    	Toast.makeText(context,context.getResources().getString(R.string.gps_off), Toast.LENGTH_LONG).show();
 		    }
 
 		    @Override
 		    public void onProviderEnabled(String arg0) {
-		        // nothing todo
+		    	Toast.makeText(context,context.getResources().getString(R.string.gps_on), Toast.LENGTH_SHORT).show();
 		    }
 
 		    @Override

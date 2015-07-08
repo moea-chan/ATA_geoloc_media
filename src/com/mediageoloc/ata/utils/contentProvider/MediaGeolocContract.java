@@ -1,4 +1,4 @@
-package com.mediageoloc.ata.utils;
+package com.mediageoloc.ata.utils.contentProvider;
 
 import android.provider.BaseColumns;
 

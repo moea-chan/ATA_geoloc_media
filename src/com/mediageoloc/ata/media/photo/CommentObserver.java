@@ -24,6 +24,7 @@ public class CommentObserver implements Observer<CommentUri> {
 
 	@Override
 	public void onCompleted() {
+		Thread.currentThread().stop();
 	}
 
 }

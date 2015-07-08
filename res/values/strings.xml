@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xdddml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" >
 
     <string name="app_name">Media Geolocalization</string>
@@ -12,7 +12,7 @@
         <item>Compte</item>
         <item>Carte</item>
         <item>Utilisateurs</item>
-        <item>Mes suivis</item> 
+        <item>Mes amis</item>
 
     </string-array>
 	<string name="drawer_open" >Ouvrir le menu tiroir</string>
@@ -30,13 +30,15 @@
     <!-- User account activity -->
     <string name="title_activity_user_account" >Mon compte</string>
     <string name="user_last_name">Nom</string>
-    <string name="user_first_name" >Prénom</string>
+    <string name="user_first_name">Prénom</string>
     <string name="user_mail">Mail</string>
-    <string name="user_phone" >Tel</string>
+    <string name="user_phone">Tel</string>
+    <string name="no_info_toast">Veuillez renseigner votre nom, merci</string>
     
     <!-- Followers activity -->
     <string name="see_followers" >Voir mes followers</string>
-    <string name="title_activity_followers">Mes Followers</string>
+    <string name="title_activity_followers">Mes Amis</string>
+    <string name="remove_follow">-</string>
   
     <!-- Map activity -->
     <string name="title_activity_map">Carte</string>
@@ -45,11 +47,17 @@
     <!-- Users activity -->
     <string name="see_users">Voir les users</string>
     <string name="title_activity_users">Les Utilisateurs</string>
+    <string name="add_follow">+</string>
     
     <!-- Generic controls -->
     <string name="save_button">Enregistrer</string>
     <string name="cancel_button">Annuler</string>
     <string name="edit_button">Modifier</string>
     <string name="ok_button">OK</string>
+    
+    <!-- GPS Message -->
+    <string name="gps_off">Penser à activer votre GPS !!!</string>
+    <string name="gps_on">Merci !!!</string>
+    
     
 </resources>

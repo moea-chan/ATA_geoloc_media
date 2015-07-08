@@ -20,9 +20,9 @@ import com.mediageoloc.ata.drawer.DrawerActivity;
 import com.mediageoloc.ata.geoloc.GetGeoLocFragment;
 import com.mediageoloc.ata.media.StoredMedia;
 import com.mediageoloc.ata.media.TakeMediaActivity;
-import com.mediageoloc.ata.user.UsersProvider;
 import com.mediageoloc.ata.utils.LocalImageLoader;
-import com.mediageoloc.ata.utils.MediaGeolocContract.Medias;
+import com.mediageoloc.ata.utils.contentProvider.GeolocProvider;
+import com.mediageoloc.ata.utils.contentProvider.MediaGeolocContract.Medias;
 import com.mediageoloc.ata.utils.ObserverImageView;
 
 public class PhotoCommentPreviewActivity extends DrawerActivity {
@@ -72,8 +72,8 @@ public class PhotoCommentPreviewActivity extends DrawerActivity {
 		Observable
 				.create(new CommentUploader(photoUri, editTextComment,
 						getApplicationContext()))
-				.subscribeOn(Schedulers.newThread())
-				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeOn(AndroidSchedulers.mainThread())
+				.observeOn(Schedulers.newThread())
 				.subscribe(new CommentObserver());
 		SaveMediaBDD();
 		returnTakeMediaActivity();
@@ -89,7 +89,7 @@ public class PhotoCommentPreviewActivity extends DrawerActivity {
 		values.put(Medias.COLUMN_NAME_TYPEMEDIA, StoredMedia.TYPEMEDIA_PHOTO);
 		
 		// use then UsersProvider on MEDIAS URI
-		Uri mUri = this.getContentResolver().insert(UsersProvider.CONTENT_URI_MEDIAS, values);
+		Uri mUri = this.getContentResolver().insert(GeolocProvider.CONTENT_URI_MEDIAS, values);
 	}
 	
 	private void returnTakeMediaActivity() {
